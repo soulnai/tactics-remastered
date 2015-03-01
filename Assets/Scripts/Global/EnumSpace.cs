@@ -2,6 +2,14 @@
 using System.Collections;
 
 namespace EnumSpace {
+
+    public enum ScenesEnum
+    {
+        mainMenu = 0,
+        Tavern = 1,
+        BattleScene = 2
+    };
+
 	public enum unitStates{
         none = 0,
 		normal = 1,
