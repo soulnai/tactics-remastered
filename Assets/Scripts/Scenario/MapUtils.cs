@@ -11,9 +11,11 @@ public class MapUtils : MonoBehaviour {
 	public Transform mapTransform;
 	public static MapUtils instance;
 	public List <List<Tile>> map = new List<List<Tile>>();
+	private ScenarioController gm;
 
 	void OnAwake(){
 		instance = this;
+		gm = ScenarioController.instance;
 	}
 	// Use this for initialization
 	void Start () {
@@ -50,6 +52,7 @@ public class MapUtils : MonoBehaviour {
 			}
 			map.Add(row);
 		}
+		gm.map = map;
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				map[i][j].generateNeighbors();

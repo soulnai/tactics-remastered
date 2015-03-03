@@ -33,9 +33,7 @@ public class Tile : MonoBehaviour {
 	}
 
 	void Start () {
-		if (Application.loadedLevelName == "gameScene") {
-			generateNeighbors();
-		}
+
 	}
 	
 	public void generateNeighbors() {		
@@ -179,7 +177,7 @@ public class Tile : MonoBehaviour {
 
 	public void showHighlight(Color color){
 		highlight.SetActive(true);
-		highlight.renderer.material.color = color;
+		highlight.GetComponent<Renderer>().material.color = color;
 	}
 
 	public void hideHighlight(){
