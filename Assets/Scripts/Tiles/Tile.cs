@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour {
 	// Use this for initialization
 	void Awake(){
 //		highlight.SetActive(false);
-		gm = ScenarioController.instance;
+
 	}
 
 	void Start () {
@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour {
 	
 	public void generateNeighbors() {		
 		neighbors = new List<Tile>();
-		
+		gm = ScenarioController.instance;
 		//up
 		if (gridPosition.y > 0) {
 			Vector2 n = new Vector2(gridPosition.x, gridPosition.y - 1);

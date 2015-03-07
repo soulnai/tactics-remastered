@@ -41,7 +41,7 @@ public class ScenarioController : MonoBehaviour {
 	}
 
 	void Start () {
-		_ScenarioController = ScenarioController.instance;
+		//_ScenarioController = ScenarioController.instance;
 		MapController.loadMapFromXml ();
 	}
 	
