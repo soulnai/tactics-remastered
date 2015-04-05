@@ -10,6 +10,7 @@ public class GUIController : MonoBehaviour
     public GameObject LoadingScreen;
     
     private ScenesController _scenesController;
+    public bool mouseOverGUI = false;
 
     public static GUIController instance
     {
@@ -71,4 +72,6 @@ public class GUIController : MonoBehaviour
         GameObject _loadingScreen = Instantiate(LoadingScreen) as GameObject;
         _loadingScreen.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
     }
+
+
 }

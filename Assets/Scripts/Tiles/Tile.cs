@@ -72,19 +72,11 @@ public class Tile : MonoBehaviour {
 	}
 	
 	void OnMouseEnter() {
-		if(Application.loadedLevelName == "gameScene"){
-			//EventManager.TileCursorOverChanged(this);
-		}
-		if (Application.loadedLevelName == "MapCreatorScene" && Input.GetMouseButton(0)) {
-			if(MapCreatorManager.instance.editorState == editorStates.setType)
-			setType(MapCreatorManager.instance.palletSelection);
-			else if(MapCreatorManager.instance.editorState == editorStates.setHeight)
-				changeHeight(MapCreatorManager.instance.up);
-		}
+        showHighlight(Color.red);
 	}
 	
 	void OnMouseExit() {
-
+        hideHighlight();
 	}
 	
 	
