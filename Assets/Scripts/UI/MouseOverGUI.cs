@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 public class MouseOverGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool UseOverUIFlag;
-    private GUIController _guiController;
+    private UIController _uiController;
 
 	// Use this for initialization
 	void Start ()
 	{
-	    _guiController = GUIController.instance;
+	    _uiController = UIController.instance;
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class MouseOverGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (UseOverUIFlag)
         {
-            _guiController.mouseOverGUI = true;
+            _uiController.mouseOverGUI = true;
         }
     }
 
@@ -30,7 +30,7 @@ public class MouseOverGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (useGUILayout)
         {
-            _guiController.mouseOverGUI = false;
+            _uiController.mouseOverGUI = false;
         }
     }
 }

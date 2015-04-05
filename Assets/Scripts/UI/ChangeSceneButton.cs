@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ChangeSceneButton : MonoBehaviour
 {
 
-    private GUIController _GUIController;
+    private UIController _uiController;
     private ScenesController _scenesController;
 
     public ScenesEnum ActionToSet;
@@ -16,11 +16,11 @@ public class ChangeSceneButton : MonoBehaviour
 
     void Start()
     {
-        _GUIController = GUIController.instance;
+        _uiController = UIController.instance;
         _scenesController = ScenesController.instance;
         _button = this.GetComponent<Button>();
 
-        _button.onClick.AddListener(() => { _GUIController.SetButtonAction(ActionToSet); });    
+        _button.onClick.AddListener(() => { _uiController.SetButtonAction(ActionToSet); });    
     }
 
 }

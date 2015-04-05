@@ -2,23 +2,23 @@
 using System.Collections;
 using EnumSpace;
 
-public class GUIController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
 
-    private static GUIController _instance;
+    private static UIController _instance;
 
     public GameObject LoadingScreen;
     
     private ScenesController _scenesController;
     public bool mouseOverGUI = false;
 
-    public static GUIController instance
+    public static UIController instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<GUIController>();
+                _instance = GameObject.FindObjectOfType<UIController>();
 
                 //Tell unity not to destroy this object when loading a new scene!
                 DontDestroyOnLoad(_instance.gameObject);

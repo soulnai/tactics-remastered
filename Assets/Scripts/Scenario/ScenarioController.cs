@@ -2,10 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+/*-----------------------------------------------------
+
+    Отвечает за описание и проверку целей и условий в даной сцене
+     
+-----------------------------------------------------*/
+
 public class ScenarioController : MonoBehaviour {
 	public List <List<Tile>> map = new List<List<Tile>>();
 	public int mapSize;
-	private ScenarioController _ScenarioController;
 	private static ScenarioController _instance;
 	public static ScenarioController instance
 	{
@@ -41,12 +47,16 @@ public class ScenarioController : MonoBehaviour {
 	}
 
 	void Start () {
-		//_ScenarioController = ScenarioController.instance;
-		MapController.loadMapFromXml ();
+		Init();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    void Init()
+    {
+        MapController.loadMapFromXml();
+    }
 }

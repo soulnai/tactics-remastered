@@ -1,27 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /*-----------------------------------------------------
 
-    Загрузка сцен
+    Отвечает за хранение всей информации по текущей битве:
+        *количество сторон
+        *количество и тип юнитов у каждой из сторон
+        *контроль ходов
      
 -----------------------------------------------------*/
+public class BattleDataController : MonoBehaviour
+{
+    public List<Player> Players;
+    public int currentRound = 0;  
 
-public class ScenesController : MonoBehaviour {
+    private static BattleDataController _instance;
 
-    private static ScenesController _instance;
-    public string sceneMainMenuName = "MainMenu";
-    public string sceneTavernName = "Tavern";
-
-    private UIController _uiController;
-
-    public static ScenesController instance
+    public static BattleDataController instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<ScenesController>();
+                _instance = GameObject.FindObjectOfType<BattleDataController>();
 
                 //Tell unity not to destroy this object when loading a new scene!
                 DontDestroyOnLoad(_instance.gameObject);
@@ -47,25 +49,15 @@ public class ScenesController : MonoBehaviour {
                 Destroy(this.gameObject);
         }
     }
-
+    // Use this for initialization
     void Start()
     {
-        _uiController = UIController.instance;
+
     }
 
-    public void LoadScene(string name) {
-        _uiController.ShowLoadingScreen();
-        Application.LoadLevel(name);
-    }
+    // Update is called once per frame
+    void Update()
+    {
 
-    public void LoadMainMenu()
-    {
-        _uiController.ShowLoadingScreen();
-        Application.LoadLevel(sceneMainMenuName);
-    }
-    public void LoadTavern()
-    {
-        _uiController.ShowLoadingScreen();
-        Application.LoadLevel(sceneTavernName);
     }
 }

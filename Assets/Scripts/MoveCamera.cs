@@ -19,10 +19,10 @@ public class MoveCamera : MonoBehaviour
 	private bool isRotating;	// Is the camera being rotated?
 	private bool isZooming;		// Is the camera zooming?
 
-    private GUIController GUImanager;
+    private UIController GUImanager;
     void Start()
     {
-        GUImanager = GUIController.instance;
+        GUImanager = UIController.instance;
     }
 
     //
