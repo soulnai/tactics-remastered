@@ -79,28 +79,21 @@ public class Tile : MonoBehaviour {
         hideHighlight();
 	}
 	
-	
-	void OnMouseDown() {
-/*		if ((Application.loadedLevelName == "gameScene")&&(!GUImanager.instance.mouseOverGUI)) {
-			if (gm.currentUnit.UnitAction == unitActions.readyToMove) {
-				gm.moveUnitTo(this);
+	//TODO move to the Controller
+	void OnMouseDown(){
+		Tile tile;
+		if (Input.GetMouseButtonDown(0)) 
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if(Physics.Raycast(ray,out hit))
+			{
+				Debug.Log(hit.collider.gameObject.name);
+				tile = hit.collider.gameObject.GetComponent<Tile>();
+				gm.GeneratePath(gm.unitsAll[0].currentTile, tile );
+				
 			}
-			EventManager.TileClick(this);
-//			else if (gm.currentUnit.UnitAction == unitActions.meleeAttack) {
-//				gm.attackWithCurrentPlayer(this);
-//			} else if (gm.currentUnit.UnitAction == unitActions.rangedAttack) {
-//				gm.distanceAttackWithCurrentPlayer(this);
-//			} else if (gm.currentUnit.UnitAction == unitActions.magicAttack) {
-//				gm.distanceAttackWithCurrentPlayer(this);
-//			} else if (gm.currentUnit.UnitAction == unitActions.healAttack) {
-//				gm.distanceAttackWithCurrentPlayer(this);
-//			}
-		} else if (Application.loadedLevelName == "MapCreatorScene") {
-			if(MapCreatorManager.instance.editorState == editorStates.setType)
-			setType(MapCreatorManager.instance.palletSelection);
-			else if(MapCreatorManager.instance.editorState == editorStates.setHeight)
-				changeHeight(MapCreatorManager.instance.up);
-		}*/
+		}
 	}
 
 	public void changeHeight(bool up)

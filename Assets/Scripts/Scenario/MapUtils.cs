@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using System.IO;
 
 public class MapUtils : MonoBehaviour {
-	public int mapSize = 22;
+	public int mapSize;
 	public Transform mapTransform;
 	public static MapUtils instance;
 	public List <List<Tile>> map = new List<List<Tile>>();
