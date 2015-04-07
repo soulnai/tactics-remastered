@@ -33,6 +33,7 @@ public class BattleDataController : MonoBehaviour
     }
 
     private static BattleDataController _instance;
+    public Unit currentUnit;
 
     public static BattleDataController instance
     {

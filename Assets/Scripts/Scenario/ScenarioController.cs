@@ -18,8 +18,6 @@ public class ScenarioController : MonoBehaviour {
 	public SpawnMiscObjects ObjSpawner;
 	public GameObject[] UnitPrefabsHolder;
 	public GameObject[] MiscPrefabsHolder;
-	public List<Unit> unitsAll;
-	public Unit curentUnit;
 
 	private static ScenarioController _instance;
 	public static ScenarioController instance
@@ -79,37 +77,4 @@ public class ScenarioController : MonoBehaviour {
 
 
     }
-
-	public void GeneratePath(Tile from, Tile to){
-		//TODO replace blocked array on unitsAll.Where(x => x.gridPosition != destTile.gridPosition && x.gridPosition != currentUnit.gridPosition).Select(x => x.gridPosition).ToArray()
-		Vector2[] blockedArray;
-		blockedArray = new Vector2[]
-		{
-			new Vector2( 4, 3 ),
-			new Vector2( 8, 2 ),
-		};
-		List<Tile> path = TilePathFinder.FindPath (from, to, blockedArray, 50f);
-		foreach( Tile tile in path )
-		{
-			tile.showHighlight(Color.red);
-		}
-		curentUnit.currentPath = path;
-		MoveUnit (curentUnit);
-	}
-
-	//TODO все работает, но юнит не ходит :)
-	public void MoveUnit (Unit unit){
-		Vector3[] VectorPath = new Vector3 [unit.currentPath.Count];
-		Tile destTile = null;
-		for (int i = 0; i<unit.currentPath.Count; i++){
-			VectorPath[i] = new Vector3(unit.currentPath[i].transform.position.x,unit.currentPath[i].transform.position.y+0.5f,unit.currentPath[i].transform.position.z);
-			destTile = unit.currentPath[i];
-		}
-		unit.transform.LookAt (unit.currentPath[unit.currentPath.Count-1].transform.position);
-		unit.transform.DOPath (VectorPath, 3f);
-		unit.currentTile = destTile;
-		unit.currentPath = null;
-	}
-
-
 }

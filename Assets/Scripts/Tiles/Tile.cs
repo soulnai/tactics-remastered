@@ -90,8 +90,9 @@ public class Tile : MonoBehaviour {
 			{
 				Debug.Log(hit.collider.gameObject.name);
 				tile = hit.collider.gameObject.GetComponent<Tile>();
-				if (tile.impassible !=true){
-				gm.GeneratePath(gm.unitsAll[0].currentTile, tile );
+				if (tile.impassible !=true)
+				{
+				    InputController.instance.OnTileClicked(this);
 				}
 			}
 		}
