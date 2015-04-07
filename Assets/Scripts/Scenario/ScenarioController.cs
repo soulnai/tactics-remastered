@@ -72,6 +72,12 @@ public class ScenarioController : MonoBehaviour {
 		ObjSpawner.SpawnMapObject (map[8][8], 0);
 		ObjSpawner.SpawnMapObject (map[2][2], 1);
 		ObjSpawner.SpawnMapObject (map[12][12], 2);
+		ObjSpawner.SpawnMapObject (map[8][4], 3);
+		ObjSpawner.SpawnMapObject (map[1][12], 5);
+		ObjSpawner.SpawnMapObject (map[2][12], 6);
+		ObjSpawner.SpawnMapObject (map[6][6], 7);
+
+
     }
 
 	public void GeneratePath(Tile from, Tile to){
