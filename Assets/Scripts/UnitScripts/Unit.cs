@@ -28,9 +28,11 @@ public class Unit : MonoBehaviour
 	public List<Tile> currentPath;
 	//Скорость перемещения
 	public int speed = 5;
+    //текущая позиция на карте
+    public Vector2 gridPosition = Vector2.zero;
 
-// Use this for initialization
-void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	

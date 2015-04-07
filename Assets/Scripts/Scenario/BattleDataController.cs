@@ -8,12 +8,29 @@ using System.Collections.Generic;
         *количество сторон
         *количество и тип юнитов у каждой из сторон
         *контроль ходов
-     
+
 -----------------------------------------------------*/
+
 public class BattleDataController : MonoBehaviour
 {
     public List<Player> Players;
-    public int currentRound = 0;  
+    public int currentRound = 0;
+
+    public List<Unit> AllUnitsInScene
+    {
+        get
+        {
+            List<Unit> _allUnits = new List<Unit>();
+            foreach (Player p in Players)
+            {
+                foreach (Unit u in p.PartyUnits)
+                {
+                    _allUnits.Add(u);
+                }
+            }
+            return _allUnits;
+        }
+    }
 
     private static BattleDataController _instance;
 
