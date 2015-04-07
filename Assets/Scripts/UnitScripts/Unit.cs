@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour
     //скорость перемещения
     public int MovementSpeed = 0;
     //максимальная разница высот для преодоления
-    public int MaxHeight = 0;
+    public int MaxHeight = 100;
     public unitStates State;
 	//Тайл на котором находится юнит
 	public Tile currentTile;

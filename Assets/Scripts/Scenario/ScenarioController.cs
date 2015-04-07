@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 
 /*-----------------------------------------------------
@@ -14,7 +15,9 @@ public class ScenarioController : MonoBehaviour {
 	public int mapSize;
 
 	public UnitSpawn UnitSpawner;
+	public SpawnMiscObjects ObjSpawner;
 	public GameObject[] UnitPrefabsHolder;
+	public GameObject[] MiscPrefabsHolder;
 	public List<Unit> unitsAll;
 	public Unit curentUnit;
 
@@ -65,8 +68,10 @@ public class ScenarioController : MonoBehaviour {
     {
 
         MapController.loadMapFromXml();
-		UnitSpawner.spawnunit (map[9][9]);
-
+		UnitSpawner.spawnunit (map[9][9], 1);
+		ObjSpawner.SpawnMapObject (map[8][8], 0);
+		ObjSpawner.SpawnMapObject (map[2][2], 1);
+		ObjSpawner.SpawnMapObject (map[12][12], 2);
     }
 
 	public void GeneratePath(Tile from, Tile to){
@@ -88,16 +93,16 @@ public class ScenarioController : MonoBehaviour {
 
 	//TODO все работает, но юнит не ходит :)
 	public void MoveUnit (Unit unit){
-		if (curentUnit.currentPath.Count > 0) {
-			Debug.Log(curentUnit.currentPath.Count);
-			foreach (Tile t in curentUnit.currentPath){
-				Debug.Log(curentUnit.currentPath[0].transform.position);
-				transform.position += (curentUnit.currentPath[0].transform.position - curentUnit.transform.position).normalized * curentUnit.speed * Time.deltaTime;
-				if (Vector3.Distance(curentUnit.currentPath[0].transform.position, curentUnit.transform.position) <= 0.1f) {
-					curentUnit.currentPath.RemoveAt(0);
-				}
-			}
+		Vector3[] VectorPath = new Vector3 [unit.currentPath.Count];
+		Tile destTile = null;
+		for (int i = 0; i<unit.currentPath.Count; i++){
+			VectorPath[i] = new Vector3(unit.currentPath[i].transform.position.x,unit.currentPath[i].transform.position.y+0.5f,unit.currentPath[i].transform.position.z);
+			destTile = unit.currentPath[i];
 		}
+		unit.transform.LookAt (unit.currentPath[unit.currentPath.Count-1].transform.position);
+		unit.transform.DOPath (VectorPath, 3f);
+		unit.currentTile = destTile;
+		unit.currentPath = null;
 	}
 
 

@@ -113,7 +113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &399326631
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
@@ -281,7 +281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &619753142
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &1066071724
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,8 +384,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSize: 22
   UnitSpawner: {fileID: 1875412859}
+  ObjSpawner: {fileID: 1422899378}
   UnitPrefabsHolder:
   - {fileID: 172704, guid: e1ada524b0cdb464996de06e584bb113, type: 2}
+  - {fileID: 100060, guid: a1a2bf3d6f77061459aa8cc3a95087b9, type: 2}
+  MiscPrefabsHolder:
+  - {fileID: 100000, guid: 8cd78779049a21145a0ecef900ea54eb, type: 2}
+  - {fileID: 100000, guid: 1ce4b41935c643b44ae882a3debc4037, type: 2}
+  - {fileID: 100000, guid: 24601cc9d011cb54eab0cd66e48ee915, type: 2}
   unitsAll: []
   curentUnit: {fileID: 0}
   MapController: {fileID: 1194859691}
@@ -400,13 +406,52 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &1194859691 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11457318, guid: afb81b4a1ecaea443b11eb936e52a452,
     type: 2}
   m_PrefabInternal: {fileID: 1560440721}
   m_Script: {fileID: 11500000, guid: 6664e16f8095fdc40924dd31308b205e, type: 3}
+--- !u!1 &1422899377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1422899379}
+  - 114: {fileID: 1422899378}
+  m_Layer: 0
+  m_Name: ObjectSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1422899378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422899377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6275ba1bfb8754645a72e93e5cac93f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1422899379
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422899377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!1 &1497334634
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &1560440721
 Prefab:
   m_ObjectHideFlags: 0
@@ -599,7 +644,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457318, guid: afb81b4a1ecaea443b11eb936e52a452, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11457318, guid: afb81b4a1ecaea443b11eb936e52a452, type: 2}
       propertyPath: mapTransform
@@ -722,7 +767,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -236}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1807025190
@@ -755,7 +800,7 @@ RectTransform:
   m_Children:
   - {fileID: 1695147530}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

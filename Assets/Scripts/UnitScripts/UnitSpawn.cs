@@ -15,9 +15,9 @@ public class UnitSpawn : MonoBehaviour {
 	
 	}
 
-	public void spawnunit(Tile tile){
+	public void spawnunit(Tile tile, int unitPrefab){
 		gm = ScenarioController.instance;
-		Unit unit = ((GameObject)Instantiate(gm.UnitPrefabsHolder[0], new Vector3(tile.transform.position.x, tile.transform.position.y + 1f, tile.transform.position.z), Quaternion.identity)).GetComponent<Unit>();
+		Unit unit = ((GameObject)Instantiate(gm.UnitPrefabsHolder[unitPrefab], new Vector3(tile.transform.position.x, tile.transform.position.y + 0.5f, tile.transform.position.z), Quaternion.identity)).GetComponent<Unit>();
 		unit.currentTile = tile;
 		gm.unitsAll.Add(unit);
 		gm.curentUnit = unit;
