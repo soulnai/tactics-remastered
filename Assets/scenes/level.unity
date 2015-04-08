@@ -425,7 +425,7 @@ MonoBehaviour:
   UnitSpawner: {fileID: 1875412859}
   ObjSpawner: {fileID: 1422899378}
   UnitPrefabsHolder:
-  - {fileID: 172704, guid: e1ada524b0cdb464996de06e584bb113, type: 2}
+  - {fileID: 100060, guid: 3a943e530c6c898469cf3fd738fdd786, type: 2}
   - {fileID: 100060, guid: a1a2bf3d6f77061459aa8cc3a95087b9, type: 2}
   MiscPrefabsHolder:
   - {fileID: 100000, guid: 8cd78779049a21145a0ecef900ea54eb, type: 2}
@@ -851,6 +851,49 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -236}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
+--- !u!1 &1704322998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1704323000}
+  - 114: {fileID: 1704322999}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1704322999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1704322998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a4da24a88eb0049a23bb32beb3442c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: 
+  UserControlled: 0
+  AvailableUnits: []
+  PartyUnits: []
+--- !u!4 &1704323000
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1704322998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1883.07178, y: 1171.65283, z: 1306.69263}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
 --- !u!1 &1807025190
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +1011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d605be6597e57124bb2f9904e19478c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Players: []
+  Players:
+  - {fileID: 1704322999}
   currentRound: 0
   currentUnit: {fileID: 0}
 --- !u!4 &1830993955
