@@ -116,7 +116,6 @@ public class BattleLogicController : MonoBehaviour {
 	}
 
 	public void CheckAP(Unit unit){
-		Debug.Log (_battleData.AllUnitsInScene.Count);
 		if (unit.AP <= 0) {
 			foreach (Unit u in _battleData.AllUnitsInScene){
 				if (u.AP > 0){

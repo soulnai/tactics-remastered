@@ -37,7 +37,7 @@ public class ScenarioController : MonoBehaviour {
 			return _instance;
 		}
 	}
-	public MapUtils MapController;
+	private MapUtils _mapController;
 	// Use this for initialization
 	void OnAwake(){
 		if (_instance == null)
@@ -56,6 +56,7 @@ public class ScenarioController : MonoBehaviour {
 	}
 
 	void Start () {
+        _mapController = MapUtils.Instance;
 		Init();
 	}
 	
@@ -67,18 +68,25 @@ public class ScenarioController : MonoBehaviour {
     void Init()
     {
 		_battleData = BattleDataController.instance;
+    }
 
-        MapController.loadMapFromXml();
-		_battleData.Players [0].PartyUnits.Add (UnitSpawner.spawnunit (map [11] [11], 0));
-		_battleData.Players [0].PartyUnits.Add (UnitSpawner.spawnunit (map [9] [9], 1));
-		ObjSpawner.SpawnMapObject (map[8][8], 0);
-		ObjSpawner.SpawnMapObject (map[2][2], 1);
-		ObjSpawner.SpawnMapObject (map[12][12], 2);
-		ObjSpawner.SpawnMapObject (map[8][4], 3);
-		ObjSpawner.SpawnMapObject (map[1][12], 5);
-		ObjSpawner.SpawnMapObject (map[2][12], 6);
-		ObjSpawner.SpawnMapObject (map[6][6], 7);
+    public void CreateBattleScene(List<Player> players )
+    {
+        _mapController.loadMapFromXml();
 
-
+        foreach (Player p in players)
+        {
+            _battleData.Players.Add(p);
+        }
+       
+        _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(map[11][11], 0));
+        _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(map[9][9], 1));
+        ObjSpawner.SpawnMapObject(map[8][8], 0);
+        ObjSpawner.SpawnMapObject(map[2][2], 1);
+        ObjSpawner.SpawnMapObject(map[12][12], 2);
+        ObjSpawner.SpawnMapObject(map[8][4], 3);
+        ObjSpawner.SpawnMapObject(map[1][12], 5);
+        ObjSpawner.SpawnMapObject(map[2][12], 6);
+        ObjSpawner.SpawnMapObject(map[6][6], 7);
     }
 }
