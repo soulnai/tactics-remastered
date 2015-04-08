@@ -62,6 +62,7 @@ public class BattleLogicController : MonoBehaviour {
         GeneratePath(_battleData.currentUnit.currentTile,tile);
         MoveUnit(_battleData.currentUnit);
 		CheckAP (_battleData.currentUnit);
+		_battleData.currentUnit.currentPath = null;
     }
 
     //TODO поворачивать юнит на каждый тайл пути
@@ -75,18 +76,21 @@ public class BattleLogicController : MonoBehaviour {
 				destTile = unit.currentPath [i];
 			}
 			float pathTime = unit.currentPath.Count * 0.5f;
-			unit.transform.LookAt (unit.currentPath [unit.currentPath.Count - 1].transform.position);
-			unit.transform.DOPath (VectorPath, pathTime);
+			//unit.transform.LookAt (unit.currentPath [unit.currentPath.Count - 1].transform.position);
+			unit.transform.DOPath (VectorPath, pathTime).OnWaypointChange(MyCallback);;
 			unit.currentTile = destTile;
 			foreach (Tile t in unit.currentPath){
 				t.hideHighlight();
 			}
-			unit.currentPath = null;
 			ReduceAP (_battleData.currentUnit);
 		} else {
 			Debug.Log("Недостаточно АР");
 		}
     }
+	//TODO fix out of bounds error
+	void MyCallback(int waypointIndex) {
+		_battleData.currentUnit.transform.LookAt (_battleData.currentUnit.currentPath[waypointIndex].transform.position);
+	}
 
     public void GeneratePath(Tile from, Tile to)
     {
