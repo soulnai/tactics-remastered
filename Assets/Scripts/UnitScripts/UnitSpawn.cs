@@ -15,10 +15,11 @@ public class UnitSpawn : MonoBehaviour {
 	
 	}
 
-	public void spawnunit(Tile tile, int unitPrefab){
+	public Unit spawnunit(Tile tile, int unitPrefab){
 		gm = ScenarioController.instance;
 		Unit unit = ((GameObject)Instantiate(gm.UnitPrefabsHolder[unitPrefab], new Vector3(tile.transform.position.x, tile.transform.position.y + 0.5f, tile.transform.position.z), Quaternion.identity)).GetComponent<Unit>();
 		unit.currentTile = tile;
         BattleDataController.instance.currentUnit = unit;
+		return unit;
 	}
 }

@@ -17,8 +17,8 @@ public class Unit : MonoBehaviour
     public float Expirience = 0;
     //список умений
     public List<Ability> Abilities;
-    //скорость перемещения
-    public int MovementSpeed = 0;
+    //дальность перемещения тайлов за 1 АР
+    public int MovementRange = 5;
     //максимальная разница высот для преодоления
     public int MaxHeight = 100;
     public unitStates State;
@@ -26,10 +26,10 @@ public class Unit : MonoBehaviour
 	public Tile currentTile;
 	//Текущий путь
 	public List<Tile> currentPath;
-	//Скорость перемещения
-	public int speed = 5;
     //текущая позиция на карте
     public Vector2 gridPosition = Vector2.zero;
+	//количество очков действия
+	public int AP = 2;
 
     // Use this for initialization
     void Start () {

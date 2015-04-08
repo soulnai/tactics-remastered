@@ -19,6 +19,8 @@ public class ScenarioController : MonoBehaviour {
 	public GameObject[] UnitPrefabsHolder;
 	public GameObject[] MiscPrefabsHolder;
 
+	private BattleDataController _battleData;
+
 	private static ScenarioController _instance;
 	public static ScenarioController instance
 	{
@@ -64,9 +66,11 @@ public class ScenarioController : MonoBehaviour {
 
     void Init()
     {
+		_battleData = BattleDataController.instance;
 
         MapController.loadMapFromXml();
-		UnitSpawner.spawnunit (map[9][9], 1);
+		_battleData.Players [0].PartyUnits.Add (UnitSpawner.spawnunit (map [11] [11], 0));
+		_battleData.Players [0].PartyUnits.Add (UnitSpawner.spawnunit (map [9] [9], 1));
 		ObjSpawner.SpawnMapObject (map[8][8], 0);
 		ObjSpawner.SpawnMapObject (map[2][2], 1);
 		ObjSpawner.SpawnMapObject (map[12][12], 2);

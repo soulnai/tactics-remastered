@@ -61,22 +61,31 @@ public class BattleLogicController : MonoBehaviour {
     {
         GeneratePath(_battleData.currentUnit.currentTile,tile);
         MoveUnit(_battleData.currentUnit);
+		CheckAP (_battleData.currentUnit);
     }
 
-    //TODO все работает, но юнит не ходит :)
+    //TODO поворачивать юнит на каждый тайл пути
     public void MoveUnit(Unit unit)
     {
-        Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
-        Tile destTile = null;
-        for (int i = 0; i < unit.currentPath.Count; i++)
-        {
-            VectorPath[i] = new Vector3(unit.currentPath[i].transform.position.x, unit.currentPath[i].transform.position.y + 0.5f, unit.currentPath[i].transform.position.z);
-            destTile = unit.currentPath[i];
-        }
-        unit.transform.LookAt(unit.currentPath[unit.currentPath.Count - 1].transform.position);
-        unit.transform.DOPath(VectorPath, 3f);
-        unit.currentTile = destTile;
-        unit.currentPath = null;
+		if (unit.AP > 0 && unit.MovementRange>=unit.currentPath.Count) {
+			Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
+			Tile destTile = null;
+			for (int i = 0; i < unit.currentPath.Count; i++) {
+				VectorPath [i] = new Vector3 (unit.currentPath [i].transform.position.x, unit.currentPath [i].transform.position.y + 0.5f, unit.currentPath [i].transform.position.z);
+				destTile = unit.currentPath [i];
+			}
+			float pathTime = unit.currentPath.Count * 0.5f;
+			unit.transform.LookAt (unit.currentPath [unit.currentPath.Count - 1].transform.position);
+			unit.transform.DOPath (VectorPath, pathTime);
+			unit.currentTile = destTile;
+			foreach (Tile t in unit.currentPath){
+				t.hideHighlight();
+			}
+			unit.currentPath = null;
+			ReduceAP (_battleData.currentUnit);
+		} else {
+			Debug.Log("Недостаточно АР");
+		}
     }
 
     public void GeneratePath(Tile from, Tile to)
@@ -95,4 +104,21 @@ public class BattleLogicController : MonoBehaviour {
         }
         _battleData.currentUnit.currentPath = path;
     }
+
+	public void ReduceAP(Unit unit){
+		if (unit.AP > 0) {
+			unit.AP = unit.AP - 1;
+		}
+	}
+
+	public void CheckAP(Unit unit){
+		Debug.Log (_battleData.AllUnitsInScene.Count);
+		if (unit.AP <= 0) {
+			foreach (Unit u in _battleData.AllUnitsInScene){
+				if (u.AP > 0){
+					_battleData.currentUnit = u;
+				}
+			}
+		}
+	}
 }
