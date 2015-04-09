@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using EnumSpace;
+using UnityEngine.Events;
+
 /*-----------------------------------------------------
 
     Обрабатывает все управление, входящие клики, нажатия и пр.
@@ -12,6 +15,7 @@ public class InputController : MonoBehaviour
 
     private static InputController _instance;
 
+    private BattleDataController _battleData;
     public static InputController instance
     {
         get
@@ -52,10 +56,7 @@ public class InputController : MonoBehaviour
 
     public void OnTileClicked(Tile t)
     {
-        //TODO check situation and what to do
         if (OnTileClick != null)
-        {
             OnTileClick(t);
-        }
     }
 }

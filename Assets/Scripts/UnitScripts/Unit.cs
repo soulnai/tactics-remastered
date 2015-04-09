@@ -30,6 +30,8 @@ public class Unit : MonoBehaviour
     public Vector2 gridPosition = Vector2.zero;
 	//количество очков действия
 	public int AP = 2;
+    //текущее действие юнита
+    public EnumSpace.unitActions CurrentAction;
 
     // Use this for initialization
     void Start () {
