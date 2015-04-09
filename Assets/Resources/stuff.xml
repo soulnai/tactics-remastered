@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<MapStuffCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" size="8">
+  <Trees>
+    <Tree  type="0" locX="8" locY="8"/>
+	<Tree  type="1" locX="2" locY="2"/>
+	<Tree  type="2" locX="12" locY="12"/>
+  </Trees>
+  <Crates>
+	<Crate  type="3" locX="8" locY="4"/>
+	<Crate  type="4" locX="1" locY="12"/>
+	<Crate  type="5" locX="2" locY="12"/>
+	<Crate  type="6" locX="6" locY="6"/>
+	<Crate  type="7" locX="5" locY="5"/>
+  </Crates>
+</MapStuffCollection>	

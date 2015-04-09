@@ -85,4 +85,29 @@ public class MapUtils : MonoBehaviour {
 			}
 		}
 	}
+
+	public void loadStuffFromXml() {
+		gm = ScenarioController.instance;
+		MapStuffXmlContainer container = MapSaveLoad.LoadStuff("/Asets/Resources/stuff.xml");
+		
+		int treesCount = container.trees.Count;
+		for (int i = 0; i < treesCount; i++) {
+				gm = ScenarioController.instance;
+				int stuffType = container.trees.ElementAt(i).type;
+				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
+				Instantiate(gm.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y+0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
+				tileTospawn.impassible = true;
+		}
+
+		int cratesCount = container.crates.Count;
+		Debug.Log (cratesCount);
+		for (int i = 0; i < cratesCount; i++) {
+			gm = ScenarioController.instance;
+			int stuffType = container.crates.ElementAt(i).type;
+			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
+			Instantiate(gm.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y+0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
+			tileTospawn.impassible = true;
+		}
+		
+	}
 }

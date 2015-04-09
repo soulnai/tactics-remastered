@@ -28,6 +28,42 @@ public class MapXmlContainer {
 	public List<TileXml> tiles = new List<TileXml>();
 }
 
+public class TreeXml {
+	[XmlAttribute("locX")]
+	public int locX;
+	
+	[XmlAttribute("locY")]
+	public int locY;
+
+	[XmlAttribute("type")]
+	public int type;
+}
+
+public class CrateXml {
+	[XmlAttribute("locX")]
+	public int locX;
+	
+	[XmlAttribute("locY")]
+	public int locY;
+	
+	[XmlAttribute("type")]
+	public int type;
+}
+
+[XmlRoot("MapStuffCollection")]
+public class MapStuffXmlContainer {
+	[XmlAttribute("size")]
+	public int size;
+	
+	[XmlArray("Trees")]
+	[XmlArrayItem("Tree")]
+	public List<TreeXml> trees = new List<TreeXml>();
+
+	[XmlArray("Crates")]
+	[XmlArrayItem("Crate")]
+	public List<CrateXml> crates = new List<CrateXml>();
+}
+
 public static class MapSaveLoad {
 	public static MapXmlContainer CreateMapContainer(List <List<Tile>> map) {
 
@@ -63,11 +99,6 @@ public static class MapSaveLoad {
 	}
 
 	public static MapXmlContainer Load(string filename) {
-	/*	var serializer = new XmlSerializer(typeof(MapXmlContainer));
-		using(var stream = new FileStream(filename, FileMode.Open))
-		{
-			return serializer.Deserialize(stream) as MapXmlContainer;
-		}*/
 		var serializer = new XmlSerializer(typeof(MapXmlContainer));
 		TextAsset rawData;
 		rawData = (TextAsset) Resources.Load("map");
@@ -76,5 +107,16 @@ public static class MapSaveLoad {
 			return serializer.Deserialize(stream) as MapXmlContainer;
 		}
 
+	}
+
+	public static MapStuffXmlContainer LoadStuff(string filename) {
+		var serializer = new XmlSerializer(typeof(MapStuffXmlContainer));
+		TextAsset rawData;
+		rawData = (TextAsset) Resources.Load("stuff");
+		using(var stream = new XmlTextReader(new StringReader(rawData.text)))
+		{
+			return serializer.Deserialize(stream) as MapStuffXmlContainer;
+		}
+		
 	}
 }

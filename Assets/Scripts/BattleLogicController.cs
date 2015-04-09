@@ -62,7 +62,7 @@ public class BattleLogicController : MonoBehaviour {
         GeneratePath(_battleData.currentUnit.currentTile,tile);
         MoveUnit(_battleData.currentUnit);
 		CheckAP (_battleData.currentUnit);
-		_battleData.currentUnit.currentPath = null;
+		//_battleData.currentUnit.currentPath = null;
     }
 
     //TODO поворачивать юнит на каждый тайл пути
@@ -76,7 +76,6 @@ public class BattleLogicController : MonoBehaviour {
 				destTile = unit.currentPath [i];
 			}
 			float pathTime = unit.currentPath.Count * 0.5f;
-			//unit.transform.LookAt (unit.currentPath [unit.currentPath.Count - 1].transform.position);
 			unit.transform.DOPath (VectorPath, pathTime).OnWaypointChange(MyCallback);;
 			unit.currentTile = destTile;
 			foreach (Tile t in unit.currentPath){

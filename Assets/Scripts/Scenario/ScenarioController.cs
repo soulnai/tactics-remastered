@@ -58,6 +58,7 @@ public class ScenarioController : MonoBehaviour {
 	void Start () {
         _mapController = MapUtils.Instance;
 		Init();
+		CreateBattleScene (_battleData.Players);
 	}
 	
 	// Update is called once per frame
@@ -73,20 +74,9 @@ public class ScenarioController : MonoBehaviour {
     public void CreateBattleScene(List<Player> players )
     {
         _mapController.loadMapFromXml();
-
-        foreach (Player p in players)
-        {
-            _battleData.Players.Add(p);
-        }
-       
+		_mapController.loadStuffFromXml();
+		   
         _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(map[11][11], 0));
         _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(map[9][9], 1));
-        ObjSpawner.SpawnMapObject(map[8][8], 0);
-        ObjSpawner.SpawnMapObject(map[2][2], 1);
-        ObjSpawner.SpawnMapObject(map[12][12], 2);
-        ObjSpawner.SpawnMapObject(map[8][4], 3);
-        ObjSpawner.SpawnMapObject(map[1][12], 5);
-        ObjSpawner.SpawnMapObject(map[2][12], 6);
-        ObjSpawner.SpawnMapObject(map[6][6], 7);
     }
 }
