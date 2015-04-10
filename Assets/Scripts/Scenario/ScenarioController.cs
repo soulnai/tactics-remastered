@@ -12,6 +12,7 @@ using DG.Tweening;
 
 public class ScenarioController : MonoBehaviour {
 	public List <List<Tile>> map = new List<List<Tile>>();
+	public List<Tile> spawnArea = new List<Tile>();
 	public int mapSize;
 
 	public UnitSpawn UnitSpawner;
@@ -75,8 +76,10 @@ public class ScenarioController : MonoBehaviour {
     {
         _mapController.loadMapFromXml();
 		_mapController.loadStuffFromXml();
-		   
-        _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(map[11][11], 0));
-        _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(map[9][9], 1));
+
+		for (int i=0; i<UnitPrefabsHolder.Length; i++) {
+			_battleData.Players [0].PartyUnits.Add (UnitSpawner.spawnunit (spawnArea[i], UnitPrefabsHolder[i]));
+		}
+		Camera.main.transform.LookAt (spawnArea[0].transform.position);
     }
 }

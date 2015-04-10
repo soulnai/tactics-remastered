@@ -108,6 +108,13 @@ public class MapUtils : MonoBehaviour {
 			Instantiate(gm.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y+0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
 		}
+
+		int spawnTilesCount = container.spawnTiles.Count;
+		Debug.Log (spawnTilesCount);
+		for (int i = 0; i < spawnTilesCount; i++) {
+			gm = ScenarioController.instance;
+			gm.spawnArea.Add(gm.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
+		}
 		
 	}
 }

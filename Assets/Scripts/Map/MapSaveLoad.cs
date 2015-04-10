@@ -50,6 +50,14 @@ public class CrateXml {
 	public int type;
 }
 
+public class SpawnTileXml {
+	[XmlAttribute("locX")]
+	public int locX;
+	
+	[XmlAttribute("locY")]
+	public int locY;
+}
+
 [XmlRoot("MapStuffCollection")]
 public class MapStuffXmlContainer {
 	[XmlAttribute("size")]
@@ -62,6 +70,10 @@ public class MapStuffXmlContainer {
 	[XmlArray("Crates")]
 	[XmlArrayItem("Crate")]
 	public List<CrateXml> crates = new List<CrateXml>();
+
+	[XmlArray("SpawnArea")]
+	[XmlArrayItem("SpawnTile")]
+	public List<SpawnTileXml> spawnTiles = new List<SpawnTileXml>();
 }
 
 public static class MapSaveLoad {

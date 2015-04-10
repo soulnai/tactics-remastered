@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<MapStuffCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" size="8">
+<MapStuffCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" size="12">
   <Trees>
     <Tree  type="0" locX="8" locY="8"/>
 	<Tree  type="1" locX="2" locY="2"/>
@@ -12,4 +12,10 @@
 	<Crate  type="6" locX="6" locY="6"/>
 	<Crate  type="7" locX="5" locY="5"/>
   </Crates>
+  <SpawnArea>
+	<SpawnTile locX="2" locY="8"/>
+	<SpawnTile locX="3" locY="8"/>
+	<SpawnTile locX="4" locY="8"/>
+	<SpawnTile locX="5" locY="8"/>
+  </SpawnArea>
 </MapStuffCollection>	

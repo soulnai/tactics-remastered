@@ -173,7 +173,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Exit
 --- !u!222 &399326634
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -421,6 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ae6e1486846cc489adccd2014c57b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnArea: []
   mapSize: 22
   UnitSpawner: {fileID: 1875412859}
   ObjSpawner: {fileID: 1422899378}
@@ -436,7 +437,6 @@ MonoBehaviour:
   - {fileID: 100000, guid: 4004bb9ed1537a940bd7b248feb648ab, type: 2}
   - {fileID: 100000, guid: 9371fa58f3c567a4cb6403149265194f, type: 2}
   - {fileID: 100000, guid: 17c353d424ceee246a1865e1070ee32c, type: 2}
-  MapController: {fileID: 1194859691}
 --- !u!4 &1066071726
 Transform:
   m_ObjectHideFlags: 0
@@ -449,12 +449,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!114 &1194859691 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11457318, guid: afb81b4a1ecaea443b11eb936e52a452,
-    type: 2}
-  m_PrefabInternal: {fileID: 1560440721}
-  m_Script: {fileID: 11500000, guid: 6664e16f8095fdc40924dd31308b205e, type: 3}
 --- !u!1 &1422899377
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,9 +593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9990c26135a754a88a5fc8e4c32fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 1.16999996
-  panSpeed: .680000007
-  zoomSpeed: .720000029
+  turnSpeed: 3.08999991
+  panSpeed: .219999999
+  zoomSpeed: 3.11999989
 --- !u!1 &1550734544
 GameObject:
   m_ObjectHideFlags: 0
