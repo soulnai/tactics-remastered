@@ -15,7 +15,6 @@ public class InputController : MonoBehaviour
 
     private static InputController _instance;
 
-    private BattleDataController _battleData;
     public static InputController instance
     {
         get

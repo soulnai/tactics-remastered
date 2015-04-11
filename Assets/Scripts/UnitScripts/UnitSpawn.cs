@@ -2,12 +2,10 @@
 using System.Collections;
 
 public class UnitSpawn : MonoBehaviour {
-	private ScenarioController gm;
-	public static UnitSpawn instance;
 
 	// Use this for initialization
 	void OnAwake(){
-		instance = this;
+
 	}
 	
 	// Update is called once per frame
@@ -16,7 +14,6 @@ public class UnitSpawn : MonoBehaviour {
 	}
 
 	public Unit spawnunit(Tile tile, GameObject unitPrefab){
-		gm = ScenarioController.instance;
 	    GameObject go =
 	        ((GameObject)
 	            Instantiate(unitPrefab,

@@ -12,11 +12,13 @@ using DG.Tweening;
 
 public class ScenarioController : MonoBehaviour {
 	public List <List<Tile>> map = new List<List<Tile>>();
-	public List<Tile> spawnArea = new List<Tile>();
+    //TODO create a list of spawn areas that will be used for different players/enemies/etc. this are for this party etc.
+    public List<Tile> spawnArea = new List<Tile>();
 	public int mapSize;
-
+    //TODO Move all functions here as second class or use Spawner for all elements - Units / Props and other elements
 	public UnitSpawn UnitSpawner;
 	public SpawnMiscObjects ObjSpawner;
+    //TODO Move to the global game data or battle data all links to the prefabs, assets, etc.
 	public GameObject[] UnitPrefabsHolder;
 	public GameObject[] MiscPrefabsHolder;
 
@@ -38,8 +40,10 @@ public class ScenarioController : MonoBehaviour {
 			return _instance;
 		}
 	}
-	private MapUtils _mapController;
-	// Use this for initialization
+
+    private MapUtils _mapController;
+	
+    // Use this for initialization
 	void OnAwake(){
 		if (_instance == null)
 		{
@@ -54,23 +58,25 @@ public class ScenarioController : MonoBehaviour {
 			if (this != _instance)
 				Destroy(this.gameObject);
 		}
+	    Init();
 	}
 
-	void Start () {
+    // Инициализация сценария текущей битвы, заполнение всех полей, ссылок и пр.
+    public void Init()
+    {
+        _battleData = BattleDataController.instance;
         _mapController = MapUtils.Instance;
-		Init();
-		CreateBattleScene (_battleData.Players);
-	}
+        CreateBattleScene(_battleData.Players);
+    }
+
+    void Start () {
+        
+		}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
-    void Init()
-    {
-		_battleData = BattleDataController.instance;
-    }
 
     public void CreateBattleScene(List<Player> players )
     {
