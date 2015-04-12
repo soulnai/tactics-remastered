@@ -21,7 +21,7 @@ public class SpawnMiscObjects : MonoBehaviour {
 
 	public void SpawnMapObject(Tile tile, int obj){
 		gm = ScenarioController.instance;
-		Instantiate(gm.MiscPrefabsHolder[obj], new Vector3(tile.transform.position.x, tile.transform.position.y+0.5f, tile.transform.position.z), Quaternion.Euler(-90, 90, 0));
+		Instantiate(gm.MiscPrefabsHolder[obj], tile.transform.position + new Vector3(0f,.5f,0f), Quaternion.identity);
 		tile.impassible = true;
 	}
 }
