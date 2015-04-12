@@ -12,8 +12,10 @@ public class ScenesController : MonoBehaviour {
     private static ScenesController _instance;
     public string sceneMainMenuName = "MainMenu";
     public string sceneTavernName = "Tavern";
+    public string sceneBattleName = "Level";
 
     private UIController _uiController;
+    private BattleDataController _battleData;
 
     public static ScenesController instance
     {
@@ -50,6 +52,7 @@ public class ScenesController : MonoBehaviour {
 
     void Start()
     {
+        _battleData = BattleDataController.instance;
         _uiController = UIController.instance;
     }
 
@@ -67,5 +70,19 @@ public class ScenesController : MonoBehaviour {
     {
         _uiController.ShowLoadingScreen();
         Application.LoadLevel(sceneTavernName);
+    }
+
+    //prepare all data to be ready for scene to load
+    public void LoadBattle()
+    {
+        if (_battleData.ReadyToStart)
+        {
+            _uiController.ShowLoadingScreen();
+            Application.LoadLevel(sceneBattleName);
+        }
+        else
+        {
+            Debug.Log("Battle Data not ready");
+        }
     }
 }

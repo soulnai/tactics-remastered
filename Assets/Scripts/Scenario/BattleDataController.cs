@@ -15,6 +15,8 @@ public class BattleDataController : MonoBehaviour
 {
     public List<Player> Players;
     public int currentRound = 0;
+    public Unit currentUnit;
+    public bool ReadyToStart = false;
 
     public List<Unit> AllUnitsInScene
     {
@@ -33,7 +35,7 @@ public class BattleDataController : MonoBehaviour
     }
 
     private static BattleDataController _instance;
-    public Unit currentUnit;
+
 
     public static BattleDataController instance
     {
@@ -50,6 +52,7 @@ public class BattleDataController : MonoBehaviour
             return _instance;
         }
     }
+
 
     void Awake()
     {

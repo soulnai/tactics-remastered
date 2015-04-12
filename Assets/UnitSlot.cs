@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler
+public class UnitSlot : MonoBehaviour, IDropHandler
 {
     public GameObject item
     {
@@ -23,8 +23,8 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         if (!item)
         {
-            DragHandler.DraggedObj.transform.SetParent(transform,false);
-            DragHandler.DraggedObj.transform.localPosition = Vector3.zero;
+            UnitDragHandler.DraggedObj.transform.SetParent(transform,false);
+            UnitDragHandler.DraggedObj.transform.localPosition = Vector3.zero;
         }
     }
 }

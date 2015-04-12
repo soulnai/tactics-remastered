@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class DragHandler : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragHandler
+public class UnitDragHandler : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragHandler
 {
 
     public static GameObject DraggedObj;

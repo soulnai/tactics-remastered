@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Security.Policy;
 
-public class GlobalGameController : MonoBehaviour {
-
+public class GlobalGameController : MonoBehaviour
+{
+    public Player Player;
     private static GlobalGameController _instance;
     
     public static GlobalGameController instance
@@ -22,7 +24,7 @@ public class GlobalGameController : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if (_instance == null)
         {
@@ -36,7 +38,23 @@ public class GlobalGameController : MonoBehaviour {
             if (this != _instance)
                 Destroy(this.gameObject);
         }
+
+        Init();
     }
+
+    private void Init()
+    {
+        CreatePlayer();
+    }
+
+    private void CreatePlayer()
+    {
+        Player = new Player();
+        Player.PlayerName = "Bob";
+        Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitKnightPrefab);
+        Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitScoutPrefab);
+    }
+
 
     // Update is called once per frame
     void Update () {

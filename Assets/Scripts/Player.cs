@@ -2,20 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour
+public class Player
 {
     //имя игрока
-    public string PlayerName;
+    public string PlayerName = "";
     //управляется пользователем
     public bool UserControlled = false;
     //все доступные на текущий момент юнити данного игрока
-    public List<Unit> AvailableUnits;
+    public List<Unit> AvailableUnits = new List<Unit>();
     //юнити в пати данного игрока
-    public List<Unit> PartyUnits;
+    public List<Unit> PartyUnits = new List<Unit>();
       
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+	    AvailableUnits = new List<Unit>();
+        PartyUnits = new List<Unit>();
 	}
 	
 	// Update is called once per frame

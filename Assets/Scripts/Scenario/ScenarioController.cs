@@ -44,7 +44,7 @@ public class ScenarioController : MonoBehaviour {
     private MapUtils _mapController;
 	
     // Use this for initialization
-	void OnAwake(){
+	void Awake(){
 		if (_instance == null)
 		{
 			//If I am the first instance, make me the Singleton
@@ -58,7 +58,6 @@ public class ScenarioController : MonoBehaviour {
 			if (this != _instance)
 				Destroy(this.gameObject);
 		}
-	    Init();
 	}
 
     // Инициализация сценария текущей битвы, заполнение всех полей, ссылок и пр.
@@ -70,8 +69,8 @@ public class ScenarioController : MonoBehaviour {
     }
 
     void Start () {
-        
-		}
+        Init();
+    }
 	
 	// Update is called once per frame
 	void Update () {
