@@ -19,10 +19,10 @@ public class ScenarioController : MonoBehaviour {
 	public UnitSpawn UnitSpawner;
 	public SpawnMiscObjects ObjSpawner;
     //TODO Move to the global game data or battle data all links to the prefabs, assets, etc.
-
+	public GameObject[] UnitPrefabsHolder;
+	public GameObject[] MiscPrefabsHolder;
 
 	private BattleDataController _battleData;
-    private GlobalPrefabHolder _prefabHolder;
 
 	private static ScenarioController _instance;
 	public static ScenarioController instance
@@ -64,7 +64,6 @@ public class ScenarioController : MonoBehaviour {
     public void Init()
     {
         _battleData = BattleDataController.instance;
-        _prefabHolder = GlobalPrefabHolder.instance;
         _mapController = MapUtils.Instance;
         CreateBattleScene(_battleData.Players);
     }
@@ -83,9 +82,8 @@ public class ScenarioController : MonoBehaviour {
         _mapController.loadMapFromXml();
 		_mapController.loadStuffFromXml();
 
-        for (int i = 0; i < _prefabHolder.UnitPrefabsHolder.Length; i++)
-        {
-            _battleData.Players[0].PartyUnits.Add(UnitSpawner.spawnunit(spawnArea[i], _prefabHolder.UnitPrefabsHolder[i]));
+		for (int i=0; i<UnitPrefabsHolder.Length; i++) {
+			_battleData.Players [0].PartyUnits.Add (UnitSpawner.spawnunit (spawnArea[i], UnitPrefabsHolder[i]));
 		}
 		Camera.main.transform.LookAt (spawnArea[0].transform.position);
     }

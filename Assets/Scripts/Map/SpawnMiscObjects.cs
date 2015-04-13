@@ -4,7 +4,6 @@ using System.Collections;
 public class SpawnMiscObjects : MonoBehaviour {
 	private ScenarioController gm;
 	public static SpawnMiscObjects instance;
-    private GlobalPrefabHolder _prefabHolder;
 
 	void OnAwake(){
 		instance = this;
@@ -22,8 +21,7 @@ public class SpawnMiscObjects : MonoBehaviour {
 
 	public void SpawnMapObject(Tile tile, int obj){
 		gm = ScenarioController.instance;
-        _prefabHolder = GlobalPrefabHolder.instance;
-        Instantiate(_prefabHolder.MiscPrefabsHolder[obj], tile.transform.position + new Vector3(0f, .5f, 0f), Quaternion.identity);
+		Instantiate(gm.MiscPrefabsHolder[obj], tile.transform.position + new Vector3(0f,.5f,0f), Quaternion.identity);
 		tile.impassible = true;
 	}
 }
