@@ -141,4 +141,12 @@ namespace EnumSpace {
 		ai = 2,
 		spectr = 3
 	}
+
+    public enum TileType
+    {
+        Normal,
+        Difficult,
+        VeryDifficult,
+        Impassible
+    }
 }

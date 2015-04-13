@@ -13,6 +13,7 @@ public class MapUtils : MonoBehaviour {
 	public List <List<Tile>> map = new List<List<Tile>>();
 	private ScenarioController gm;
     private static MapUtils _instance;
+    private GlobalPrefabHolder _prefabHolder;
 
     public static MapUtils Instance
     {
@@ -53,6 +54,7 @@ public class MapUtils : MonoBehaviour {
 	}
 
 	public void loadMapFromXml() {
+        _prefabHolder = GlobalPrefabHolder.instance;
 		gm = ScenarioController.instance;
 		MapXmlContainer container = MapSaveLoad.Load("/Asets/Resources/map.xml");
 		
@@ -68,11 +70,11 @@ public class MapUtils : MonoBehaviour {
 			List <Tile> row = new List<Tile>();
 			for (int j = 0; j < gm.mapSize; j++) {
 				float tileHeight = container.tiles.Where(x => x.locX == i && x.locY == j).First().height;
-				Tile tile = ((GameObject)Instantiate(PrefabHolder.instance.BASE_TILE_PREFAB, new Vector3(i - Mathf.Floor(gm.mapSize/2),tileHeight, -j + Mathf.Floor(gm.mapSize/2)), Quaternion.Euler(new Vector3()))).GetComponent<Tile>();
+                Tile tile = ((GameObject)Instantiate(_prefabHolder.BASE_TILE_PREFAB, new Vector3(i - Mathf.Floor(gm.mapSize / 2), tileHeight, -j + Mathf.Floor(gm.mapSize / 2)), Quaternion.Euler(new Vector3()))).GetComponent<Tile>();
 				
 				tile.transform.parent = mapTransform;
 				tile.gridPosition = new Vector2(i, j);
-				tile.setType((TileType)container.tiles.Where(x => x.locX == i && x.locY == j).First().id);
+				tile.setType((EnumSpace.TileType)container.tiles.Where(x => x.locX == i && x.locY == j).First().id);
 				tile.height = tileHeight;
 				row.Add (tile);
 			}
@@ -95,7 +97,7 @@ public class MapUtils : MonoBehaviour {
 				gm = ScenarioController.instance;
 				int stuffType = container.trees.ElementAt(i).type;
 				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
-				Instantiate(gm.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y+0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
+                Instantiate(_prefabHolder.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y + 0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
 				tileTospawn.impassible = true;
 		}
 
@@ -105,7 +107,7 @@ public class MapUtils : MonoBehaviour {
 			gm = ScenarioController.instance;
 			int stuffType = container.crates.ElementAt(i).type;
 			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
-			Instantiate(gm.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y+0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
+            Instantiate(_prefabHolder.MiscPrefabsHolder[stuffType], new Vector3(tileTospawn.transform.position.x, tileTospawn.transform.position.y + 0.5f, tileTospawn.transform.position.z), Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
 		}
 

@@ -51,8 +51,8 @@ public class GlobalGameController : MonoBehaviour
     {
         Player = new Player();
         Player.PlayerName = "Bob";
-        Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitKnightPrefab);
-        Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitScoutPrefab);
+        //Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitPrefabsHolder[0]);
+        //Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitPrefabsHolder[1]);
     }
 
 
