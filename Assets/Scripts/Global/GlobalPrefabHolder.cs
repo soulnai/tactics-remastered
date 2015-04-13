@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GlobalPrefabHolder : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class GlobalPrefabHolder : MonoBehaviour {
     public GameObject[] UnitPrefabsHolder;
     //MapStuff
     public GameObject[] MiscPrefabsHolder;
+
+    public Dictionary<string,GameObject> Prefabs; 
 
     private static GlobalPrefabHolder _instance;
 
@@ -44,6 +47,19 @@ public class GlobalPrefabHolder : MonoBehaviour {
             //another reference in scene, destroy it!
             if (this != _instance)
                 Destroy(this.gameObject);
+        }
+
+        LoadAllPrefabs();
+    }
+
+
+    //stores all prefabs in Prefabs
+    public void LoadAllPrefabs()
+    {
+        Prefabs = new Dictionary<string, GameObject>();
+        foreach (GameObject prefab in Resources.LoadAll("Prefabs", typeof(GameObject)))
+        {
+            Prefabs.Add(prefab.name,prefab);
         }
     }
 }
