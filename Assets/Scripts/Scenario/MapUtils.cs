@@ -102,7 +102,7 @@ public class MapUtils : MonoBehaviour {
 		}
 
 		int cratesCount = container.crates.Count;
-		Debug.Log (crate    sCount);
+		
 		for (int i = 0; i < cratesCount; i++) {
 			gm = ScenarioController.instance;
 			int stuffType = container.crates.ElementAt(i).type;
