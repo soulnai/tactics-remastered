@@ -160,8 +160,8 @@ public class Tile : MonoBehaviour {
 			Destroy (container.transform.GetChild(i).gameObject);
 		}
 
-		GameObject newVisual = (GameObject)Instantiate(PREFAB, transform.position, Quaternion.identity);
-		newVisual.transform.parent = container.transform;
+		GameObject newVisual = (GameObject)Instantiate(PREFAB, visual.transform.position, Quaternion.identity);
+		newVisual.transform.SetParent(container.transform);
 		visual = newVisual;
 	}
 

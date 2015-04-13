@@ -269,13 +269,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca389b283f1af643825fa2331df8d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BASE_TILE_PREFAB: {fileID: 0}
-  TILE_NORMAL_PREFAB: {fileID: 0}
-  TILE_DIFFICULT_PREFAB: {fileID: 0}
-  TILE_VERY_DIFFICULT_PREFAB: {fileID: 0}
-  TILE_IMPASSIBLE_PREFAB: {fileID: 0}
-  UnitKnightPrefab: {fileID: 11418224, guid: e1ada524b0cdb464996de06e584bb113, type: 2}
-  UnitScoutPrefab: {fileID: 11418224, guid: e1ada524b0cdb464996de06e584bb113, type: 2}
+  BASE_TILE_PREFAB: {fileID: 100000, guid: d0c30b07cf7299c40ae65f3b59b4fb7b, type: 2}
+  TILE_NORMAL_PREFAB: {fileID: 100000, guid: 7d41b18ee6bb0714cbe1fe017703a21d, type: 2}
+  TILE_DIFFICULT_PREFAB: {fileID: 100000, guid: d0ad958e332bc2d4db9ebe6735b06ebb,
+    type: 2}
+  TILE_VERY_DIFFICULT_PREFAB: {fileID: 100000, guid: 4e8f44a2599e98947a98d3f0399f5a20,
+    type: 2}
+  TILE_IMPASSIBLE_PREFAB: {fileID: 100000, guid: 707a1df08cda1b348b1b551c31039d45,
+    type: 2}
+  UnitPrefabsHolder: []
+  MiscPrefabsHolder: []
 --- !u!114 &11413700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdcf60a70bedcc4393f71bc134fbf12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
 --- !u!114 &11451844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d605be6597e57124bb2f9904e19478c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Players: []
   currentRound: 0
   currentUnit: {fileID: 0}
   ReadyToStart: 0
