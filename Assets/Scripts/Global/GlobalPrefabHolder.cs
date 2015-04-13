@@ -10,8 +10,9 @@ public class GlobalPrefabHolder : MonoBehaviour {
 	public GameObject TILE_VERY_DIFFICULT_PREFAB;
 	public GameObject TILE_IMPASSIBLE_PREFAB;
     //Units
-    public Unit UnitKnightPrefab;
-    public Unit UnitScoutPrefab;
+    public GameObject[] UnitPrefabsHolder;
+    //MapStuff
+    public GameObject[] MiscPrefabsHolder;
 
     private static GlobalPrefabHolder _instance;
 

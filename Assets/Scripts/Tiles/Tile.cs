@@ -26,6 +26,8 @@ public class Tile : MonoBehaviour {
 	public Tile leftNeighbour;
 
 	private ScenarioController gm;
+
+    private GlobalPrefabHolder _prefabHolder;
 	// Use this for initialization
 	void Awake(){
 //		highlight.SetActive(false);
@@ -113,37 +115,38 @@ public class Tile : MonoBehaviour {
 	}
 
 	public void setType(TileType t) {
+        _prefabHolder = GlobalPrefabHolder.instance;
 		type = t;
 		//definitions of TileType properties
 		switch(t) {
 			case TileType.Normal:
 				movementCost = 1;
 				impassible = false;
-				PREFAB = PrefabHolder.instance.TILE_NORMAL_PREFAB;
+                PREFAB = _prefabHolder.TILE_NORMAL_PREFAB;
 				break;
 			
 			case TileType.Difficult:
 				movementCost = 2;
 				impassible = false;
-				PREFAB = PrefabHolder.instance.TILE_DIFFICULT_PREFAB;
+                PREFAB = _prefabHolder.TILE_DIFFICULT_PREFAB;
 				break;
 				
 			case TileType.VeryDifficult:
 				movementCost = 3;
 				impassible = false;
-				PREFAB = PrefabHolder.instance.TILE_VERY_DIFFICULT_PREFAB;
+				PREFAB = _prefabHolder.TILE_VERY_DIFFICULT_PREFAB;
 				break;
 				
 			case TileType.Impassible:
 				movementCost = 999;
 				impassible = true;
-				PREFAB = PrefabHolder.instance.TILE_IMPASSIBLE_PREFAB;
+                PREFAB = _prefabHolder.TILE_IMPASSIBLE_PREFAB;
 				break;
 
 			default:
 				movementCost = 1;
 				impassible = false;
-				PREFAB = PrefabHolder.instance.TILE_NORMAL_PREFAB;
+                PREFAB = _prefabHolder.TILE_NORMAL_PREFAB;
 				break;
 		}
 

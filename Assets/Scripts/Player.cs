@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player
+public class Player : MonoBehaviour
 {
     //имя игрока
     public string PlayerName = "";
