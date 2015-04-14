@@ -277,8 +277,11 @@ MonoBehaviour:
     type: 2}
   TILE_IMPASSIBLE_PREFAB: {fileID: 100000, guid: 707a1df08cda1b348b1b551c31039d45,
     type: 2}
-  UnitPrefabsHolder: []
+  UnitPrefabsHolder:
+  - {fileID: 100060, guid: 44d077ace9df0704ebb00a3e7759b200, type: 2}
+  - {fileID: 0}
   MiscPrefabsHolder: []
+  player: {fileID: 158182, guid: 32acdc028019f72498afe233193dcf59, type: 2}
 --- !u!114 &11413700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Players: []
   currentRound: 0
-  currentUnit: {fileID: 0}
+  CurrentUnit: {fileID: 0}
   ReadyToStart: 0
 --- !u!1001 &100100000
 Prefab:

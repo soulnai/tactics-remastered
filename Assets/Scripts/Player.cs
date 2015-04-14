@@ -17,7 +17,9 @@ public class Player : MonoBehaviour
 	void Awake () {
 	    AvailableUnits = new List<Unit>();
         PartyUnits = new List<Unit>();
-	}
+        PartyUnits.Add(GlobalPrefabHolder.instance.Prefabs["Warrior_01"].GetComponent<Unit>());
+        PartyUnits.Add(GlobalPrefabHolder.instance.Prefabs["Warrior_02"].GetComponent<Unit>());
+    }
 	
 	// Update is called once per frame
 	void Update () {

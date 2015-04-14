@@ -89,7 +89,7 @@ public class ScenarioController : MonoBehaviour {
         for (int i = 0; i < _prefabHolder.UnitPrefabsHolder.Length; i++)
         {
 			Debug.Log(spawnArea[i].gridPosition);
-			Unit unit = UnitSpawner.spawnunit(spawnArea[i], _prefabHolder.UnitPrefabsHolder[i]);
+			Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], _prefabHolder.UnitPrefabsHolder[i]);
 			_battleData.Players[0].PartyUnits.Add(unit);
 		}
 		Camera.main.transform.LookAt (spawnArea[0].transform.position);

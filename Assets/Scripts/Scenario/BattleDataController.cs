@@ -15,7 +15,7 @@ public class BattleDataController : MonoBehaviour
 {
     public List<Player> Players;
     public int currentRound = 0;
-    public Unit currentUnit;
+    public Unit CurrentUnit;
     public bool ReadyToStart = false;
 
     public List<Unit> AllUnitsInScene
