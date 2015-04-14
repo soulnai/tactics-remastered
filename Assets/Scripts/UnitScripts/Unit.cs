@@ -42,4 +42,19 @@ public class Unit : MonoBehaviour
 	void Update () {
 	
 	}
+
+	void OnMouseDown(){
+		Unit unit;
+		if (Input.GetMouseButtonDown(0)) 
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if(Physics.Raycast(ray,out hit))
+			{
+				Debug.Log(hit.collider.gameObject.name);
+				unit = hit.collider.gameObject.GetComponent<Unit>();
+					InputController.instance.OnUnitClicked(this);
+			}
+		}
+	}
 }

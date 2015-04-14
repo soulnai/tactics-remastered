@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using System.Linq;
 
 /*-----------------------------------------------------
 
@@ -55,6 +56,7 @@ public class BattleLogicController : MonoBehaviour {
     {
         _battleData = BattleDataController.instance;
         InputController.instance.OnTileClick += MoveUnit;
+		InputController.instance.OnUnitClick += UnitSelect;
     }
 
     private void MoveUnit(Tile tile)
@@ -65,7 +67,11 @@ public class BattleLogicController : MonoBehaviour {
 		//_battleData.currentUnit.currentPath = null;
     }
 
-    //TODO поворачивать юнит на каждый тайл пути
+	public void UnitSelect(Unit unit){
+		_battleData.currentUnit = unit;
+	}
+
+
     public void MoveUnit(Unit unit)
     {
 		if (unit.AP > 0 && unit.MovementRange>=unit.currentPath.Count) {
@@ -93,13 +99,10 @@ public class BattleLogicController : MonoBehaviour {
 
     public void GeneratePath(Tile from, Tile to)
     {
-        //TODO replace blocked array on unitsAll.Where(x => x.gridPosition != destTile.gridPosition && x.gridPosition != currentUnit.gridPosition).Select(x => x.gridPosition).ToArray()
-        Vector2[] blockedArray;
-        blockedArray = new Vector2[]
-        {
-            new Vector2( 4, 3 ),
-            new Vector2( 8, 2 ),
-        };
+        Vector2[] blockedArray = null;
+		foreach (Player p in _battleData.Players) {
+			blockedArray = p.PartyUnits.Where (x => x.gridPosition != to.gridPosition && x.gridPosition != _battleData.currentUnit.gridPosition).Select (x => x.gridPosition).ToArray ();
+		}
         List<Tile> path = TilePathFinder.FindPath(from, to, blockedArray, 50f);
         foreach (Tile tile in path)
         {

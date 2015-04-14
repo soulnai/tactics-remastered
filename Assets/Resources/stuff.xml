@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <MapStuffCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" size="12">
   <Trees>
-    <Tree  type="0" locX="8" locY="8"/>
-	<Tree  type="1" locX="2" locY="2"/>
-	<Tree  type="2" locX="12" locY="12"/>
+    <Tree  prefabName="Tree02A" locX="8" locY="8"/>
+	<Tree  prefabName="Tree03A" locX="2" locY="2"/>
+	<Tree  prefabName="Tree04B" locX="12" locY="12"/>
   </Trees>
   <Crates>
-	<Crate  type="3" locX="8" locY="4"/>
-	<Crate  type="4" locX="1" locY="12"/>
-	<Crate  type="5" locX="2" locY="12"/>
-	<Crate  type="6" locX="6" locY="6"/>
-	<Crate  type="7" locX="5" locY="5"/>
+	<Crate  prefabName="Barrel01A" locX="8" locY="4"/>
+	<Crate  prefabName="Chest01A" locX="1" locY="12"/>
+	<Crate  prefabName="Fence01A" locX="2" locY="12"/>
+	<Crate  prefabName="GraveTop01A" locX="6" locY="6"/>
+	<Crate  prefabName="TreesTrunk02A" locX="5" locY="5"/>
   </Crates>
   <SpawnArea>
 	<SpawnTile locX="2" locY="8"/>

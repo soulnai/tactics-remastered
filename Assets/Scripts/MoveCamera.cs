@@ -32,7 +32,7 @@ public class MoveCamera : MonoBehaviour
     void Update () 
 	{
 		// Get the left mouse button
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(2))
 		{
 			// Get mouse origin
 			mouseOrigin = Input.mousePosition;
@@ -56,7 +56,7 @@ public class MoveCamera : MonoBehaviour
 		}
 		
 		// Disable movements on button release
-		if (!Input.GetMouseButton(0)) isRotating=false;
+		if (!Input.GetMouseButton(2)) isRotating=false;
 		if (!Input.GetMouseButton(1)) isPanning=false;
 		if (Input.GetAxis("Mouse ScrollWheel") == 0) isZooming=false;
 		

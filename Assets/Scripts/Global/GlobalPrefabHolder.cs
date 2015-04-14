@@ -15,6 +15,8 @@ public class GlobalPrefabHolder : MonoBehaviour {
     //MapStuff
     public GameObject[] MiscPrefabsHolder;
 
+	public GameObject player;
+
     public Dictionary<string,GameObject> Prefabs; 
 
     private static GlobalPrefabHolder _instance;

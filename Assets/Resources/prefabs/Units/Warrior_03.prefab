@@ -462,6 +462,7 @@ GameObject:
   - 111: {fileID: 11100000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11421446}
+  - 136: {fileID: 13627674}
   m_Layer: 0
   m_Name: Warrior_03
   m_TagString: Untagged
@@ -1323,6 +1324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitName: 
   UnitClass: 0
+  OwnerPlayer: {fileID: 0}
   Lvl: 0
   Expirience: 0
   Abilities: []
@@ -1334,6 +1336,19 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   AP: 2
   CurrentAction: 0
+--- !u!136 &13627674
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

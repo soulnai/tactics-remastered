@@ -35,8 +35,8 @@ public class TreeXml {
 	[XmlAttribute("locY")]
 	public int locY;
 
-	[XmlAttribute("type")]
-	public int type;
+	[XmlAttribute("prefabName")]
+	public string prefabName;
 }
 
 public class CrateXml {
@@ -46,8 +46,8 @@ public class CrateXml {
 	[XmlAttribute("locY")]
 	public int locY;
 	
-	[XmlAttribute("type")]
-	public int type;
+	[XmlAttribute("prefabName")]
+	public string prefabName;
 }
 
 public class SpawnTileXml {

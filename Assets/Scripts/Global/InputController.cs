@@ -12,6 +12,7 @@ using UnityEngine.Events;
 public class InputController : MonoBehaviour
 {
     public Action<Tile> OnTileClick;
+	public Action<Unit> OnUnitClick;
 
     private static InputController _instance;
 
@@ -58,4 +59,10 @@ public class InputController : MonoBehaviour
         if (OnTileClick != null)
             OnTileClick(t);
     }
+
+	public void OnUnitClicked(Unit u)
+	{
+		if (OnUnitClick != null)
+			OnUnitClick(u);
+	}
 }

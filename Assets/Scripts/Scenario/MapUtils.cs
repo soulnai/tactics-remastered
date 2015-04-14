@@ -95,9 +95,9 @@ public class MapUtils : MonoBehaviour {
 		int treesCount = container.trees.Count;
 		for (int i = 0; i < treesCount; i++) {
 				gm = ScenarioController.instance;
-				int stuffType = container.trees.ElementAt(i).type;
+				string stuffType = container.trees.ElementAt(i).prefabName;
 				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
-                Instantiate(_prefabHolder.Prefabs[prefabName], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
+				Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 				tileTospawn.impassible = true;
 		}
 
@@ -105,9 +105,9 @@ public class MapUtils : MonoBehaviour {
 		
 		for (int i = 0; i < cratesCount; i++) {
 			gm = ScenarioController.instance;
-			int stuffType = container.crates.ElementAt(i).type;
+			string stuffType = container.crates.ElementAt(i).prefabName;
 			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
-            Instantiate(_prefabHolder.Prefabs[prefabName], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
+			Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
 		}
 
