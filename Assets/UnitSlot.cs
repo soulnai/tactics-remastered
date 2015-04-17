@@ -28,8 +28,8 @@ public class UnitSlot : MonoBehaviour, IDropHandler
         {
             UnitItem.transform.SetParent(dragObj.transform.parent,false);
         }
-        UnitDragHandler.DraggedObj.transform.SetParent(transform, false);
-        UnitDragHandler.DraggedObj.transform.localPosition = Vector3.zero;
+        dragObj.transform.SetParent(transform, false);
+        dragObj.transform.localPosition = Vector3.zero;
         InputController.instance.OnUnitDroppedToSlot(dragObj.GetComponent<Unit>());
     }
 }
