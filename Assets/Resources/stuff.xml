@@ -18,4 +18,12 @@
 	<SpawnTile locX="4" locY="8"/>
 	<SpawnTile locX="5" locY="8"/>
   </SpawnArea>
+  <Players>
+    <Player name="Bot1">
+      <Unit prefabName="archer"/>
+    </Player>
+    <Player name="Bot2">
+      <Unit prefabName="warrior"/>
+    </Player>
+  </Players>
 </MapStuffCollection>	

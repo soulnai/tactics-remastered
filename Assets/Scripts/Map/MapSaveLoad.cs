@@ -58,6 +58,25 @@ public class SpawnTileXml {
 	public int locY;
 }
 
+
+[XmlRoot("Player")]
+public class UnitXml
+{
+    [XmlAttribute("prefabName")]
+    public string prefabName;
+}
+
+[XmlRoot("Players")]
+public class PlayerXml
+{
+    [XmlArray("Player")]
+    [XmlArrayItem("Unit")]
+    public List<UnitXml> units = new List<UnitXml>();
+
+    [XmlAttribute("name")]
+    public string name;
+}
+
 [XmlRoot("MapStuffCollection")]
 public class MapStuffXmlContainer {
 	[XmlAttribute("size")]
@@ -74,7 +93,16 @@ public class MapStuffXmlContainer {
 	[XmlArray("SpawnArea")]
 	[XmlArrayItem("SpawnTile")]
 	public List<SpawnTileXml> spawnTiles = new List<SpawnTileXml>();
+
+    [XmlArray("Players")]
+    [XmlArrayItem("Player")]
+    public List<PlayerXml> players = new List<PlayerXml>();
+
+
+
 }
+
+
 
 public static class MapSaveLoad {
 	public static MapXmlContainer CreateMapContainer(List <List<Tile>> map) {

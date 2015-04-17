@@ -117,6 +117,11 @@ public class MapUtils : MonoBehaviour {
 			gm = ScenarioController.instance;
 			gm.spawnArea.Add(gm.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}
+
+        int playersCount = container.players.Count;
+        Debug.Log(playersCount);
+
+        Debug.Log(container.players[0].units.Count);
 		
 	}
 }
