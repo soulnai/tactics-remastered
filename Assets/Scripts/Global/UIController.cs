@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using EnumSpace;
 
@@ -7,8 +8,8 @@ public class UIController : MonoBehaviour
 
     private static UIController _instance;
 
-    public GameObject LoadingScreen;
-    
+    public GameObject LoadingScreen; 
+
     private ScenesController _scenesController;
     public bool mouseOverGUI = false;
 

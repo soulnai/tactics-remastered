@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumSpace;
 
 public class UnitsPanel : MonoBehaviour
 {
-
+    public EnumSpace.UnitListPanelType PanelType;
     private GlobalGameController _globalGame;
-    private List<GameObject> _slots;
+    private List<UnitSlot> _slots;
     
 	// Use this for initialization
 	void Start () {
-        _slots = new List<GameObject>();
+        _slots = new List<UnitSlot>();
         _globalGame = GlobalGameController.instance;
 	    foreach (Transform child in transform)
 	    {
 	        if (child.GetComponent<UnitSlot>())
 	        {
-	            _slots.Add(child.gameObject);
+	            _slots.Add(child.gameObject.GetComponent<UnitSlot>());
 	        }
 	    }
 	}
@@ -26,15 +27,38 @@ public class UnitsPanel : MonoBehaviour
 	
 	}
 
-    public void PlaceUnitsInSlots(UnitListElement unitListElement)
+    public void PlaceUnitsInSlots(GameObject unitListItemPrefab)
     {
         int i = 0;
-        foreach (Unit u in _globalGame.Player.AvailableUnits)
+        foreach (Unit u in _globalGame.UserPlayer.AvailableUnits)
         {
-            UnitListElement uElement = Instantiate(unitListElement, _slots[i].transform.position, Quaternion.identity) as UnitListElement;
-            uElement.transform.SetParent(_slots[i].transform);
-            uElement.Unit = u;
+            GameObject tempItem = (GameObject)Instantiate(unitListItemPrefab, _slots[i].transform.position, Quaternion.identity);
+            UnitListItem uItem = tempItem.GetComponent<UnitListItem>();
+            uItem.transform.SetParent(_slots[i].transform);
+            uItem.Unit = u;
             i++;
+        }
+    }
+
+    public void UpdateUnitsList(Unit u)
+    {
+        List<Unit> tempList = new List<Unit>();
+        foreach (UnitSlot slot in _slots)
+        {
+            if (slot.UnitItem != null)
+            {
+                tempList.Add(slot.UnitItem.Unit);
+            }
+        }
+        switch (PanelType)
+        {
+                case UnitListPanelType.AvailableUnitsPanel:
+                    _globalGame.UserPlayer.AvailableUnits = tempList;
+                break;
+
+                case UnitListPanelType.PartyUnitsPanel:
+                    _globalGame.UserPlayer.PartyUnits = tempList;
+                break;
         }
     }
 }

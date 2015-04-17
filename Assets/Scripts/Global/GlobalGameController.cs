@@ -4,7 +4,9 @@ using System.Security.Policy;
 
 public class GlobalGameController : MonoBehaviour
 {
-    public Player Player;
+    public Player UserPlayer;
+
+    private bool _wasInited = false;
     private static GlobalGameController _instance;
     
     public static GlobalGameController instance
@@ -38,21 +40,32 @@ public class GlobalGameController : MonoBehaviour
             if (this != _instance)
                 Destroy(this.gameObject);
         }
+      }
 
-        Init();
+    public void Start()
+    {
+        if (!_wasInited)
+            Init();
     }
 
     private void Init()
     {
-        CreatePlayer();
+        //TODO if need load then load player from XML etc. else create new User player
+        CreateUserPlayer();
     }
 
-    private void CreatePlayer()
+    private void CreateUserPlayer()
     {
-        Player = new Player();
-        Player.PlayerName = "Bob";
-        //Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitPrefabsHolder[0]);
-        //Player.AvailableUnits.Add(GlobalPrefabHolder.instance.UnitPrefabsHolder[1]);
+        GameObject tempPlayer = (GameObject)Instantiate(GlobalPrefabHolder.instance.Prefabs["Player"], Vector3.zero, Quaternion.identity);
+        UserPlayer = tempPlayer.GetComponent<Player>();
+        UserPlayer.transform.SetParent(this.transform);
+        //TODO replace with final solution
+        UserPlayer.name = "UserPlayer";
+        UserPlayer.PlayerName = "Bob";
+        UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.instance.Prefabs["Warrior_01"].GetComponent<Unit>());
+        UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.instance.Prefabs["Warrior_02"].GetComponent<Unit>());
+        UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.instance.Prefabs["Warrior_01"].GetComponent<Unit>());
+        UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.instance.Prefabs["Warrior_02"].GetComponent<Unit>());
     }
 
 

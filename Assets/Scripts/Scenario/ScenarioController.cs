@@ -66,9 +66,9 @@ public class ScenarioController : MonoBehaviour {
         _battleData = BattleDataController.instance;
         _prefabHolder = GlobalPrefabHolder.instance;
         _mapController = MapUtils.Instance;
-		GameObject go = ((GameObject)Instantiate(_prefabHolder.player, new Vector3(0,0,0), Quaternion.identity));
-		Player player1 = go.GetComponent<Player> ();
-		_battleData.Players.Add (player1);
+		//GameObject go = ((GameObject)Instantiate(_prefabHolder.player, new Vector3(0,0,0), Quaternion.identity));
+		//Player player1 = go.GetComponent<Player> ();
+		//_battleData.Players.Add (player1);
         CreateBattleScene(_battleData.Players);
     }
 
@@ -86,12 +86,25 @@ public class ScenarioController : MonoBehaviour {
         _mapController.loadMapFromXml();
 		_mapController.loadStuffFromXml();
 
-        for (int i = 0; i < _prefabHolder.UnitPrefabsHolder.Length; i++)
+        if (_battleData.Players.Count > 0)
         {
-			Debug.Log(spawnArea[i].gridPosition);
-			Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], _prefabHolder.UnitPrefabsHolder[i]);
-			_battleData.Players[0].PartyUnits.Add(unit);
-		}
-		Camera.main.transform.LookAt (spawnArea[0].transform.position);
+            if (spawnArea.Count >= _battleData.AllUnitsInScene.Count)
+            {
+                for (int i = 0; i < _battleData.Players[0].PartyUnits.Count; i++)
+                {
+                    Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], _battleData.Players[0].PartyUnits[i].gameObject);
+                }
+            }
+            else
+            {
+                Debug.LogError("Not enough spawn points");
+            }
+        }
+        else
+        {
+            Debug.LogError("No players added to battle data controller");
+        }
+
+        Camera.main.transform.LookAt (spawnArea[0].transform.position);
     }
 }

@@ -13,6 +13,8 @@ public class InputController : MonoBehaviour
 {
     public Action<Tile> OnTileClick;
 	public Action<Unit> OnUnitClick;
+    public Action<Unit> OnUnitDropToSlot;
+    public Action OnBattleLoad;
 
     private static InputController _instance;
 
@@ -65,4 +67,18 @@ public class InputController : MonoBehaviour
 		if (OnUnitClick != null)
 			OnUnitClick(u);
 	}
+
+    public void OnUnitDroppedToSlot(Unit u)
+    {
+        if (OnUnitDropToSlot != null)
+            OnUnitDropToSlot(u);
+    }
+
+    public void OnBattleLoadPressed()
+    {
+        if (OnBattleLoad != null)
+        {
+            OnBattleLoad();
+        }
+    }
 }

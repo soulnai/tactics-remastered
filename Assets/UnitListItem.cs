@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitListElement : MonoBehaviour
+public class UnitListItem : MonoBehaviour
 {
 
     public Unit Unit;

@@ -14,7 +14,7 @@ GameObject:
   - 225: {fileID: 22546928}
   - 114: {fileID: 11420354}
   m_Layer: 5
-  m_Name: UnitListElement
+  m_Name: UnitListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

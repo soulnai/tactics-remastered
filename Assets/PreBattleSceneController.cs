@@ -5,11 +5,13 @@ public class PreBattleSceneController : MonoBehaviour
 {
     public UnitsPanel AvailableUnitsPanel;
     public UnitsPanel PartyUnitsPanel;
-    public UnitListElement UnitListElement;
+    public GameObject UnitListItem;
 
     private Player _player;
     private GlobalGameController _globalGame;
-	// Use this for initialization
+    private BattleDataController _battleData;
+    private ScenesController _scenes;
+    // Use this for initialization
 	void Start ()
 	{
 	    Init();
@@ -18,8 +20,17 @@ public class PreBattleSceneController : MonoBehaviour
     private void Init()
     {
         _globalGame = GlobalGameController.instance;
-        _player = _globalGame.Player;
-        AvailableUnitsPanel.PlaceUnitsInSlots(UnitListElement);
+        _battleData = BattleDataController.instance;
+        _scenes = ScenesController.instance;
+        _player = _globalGame.UserPlayer;
+        AvailableUnitsPanel.PlaceUnitsInSlots(UnitListItem);
+        InputController.instance.OnUnitDropToSlot += UpdateUnitsLists;
+    }
+
+    private void UpdateUnitsLists(Unit u)
+    {
+        AvailableUnitsPanel.UpdateUnitsList(u);
+        PartyUnitsPanel.UpdateUnitsList(u);
     }
 
     // Update is called once per frame

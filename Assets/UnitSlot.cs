@@ -4,13 +4,14 @@ using UnityEngine.EventSystems;
 
 public class UnitSlot : MonoBehaviour, IDropHandler
 {
-    public GameObject item
+    public UnitsPanel OwnerUnitsPanel;
+    public UnitListItem UnitItem
     {
         get
         {
             if (transform.childCount>0)
             {
-                return transform.GetChild(0).gameObject;
+                return transform.GetChild(0).GetComponent<UnitListItem>();
             }
             else
             {
@@ -21,10 +22,11 @@ public class UnitSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (!item)
+        if (!UnitItem)
         {
             UnitDragHandler.DraggedObj.transform.SetParent(transform,false);
             UnitDragHandler.DraggedObj.transform.localPosition = Vector3.zero;
+            InputController.instance.OnUnitDroppedToSlot(UnitItem.Unit);
         }
     }
 }

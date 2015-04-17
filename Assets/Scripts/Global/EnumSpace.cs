@@ -3,6 +3,12 @@ using System.Collections;
 
 namespace EnumSpace {
 
+    public enum UnitListPanelType
+    {
+        AvailableUnitsPanel = 0,
+        PartyUnitsPanel = 1
+    }
+
     public enum ScenesEnum
     {
         mainMenu = 0,

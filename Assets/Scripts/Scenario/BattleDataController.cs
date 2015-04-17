@@ -73,7 +73,23 @@ public class BattleDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Players.Add(GlobalGameController.instance.UserPlayer);
+        ScenesController.instance.OnBattleSceneLoadingStart += CheckBattleData;
+    }
 
+    private void CheckBattleData()
+    {
+        if ((Players != null)&&(Players.Count>0))
+        {
+            if (Players[0].PartyUnits.Count > 0)
+            {
+                ReadyToStart = true;
+            }
+            else
+            {
+                Debug.LogError("No units or players added to battle data");
+            }
+        }
     }
 
     // Update is called once per frame

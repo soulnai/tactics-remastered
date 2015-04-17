@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 /*-----------------------------------------------------
@@ -10,6 +11,9 @@ using System.Collections;
 public class ScenesController : MonoBehaviour {
 
     private static ScenesController _instance;
+
+    public Action OnBattleSceneLoadingStart;
+
     public string sceneMainMenuName = "MainMenu";
     public string sceneTavernName = "Tavern";
     public string sceneBattleName = "Level";
@@ -73,8 +77,9 @@ public class ScenesController : MonoBehaviour {
     }
 
     //prepare all data to be ready for scene to load
-    public void LoadBattle()
+    public void TryLoadBattle()
     {
+        OnBattleSceneLoadingStarted();
         if (_battleData.ReadyToStart)
         {
             _uiController.ShowLoadingScreen();
@@ -83,6 +88,14 @@ public class ScenesController : MonoBehaviour {
         else
         {
             Debug.Log("Battle Data not ready");
+        }
+    }
+
+    public void OnBattleSceneLoadingStarted()
+    {
+        if (OnBattleSceneLoadingStart != null)
+        {
+            OnBattleSceneLoadingStart();
         }
     }
 }
