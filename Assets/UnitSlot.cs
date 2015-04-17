@@ -26,7 +26,7 @@ public class UnitSlot : MonoBehaviour, IDropHandler
         GameObject dragObj = eventData.pointerDrag;
         if (UnitItem)
         {
-            UnitItem.transform.SetParent(dragObj.transform.parent,false);
+            UnitItem.transform.SetParent(dragObj.GetComponent<UnitListItem>().StartParent,false);
         }
         dragObj.transform.SetParent(transform, false);
         dragObj.transform.localPosition = Vector3.zero;
