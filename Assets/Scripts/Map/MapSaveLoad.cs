@@ -59,18 +59,15 @@ public class SpawnTileXml {
 }
 
 
-[XmlRoot("Player")]
 public class UnitXml
 {
     [XmlAttribute("prefabName")]
     public string prefabName;
 }
 
-[XmlRoot("Players")]
 public class PlayerXml
 {
-    [XmlArray("Player")]
-    [XmlArrayItem("Unit")]
+    [XmlElement("Unit")]
     public List<UnitXml> units = new List<UnitXml>();
 
     [XmlAttribute("name")]
@@ -97,8 +94,6 @@ public class MapStuffXmlContainer {
     [XmlArray("Players")]
     [XmlArrayItem("Player")]
     public List<PlayerXml> players = new List<PlayerXml>();
-
-
 
 }
 

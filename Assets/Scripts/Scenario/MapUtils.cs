@@ -118,10 +118,10 @@ public class MapUtils : MonoBehaviour {
 			gm.spawnArea.Add(gm.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}
 
-        int playersCount = container.players.Count;
-        Debug.Log(playersCount);
+        //int playersCount = container.players.Count;
+        //Debug.Log(playersCount);
 
-        Debug.Log(container.players[0].units.Count);
+        Debug.Log(container.players[1].units[0].prefabName);
 		
 	}
 }
