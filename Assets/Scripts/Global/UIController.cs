@@ -52,12 +52,12 @@ public class UIController : MonoBehaviour
     }
 
 
-    internal void SetButtonAction(ScenesEnum ActionToSet)
+    public void SetButtonAction(ScenesEnum ActionToSet)
     {
         switch (ActionToSet)
         {
             case ScenesEnum.BattleScene:
-                _scenesController.LoadScene("level");
+                _scenesController.TryLoadBattle();
                 break;
             case ScenesEnum.Tavern:
                 _scenesController.LoadTavern();

@@ -601,18 +601,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11459052, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: Players.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: UnitPrefabsHolder.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.size
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -643,92 +631,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_NORMAL_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: 8596fafd321d91848a65f4df7d5c3086, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: BASE_TILE_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: d0c30b07cf7299c40ae65f3b59b4fb7b, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_DIFFICULT_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: 9865dd7b843ef1f4fae1716884db0d67, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_IMPASSIBLE_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: e0e6b58d5f5e6674289a87452c84f332, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_VERY_DIFFICULT_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: 254cfa8edc89ed2429217b51242b1f14, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: UnitPrefabsHolder.Array.data[0]
-      value: 
-      objectReference: {fileID: 100060, guid: 7990a046834d7bc489a692c6c1de6a47, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: UnitPrefabsHolder.Array.data[1]
-      value: 
-      objectReference: {fileID: 100000, guid: 386e82eae97bba74992ed606223c8d27, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: UnitPrefabsHolder.Array.data[2]
-      value: 
-      objectReference: {fileID: 100060, guid: 7618d85331e01254895eb1bc6b40f102, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: UnitPrefabsHolder.Array.data[3]
-      value: 
-      objectReference: {fileID: 100060, guid: 55ad29f579d991c489f46441517294d3, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: UnitPrefabsHolder.Array.data[4]
-      value: 
-      objectReference: {fileID: 100060, guid: f9ad168d07fc9bb4ca01dec75a40f36c, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[0]
-      value: 
-      objectReference: {fileID: 100000, guid: 8cd78779049a21145a0ecef900ea54eb, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[1]
-      value: 
-      objectReference: {fileID: 100000, guid: 1ce4b41935c643b44ae882a3debc4037, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[2]
-      value: 
-      objectReference: {fileID: 100000, guid: 24601cc9d011cb54eab0cd66e48ee915, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[3]
-      value: 
-      objectReference: {fileID: 100000, guid: ea9d572991880bd418448c6ba57f24ff, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[4]
-      value: 
-      objectReference: {fileID: 100000, guid: 6ad73b5b44186de459d7b8264e188383, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[5]
-      value: 
-      objectReference: {fileID: 100000, guid: 81ab8da07e4ee484db81f9b4eac33c8c, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[6]
-      value: 
-      objectReference: {fileID: 100000, guid: 4b9874f557213384dafa33bc574138d0, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[7]
-      value: 
-      objectReference: {fileID: 100000, guid: ad8488ac67e527441ba2259e3b7e934f, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: MiscPrefabsHolder.Array.data[8]
-      value: 
-      objectReference: {fileID: 100000, guid: ad8488ac67e527441ba2259e3b7e934f, type: 2}
-    - target: {fileID: 11459052, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: Players.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 158182, guid: 32acdc028019f72498afe233193dcf59, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
   m_IsPrefabParent: 0
