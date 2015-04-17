@@ -2,15 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using EnumSpace;
+using UnityEngine.EventSystems;
 
-public class UnitsPanel : MonoBehaviour
+public class UnitsPanel : MonoBehaviour, IDropHandler
 {
     public EnumSpace.UnitListPanelType PanelType;
     private GlobalGameController _globalGame;
     private List<UnitSlot> _slots;
-    
-	// Use this for initialization
-	void Start () {
+
+    private UnitSlot FirstEmptySlot
+    {
+        get
+        {
+            foreach (UnitSlot slot in _slots)
+            {
+                if (slot.UnitItem == null)
+                {
+                    return slot;
+                }
+            }
+            return null;
+        }
+    }
+
+
+    // Use this for initialization
+    void Start () {
         _slots = new List<UnitSlot>();
         _globalGame = GlobalGameController.instance;
 	    foreach (Transform child in transform)
@@ -20,7 +37,7 @@ public class UnitsPanel : MonoBehaviour
 	            _slots.Add(child.gameObject.GetComponent<UnitSlot>());
 	        }
 	    }
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -59,6 +76,17 @@ public class UnitsPanel : MonoBehaviour
                 case UnitListPanelType.PartyUnitsPanel:
                     _globalGame.UserPlayer.PartyUnits = tempList;
                 break;
+        }
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        GameObject tempItem = eventData.pointerDrag;
+        if (FirstEmptySlot)
+        {
+            tempItem.transform.SetParent(FirstEmptySlot.transform, false);
+            tempItem.transform.localPosition = Vector3.zero;
+            InputController.instance.OnUnitDroppedToSlot(tempItem.GetComponent<Unit>());
         }
     }
 }

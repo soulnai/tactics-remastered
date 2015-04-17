@@ -21,21 +21,27 @@ public class UnitDragHandler : MonoBehaviour, IBeginDragHandler,IDragHandler,IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         DraggedObj = this.gameObject;
+        if (DraggedObj.GetComponent<UnitListItem>().Slot)
+        {
+            DraggedObj.GetComponent<UnitListItem>().Slot.UnitItem = null;
+        }
         _startPosition = transform.position;
         _startParent = transform.parent;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
+        transform.SetParent(FindObjectOfType<Canvas>().transform);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         DraggedObj = null;
-        if (transform.parent == _startParent)
+        if ((transform.parent == _startParent)||(transform.parent.GetComponent<Canvas>()))
         {
             transform.position = _startPosition;
         }

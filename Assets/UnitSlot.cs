@@ -5,28 +5,31 @@ using UnityEngine.EventSystems;
 public class UnitSlot : MonoBehaviour, IDropHandler
 {
     public UnitsPanel OwnerUnitsPanel;
+    private UnitListItem _unitItem;
     public UnitListItem UnitItem
     {
         get
         {
-            if (transform.childCount>0)
+            _unitItem = null;
+
+            if (transform.childCount > 0)
             {
-                return transform.GetChild(0).GetComponent<UnitListItem>();
+                _unitItem = transform.GetChild(0).GetComponent<UnitListItem>();
             }
-            else
-            {
-                return null;
-            }
+        return _unitItem;
         }
+        set { _unitItem = value; }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (!UnitItem)
+        GameObject dragObj = eventData.pointerDrag;
+        if (UnitItem)
         {
-            UnitDragHandler.DraggedObj.transform.SetParent(transform,false);
-            UnitDragHandler.DraggedObj.transform.localPosition = Vector3.zero;
-            InputController.instance.OnUnitDroppedToSlot(UnitItem.Unit);
+            UnitItem.transform.SetParent(dragObj.transform.parent,false);
         }
+        UnitDragHandler.DraggedObj.transform.SetParent(transform, false);
+        UnitDragHandler.DraggedObj.transform.localPosition = Vector3.zero;
+        InputController.instance.OnUnitDroppedToSlot(dragObj.GetComponent<Unit>());
     }
 }
