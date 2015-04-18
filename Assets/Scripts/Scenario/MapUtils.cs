@@ -56,7 +56,7 @@ public class MapUtils : MonoBehaviour {
 	public void loadMapFromXml() {
         _prefabHolder = GlobalPrefabHolder.instance;
 		gm = ScenarioController.instance;
-		MapXmlContainer container = MapSaveLoad.Load("/Asets/Resources/map.xml");
+        MapXmlContainer container = MapSaveLoad.Load("Resources/Level1/map.xml");
 		
 		gm.mapSize = container.size;
 		
@@ -90,7 +90,7 @@ public class MapUtils : MonoBehaviour {
 
 	public void loadStuffFromXml() {
 		gm = ScenarioController.instance;
-		MapStuffXmlContainer container = MapSaveLoad.LoadStuff("/Asets/Resources/stuff.xml");
+		MapStuffXmlContainer container = MapSaveLoad.LoadStuff("Resources/Level1/stuff.xml");
 		
 		int treesCount = container.trees.Count;
 		for (int i = 0; i < treesCount; i++) {

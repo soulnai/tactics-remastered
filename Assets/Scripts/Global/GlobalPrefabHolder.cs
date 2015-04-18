@@ -59,7 +59,7 @@ public class GlobalPrefabHolder : MonoBehaviour {
     public void LoadAllPrefabs()
     {
         Prefabs = new Dictionary<string, GameObject>();
-        foreach (GameObject prefab in Resources.LoadAll("Prefabs", typeof(GameObject)))
+        foreach (GameObject prefab in Resources.LoadAll("Level1/Prefabs", typeof(GameObject)))
         {
             Prefabs.Add(prefab.name,prefab);
         }

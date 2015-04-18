@@ -135,9 +135,7 @@ public static class MapSaveLoad {
 
 	public static MapXmlContainer Load(string filename) {
 		var serializer = new XmlSerializer(typeof(MapXmlContainer));
-		TextAsset rawData;
-		rawData = (TextAsset) Resources.Load("map");
-		using(var stream = new XmlTextReader(new StringReader(rawData.text)))
+        using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Open))
 		{
 			return serializer.Deserialize(stream) as MapXmlContainer;
 		}
@@ -146,9 +144,7 @@ public static class MapSaveLoad {
 
 	public static MapStuffXmlContainer LoadStuff(string filename) {
 		var serializer = new XmlSerializer(typeof(MapStuffXmlContainer));
-		TextAsset rawData;
-		rawData = (TextAsset) Resources.Load("stuff");
-		using(var stream = new XmlTextReader(new StringReader(rawData.text)))
+        using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Open))
 		{
 			return serializer.Deserialize(stream) as MapStuffXmlContainer;
 		}

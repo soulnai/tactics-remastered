@@ -66,9 +66,6 @@ public class ScenarioController : MonoBehaviour {
         _battleData = BattleDataController.instance;
         _prefabHolder = GlobalPrefabHolder.instance;
         _mapController = MapUtils.Instance;
-		//GameObject go = ((GameObject)Instantiate(_prefabHolder.player, new Vector3(0,0,0), Quaternion.identity));
-		//Player player1 = go.GetComponent<Player> ();
-		//_battleData.Players.Add (player1);
         CreateBattleScene(_battleData.Players);
     }
 
