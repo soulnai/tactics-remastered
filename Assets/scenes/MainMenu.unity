@@ -633,6 +633,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
+      propertyPath: BASE_TILE_PREFAB
+      value: 
+      objectReference: {fileID: 100000, guid: 775c8b9181fbbec48ae2b3900fc3cc5b, type: 2}
+    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
+      propertyPath: TILE_NORMAL_PREFAB
+      value: 
+      objectReference: {fileID: 100000, guid: c83db7b0d78f109498d47c66651b080b, type: 2}
+    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
+      propertyPath: TILE_DIFFICULT_PREFAB
+      value: 
+      objectReference: {fileID: 100000, guid: 502d9fa8f03323e41a61ab6e84b37ca6, type: 2}
+    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
+      propertyPath: TILE_VERY_DIFFICULT_PREFAB
+      value: 
+      objectReference: {fileID: 100000, guid: fcb6df06e21c5a04b8c285bafa73ec58, type: 2}
+    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
+      propertyPath: TILE_IMPASSIBLE_PREFAB
+      value: 
+      objectReference: {fileID: 100000, guid: 365635e4e6a9fb3499b9138db1f4b661, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
   m_IsPrefabParent: 0

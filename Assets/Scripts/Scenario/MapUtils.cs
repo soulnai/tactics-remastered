@@ -124,4 +124,15 @@ public class MapUtils : MonoBehaviour {
         Debug.Log(container.players[1].units[0].prefabName);
 		
 	}
+
+    public void loadMapDetailsFromXml()
+    {
+        gm = ScenarioController.instance;
+        MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails("Resources/Level1/mission.xml");
+
+        Debug.Log("Mission name = "+container.missionName.name);
+        Debug.Log("Mission description = "+container.missionDescription.description);
+        Debug.Log("Mission target = "+container.missionTarget.target);
+        Debug.Log("Mission map = " +container.missionMap.map);
+    }
 }
