@@ -83,21 +83,7 @@ public class Tile : MonoBehaviour {
 	
 	//TODO move to the Controller
 	void OnMouseDown(){
-		Tile tile;
-		if (Input.GetMouseButtonDown(0)) 
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if(Physics.Raycast(ray,out hit))
-			{
-				Debug.Log(hit.collider.gameObject.name);
-				tile = hit.collider.gameObject.GetComponent<Tile>();
-				if (tile.impassible !=true)
-				{
-				    InputController.instance.OnTileClicked(this);
-				}
-			}
-		}
+        InputController.instance.OnTileClicked(this);
 	}
 
 	public void changeHeight(bool up)

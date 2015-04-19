@@ -51,11 +51,6 @@ public class InputController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
-
     public void OnTileClicked(Tile t)
     {
         if (OnTileClick != null)

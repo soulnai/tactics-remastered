@@ -10,7 +10,7 @@ public class UnitsPanel : MonoBehaviour, IDropHandler
     private GlobalGameController _globalGame;
     private List<UnitSlot> _slots;
 
-    private UnitSlot FirstEmptySlot
+    public UnitSlot FirstEmptySlot
     {
         get
         {

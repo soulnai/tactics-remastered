@@ -18,8 +18,6 @@ public class ScenarioController : MonoBehaviour {
     //TODO Move all functions here as second class or use Spawner for all elements - Units / Props and other elements
 	public UnitSpawn UnitSpawner;
 	public SpawnMiscObjects ObjSpawner;
-    //TODO Move to the global game data or battle data all links to the prefabs, assets, etc.
-
 
 	private BattleDataController _battleData;
     private GlobalPrefabHolder _prefabHolder;

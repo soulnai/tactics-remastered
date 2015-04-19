@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler
+public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler,IPointerClickHandler
 {
     public Image IconImage;
     public Text NameText;
@@ -40,6 +40,13 @@ public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDra
 
     private Vector3 _startPosition;
     private Transform _startParent;
+    private PreBattleSceneController _preBattleSceneController;
+
+    public void Start()
+    {
+        _preBattleSceneController = PreBattleSceneController.instance;
+        _startParent = transform.parent;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -78,5 +85,19 @@ public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDra
             NameText.text = Unit.UnitName;
             ClassText.text = Unit.UnitClass.ToString();
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (StartParent.parent == _preBattleSceneController.AvailableUnitsPanel.transform)
+        {
+            transform.SetParent(_preBattleSceneController.PartyUnitsPanel.FirstEmptySlot.transform,false);
+        }
+        else
+        {
+            transform.SetParent(_preBattleSceneController.AvailableUnitsPanel.FirstEmptySlot.transform, false);
+        }
+        _startParent = transform.parent;
+        InputController.instance.OnUnitDroppedToSlot(Unit);
     }
 }
