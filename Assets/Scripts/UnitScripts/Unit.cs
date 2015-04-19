@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EnumSpace;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Unit : MonoBehaviour
 	public int AP = 2;
     //текущее действие юнита
     public EnumSpace.unitActions CurrentAction;
+    //иконка/портрет юнита
+    public Image IconImage;
 
     // Use this for initialization
     void Start () {

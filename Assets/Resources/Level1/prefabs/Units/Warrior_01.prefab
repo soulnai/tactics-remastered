@@ -1322,8 +1322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc21355c441e1a74aa2e26de0ddfd84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitName: 
-  UnitClass: 0
+  UnitName: Test
+  UnitClass: 2
   OwnerPlayer: {fileID: 0}
   Lvl: 0
   Expirience: 0
@@ -1336,6 +1336,7 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   AP: 2
   CurrentAction: 0
+  IconImage: {fileID: 0}
 --- !u!136 &13691724
 CapsuleCollider:
   m_ObjectHideFlags: 1
