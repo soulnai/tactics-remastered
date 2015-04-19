@@ -82,6 +82,7 @@ public class ScenarioController : MonoBehaviour {
     {
         _mapController.loadMapFromXml();
 		_mapController.loadStuffFromXml();
+        _mapController.loadMapDetailsFromXml();
 
         if (_battleData.Players.Count > 0)
         {

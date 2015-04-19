@@ -97,6 +97,46 @@ public class MapStuffXmlContainer {
 
 }
 
+public class MissionNameXml
+{
+    [XmlAttribute("name")]
+    public string name;
+}
+
+public class MissionDescriptionXml
+{
+    [XmlAttribute("description")]
+    public string description;
+}
+
+public class MissionTargetXml
+{
+    [XmlAttribute("target")]
+    public string target;
+}
+
+public class MissionMapXml
+{
+    [XmlAttribute("map")]
+    public string map;
+}
+
+[XmlRoot("MissionDetailsCollection")]
+public class MissionDetailsXmlContainer
+{
+    [XmlElement("MissionName")]
+    public MissionNameXml missionName = new MissionNameXml();
+
+    [XmlElement("MissionDescription")]
+    public MissionDescriptionXml missionDescription = new MissionDescriptionXml();
+
+    [XmlElement("MissionTarget")]
+    public MissionTargetXml missionTarget = new MissionTargetXml();
+
+    [XmlElement("MissionMap")]
+    public MissionMapXml missionMap = new MissionMapXml();
+}
+
 
 
 public static class MapSaveLoad {
@@ -150,4 +190,14 @@ public static class MapSaveLoad {
 		}
 		
 	}
+
+    public static MissionDetailsXmlContainer LoadMapDetails(string filename)
+    {
+        var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
+        using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Open))
+        {
+            return serializer.Deserialize(stream) as MissionDetailsXmlContainer;
+        }
+
+    }
 }
