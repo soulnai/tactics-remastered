@@ -26,6 +26,14 @@ public class MapXmlContainer {
 	[XmlArray("Tiles")]
 	[XmlArrayItem("Tile")]
 	public List<TileXml> tiles = new List<TileXml>();
+
+	[XmlArray("Trees")]
+	[XmlArrayItem("Tree")]
+	public List<TreeXml> trees = new List<TreeXml>();
+	
+	[XmlArray("Crates")]
+	[XmlArrayItem("Crate")]
+	public List<CrateXml> crates = new List<CrateXml>();
 }
 
 public class TreeXml {
@@ -74,29 +82,6 @@ public class PlayerXml
     public string name;
 }
 
-[XmlRoot("MapStuffCollection")]
-public class MapStuffXmlContainer {
-	[XmlAttribute("size")]
-	public int size;
-	
-	[XmlArray("Trees")]
-	[XmlArrayItem("Tree")]
-	public List<TreeXml> trees = new List<TreeXml>();
-
-	[XmlArray("Crates")]
-	[XmlArrayItem("Crate")]
-	public List<CrateXml> crates = new List<CrateXml>();
-
-	[XmlArray("SpawnArea")]
-	[XmlArrayItem("SpawnTile")]
-	public List<SpawnTileXml> spawnTiles = new List<SpawnTileXml>();
-
-    [XmlArray("Players")]
-    [XmlArrayItem("Player")]
-    public List<PlayerXml> players = new List<PlayerXml>();
-
-}
-
 public class MissionNameXml
 {
     [XmlAttribute("name")]
@@ -135,6 +120,14 @@ public class MissionDetailsXmlContainer
 
     [XmlElement("MissionMap")]
     public MissionMapXml missionMap = new MissionMapXml();
+
+	[XmlArray("SpawnArea")]
+	[XmlArrayItem("SpawnTile")]
+	public List<SpawnTileXml> spawnTiles = new List<SpawnTileXml>();
+	
+	[XmlArray("Players")]
+	[XmlArrayItem("Player")]
+	public List<PlayerXml> players = new List<PlayerXml>();
 }
 
 
@@ -182,14 +175,6 @@ public static class MapSaveLoad {
 
 	}
 
-	public static MapStuffXmlContainer LoadStuff(string filename) {
-		var serializer = new XmlSerializer(typeof(MapStuffXmlContainer));
-        using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Open))
-		{
-			return serializer.Deserialize(stream) as MapStuffXmlContainer;
-		}
-		
-	}
 
     public static MissionDetailsXmlContainer LoadMapDetails(string filename)
     {
