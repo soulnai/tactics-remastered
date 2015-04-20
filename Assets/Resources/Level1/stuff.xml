@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<MapStuffCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" size="12">
+<MapStuffCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-Instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" size="12">
   <Trees>
     <Tree  prefabName="Tree02A" locX="8" locY="8"/>
 	<Tree  prefabName="Tree03A" locX="2" locY="2"/>

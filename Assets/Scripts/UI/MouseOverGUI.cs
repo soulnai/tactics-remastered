@@ -10,7 +10,7 @@ public class MouseOverGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	// Use this for initialization
 	void Start ()
 	{
-	    _uiController = UIController.instance;
+	    _uiController = UIController.Instance;
 	}
 	
 	// Update is called once per frame

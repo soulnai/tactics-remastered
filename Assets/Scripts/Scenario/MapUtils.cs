@@ -6,46 +6,21 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-public class MapUtils : MonoBehaviour {
-	public int mapSize;
+public class MapUtils : Singleton<MapUtils>
+{
+    protected MapUtils() { } // guarantee this will be always a singleton only - can't use the constructor!
+
+
+    public int mapSize;
 	public Transform mapTransform;
-	public static MapUtils instance;
 	public List <List<Tile>> map = new List<List<Tile>>();
 	private ScenarioController gm;
-    private static MapUtils _instance;
     private GlobalPrefabHolder _prefabHolder;
-
-    public static MapUtils Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<MapUtils>();
-
-                //Tell unity not to destroy this object when loading a new scene!
-                DontDestroyOnLoad(_instance.gameObject);
-            }
-
-            return _instance;
-        }
-    }
 
     // Use this for initialization
     void Start()
     {
-        if (_instance == null)
-        {
-            //If I am the first instance, make me the Singleton
-            _instance = this;
-        }
-        else
-        {
-            //If a Singleton already exists and you find
-            //another reference in scene, destroy it!
-            if (this != _instance)
-                Destroy(this.gameObject);
-        }
+
     }
 
     // Update is called once per frame
@@ -54,8 +29,8 @@ public class MapUtils : MonoBehaviour {
 	}
 
 	public void loadMapFromXml() {
-        _prefabHolder = GlobalPrefabHolder.instance;
-		gm = ScenarioController.instance;
+        _prefabHolder = GlobalPrefabHolder.Instance;
+		gm = ScenarioController.Instance;
         MapXmlContainer container = MapSaveLoad.Load("Resources/Level1/map.xml");
 		
 		gm.mapSize = container.size;
@@ -89,12 +64,12 @@ public class MapUtils : MonoBehaviour {
 	}
 
 	public void loadStuffFromXml() {
-		gm = ScenarioController.instance;
+		gm = ScenarioController.Instance;
 		MapStuffXmlContainer container = MapSaveLoad.LoadStuff("Resources/Level1/stuff.xml");
 		
 		int treesCount = container.trees.Count;
 		for (int i = 0; i < treesCount; i++) {
-				gm = ScenarioController.instance;
+				gm = ScenarioController.Instance;
 				string stuffType = container.trees.ElementAt(i).prefabName;
 				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
 				Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
@@ -104,7 +79,7 @@ public class MapUtils : MonoBehaviour {
 		int cratesCount = container.crates.Count;
 		
 		for (int i = 0; i < cratesCount; i++) {
-			gm = ScenarioController.instance;
+			gm = ScenarioController.Instance;
 			string stuffType = container.crates.ElementAt(i).prefabName;
 			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
 			Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
@@ -114,7 +89,7 @@ public class MapUtils : MonoBehaviour {
 		int spawnTilesCount = container.spawnTiles.Count;
 		Debug.Log (spawnTilesCount);
 		for (int i = 0; i < spawnTilesCount; i++) {
-			gm = ScenarioController.instance;
+			gm = ScenarioController.Instance;
 			gm.spawnArea.Add(gm.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}
 
@@ -127,7 +102,7 @@ public class MapUtils : MonoBehaviour {
 
     public void loadMapDetailsFromXml()
     {
-        gm = ScenarioController.instance;
+        gm = ScenarioController.Instance;
         MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails("Resources/Level1/mission.xml");
 
         Debug.Log("Mission name = "+container.missionName.name);

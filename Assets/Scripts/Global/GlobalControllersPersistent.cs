@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GlobalControllersPersistent : MonoBehaviour {
-	void Awake()
-	{
-		DontDestroyOnLoad(gameObject);
-	}
-	// Use this for initialization
-	void Start () {
-	
-	}
+public class GlobalControllersPersistent : MonoBehaviour
+{
+
+    // Use this for initialization
+    void Awake()
+    {
+       DontDestroyOnLoad(this.gameObject);
+    }
 
 }

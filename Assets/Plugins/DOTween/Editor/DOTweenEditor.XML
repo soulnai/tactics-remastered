@@ -6,7 +6,7 @@
     <members>
         <member name="T:DG.DOTweenEditor.DOTweenSetupMenuItem">
             <summary>
-            Not used as menu UnitItem anymore, but as a utiity function
+            Not used as menu item anymore, but as a utiity function
             </summary>
         </member>
         <member name="M:DG.DOTweenEditor.DOTweenSetupMenuItem.Setup(System.Boolean)">

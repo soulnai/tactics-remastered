@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<MissionDetailsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<MissionDetailsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-Instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <MissionName name="Rise of the West"/>
     <MissionDescription description="Learn the history of West Rebellion"/>
     <MissionTarget target="Hold the position for 5 turns"/>

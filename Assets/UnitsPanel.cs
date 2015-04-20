@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UnitsPanel : MonoBehaviour, IDropHandler
 {
+    public GameObject unitListItemPrefab;
     public EnumSpace.UnitListPanelType PanelType;
     private GlobalGameController _globalGame;
     private List<UnitSlot> _slots;
@@ -29,7 +30,7 @@ public class UnitsPanel : MonoBehaviour, IDropHandler
     // Use this for initialization
     void Start () {
         _slots = new List<UnitSlot>();
-        _globalGame = GlobalGameController.instance;
+        _globalGame = GlobalGameController.Instance;
 	    foreach (Transform child in transform)
 	    {
 	        if (child.GetComponent<UnitSlot>())
@@ -44,10 +45,10 @@ public class UnitsPanel : MonoBehaviour, IDropHandler
 	
 	}
 
-    public void PlaceUnitsInSlots(GameObject unitListItemPrefab)
+    public void PlaceUnitsInSlots(List<Unit> unitsList)
     {
         int i = 0;
-        foreach (Unit u in _globalGame.UserPlayer.AvailableUnits)
+        foreach (Unit u in unitsList)
         {
             GameObject tempItem = (GameObject)Instantiate(unitListItemPrefab, _slots[i].transform.position, Quaternion.identity);
             UnitListItem uItem = tempItem.GetComponent<UnitListItem>();
@@ -86,7 +87,7 @@ public class UnitsPanel : MonoBehaviour, IDropHandler
         {
             tempItem.transform.SetParent(FirstEmptySlot.transform, false);
             tempItem.transform.localPosition = Vector3.zero;
-            InputController.instance.OnUnitDroppedToSlot(tempItem.GetComponent<Unit>());
+            InputController.Instance.OnUnitDroppedToSlot(tempItem.GetComponent<Unit>());
         }
     }
 }

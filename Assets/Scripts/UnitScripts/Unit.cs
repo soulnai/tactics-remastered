@@ -56,7 +56,7 @@ public class Unit : MonoBehaviour
 			{
 				Debug.Log(hit.collider.gameObject.name);
 				unit = hit.collider.gameObject.GetComponent<Unit>();
-					InputController.instance.OnUnitClicked(this);
+					InputController.Instance.OnUnitClicked(this);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ public class MoveCamera : MonoBehaviour
     private UIController GUImanager;
     void Start()
     {
-        GUImanager = UIController.instance;
+        GUImanager = UIController.Instance;
     }
 
     //

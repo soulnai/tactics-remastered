@@ -40,7 +40,7 @@ public class Tile : MonoBehaviour {
 	
 	public void generateNeighbors() {		
 		neighbors = new List<Tile>();
-		gm = ScenarioController.instance;
+		gm = ScenarioController.Instance;
 		//up
 		if (gridPosition.y > 0) {
 			Vector2 n = new Vector2(gridPosition.x, gridPosition.y - 1);
@@ -83,7 +83,7 @@ public class Tile : MonoBehaviour {
 	
 	//TODO move to the Controller
 	void OnMouseDown(){
-        InputController.instance.OnTileClicked(this);
+        InputController.Instance.OnTileClicked(this);
 	}
 
 	public void changeHeight(bool up)
@@ -101,7 +101,7 @@ public class Tile : MonoBehaviour {
 	}
 
 	public void setType(TileType t) {
-        _prefabHolder = GlobalPrefabHolder.instance;
+        _prefabHolder = GlobalPrefabHolder.Instance;
 		type = t;
 		//definitions of TileType properties
 		switch(t) {

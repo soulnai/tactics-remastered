@@ -12,50 +12,52 @@ public class PreBattleSceneController : MonoBehaviour
     private BattleDataController _battleData;
     private ScenesController _scenes;
 
-    private static PreBattleSceneController _instance;
+    private static PreBattleSceneController _Instance;
     // Use this for initialization
-    public static PreBattleSceneController instance
+    public static PreBattleSceneController Instance
     {
         get
         {
-            if (_instance == null)
+            if (_Instance == null)
             {
-                _instance = GameObject.FindObjectOfType<PreBattleSceneController>();
-
-                //Tell unity not to destroy this object when loading a new scene!
-                DontDestroyOnLoad(_instance.gameObject);
+                _Instance = GameObject.FindObjectOfType<PreBattleSceneController>();
             }
 
-            return _instance;
+            return _Instance;
         }
     }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-        if (_instance == null)
+        if (_Instance == null)
         {
-            //If I am the first instance, make me the Singleton
-            _instance = this;
+            //If I am the first Instance, make me the Singleton
+            _Instance = this;
         }
         else
         {
             //If a Singleton already exists and you find
             //another reference in scene, destroy it!
-            if (this != _instance)
+            if (this != _Instance)
                 Destroy(this.gameObject);
         }
-        Init();
 	}
+
+    public void Start()
+    {
+        Init();
+    }
 
     private void Init()
     {
-        _globalGame = GlobalGameController.instance;
-        _battleData = BattleDataController.instance;
-        _scenes = ScenesController.instance;
+        _globalGame = GlobalGameController.Instance;
+        _battleData = BattleDataController.Instance;
+        _scenes = ScenesController.Instance;
         _player = _globalGame.UserPlayer;
-        AvailableUnitsPanel.PlaceUnitsInSlots(UnitListItem);
-        InputController.instance.OnUnitDropToSlot += UpdateUnitsLists;
+        AvailableUnitsPanel.PlaceUnitsInSlots(_player.AvailableUnits);
+        PartyUnitsPanel.PlaceUnitsInSlots(_player.PartyUnits);
+        InputController.Instance.OnUnitDropToSlot += UpdateUnitsLists;
     }
 
     private void UpdateUnitsLists(Unit u)
@@ -68,4 +70,9 @@ public class PreBattleSceneController : MonoBehaviour
 	void Update () {
 	
 	}
+
+    public void OnDestroy()
+    {
+        InputController.Instance.OnUnitDropToSlot -= UpdateUnitsLists;
+    }
 }

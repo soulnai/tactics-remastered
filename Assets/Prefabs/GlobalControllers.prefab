@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 440582}
-  - 114: {fileID: 11451844}
+  - 114: {fileID: 11495614}
   m_Layer: 0
   m_Name: GlobalControllers
   m_TagString: Untagged
@@ -276,17 +276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UserPlayer: {fileID: 0}
---- !u!114 &11451844
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebd87791dd7c874cbc82cd0a9248b30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11459052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,6 +291,17 @@ MonoBehaviour:
   currentRound: 0
   CurrentUnit: {fileID: 0}
   ReadyToStart: 0
+--- !u!114 &11495614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ebd87791dd7c874cbc82cd0a9248b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

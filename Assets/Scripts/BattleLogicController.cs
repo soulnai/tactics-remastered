@@ -11,39 +11,13 @@ using System.Linq;
      
 -----------------------------------------------------*/
 
-public class BattleLogicController : MonoBehaviour {
-    private static BattleLogicController _instance;
+public class BattleLogicController : Singleton<BattleLogicController>
+{
+    protected BattleLogicController() { } // guarantee this will be always a singleton only - can't use the constructor!
+
     private BattleDataController _battleData;
-    public static BattleLogicController instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<BattleLogicController>();
-
-                //Tell unity not to destroy this object when loading a new scene!
-                DontDestroyOnLoad(_instance.gameObject);
-            }
-
-            return _instance;
-        }
-    }
-
     // Use this for initialization
     void Start () {
-        if (_instance == null)
-        {
-            //If I am the first instance, make me the Singleton
-            _instance = this;
-        }
-        else
-        {
-            //If a Singleton already exists and you find
-            //another reference in scene, destroy it!
-            if (this != _instance)
-                Destroy(this.gameObject);
-        }
         InitBattleLogic();
     }
 	
@@ -54,9 +28,9 @@ public class BattleLogicController : MonoBehaviour {
 
     void InitBattleLogic()
     {
-        _battleData = BattleDataController.instance;
-        InputController.instance.OnTileClick += MoveUnit;
-		InputController.instance.OnUnitClick += UnitSelect;
+        _battleData = BattleDataController.Instance;
+        InputController.Instance.OnTileClick += MoveUnit;
+		InputController.Instance.OnUnitClick += UnitSelect;
     }
 
     private void MoveUnit(Tile tile)
@@ -129,7 +103,7 @@ public class BattleLogicController : MonoBehaviour {
 
     public void OnDestroy()
     {
-        InputController.instance.OnTileClick -= MoveUnit;
-        InputController.instance.OnUnitClick -= UnitSelect;
+        InputController.Instance.OnTileClick -= MoveUnit;
+        InputController.Instance.OnUnitClick -= UnitSelect;
     }
 }

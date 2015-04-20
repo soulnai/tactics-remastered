@@ -34,51 +34,57 @@ public class BattleDataController : MonoBehaviour
         }
     }
 
-    private static BattleDataController _instance;
+    private static BattleDataController _Instance;
 
 
-    public static BattleDataController instance
+    public static BattleDataController Instance
     {
         get
         {
-            if (_instance == null)
+            if (_Instance == null)
             {
-                _instance = GameObject.FindObjectOfType<BattleDataController>();
+                _Instance = GameObject.FindObjectOfType<BattleDataController>();
 
                 //Tell unity not to destroy this object when loading a new scene!
-                DontDestroyOnLoad(_instance.gameObject);
+                DontDestroyOnLoad(_Instance.gameObject);
             }
 
-            return _instance;
+            return _Instance;
         }
     }
 
 
     void Awake()
     {
-        if (_instance == null)
+        if (_Instance == null)
         {
-            //If I am the first instance, make me the Singleton
-            _instance = this;
+            //If I am the first Instance, make me the Singleton
+            _Instance = this;
             DontDestroyOnLoad(this);
         }
         else
         {
             //If a Singleton already exists and you find
             //another reference in scene, destroy it!
-            if (this != _instance)
+            if (this != _Instance)
                 Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(_Instance.gameObject);
     }
     // Use this for initialization
     void Start()
     {
-        Players.Add(GlobalGameController.instance.UserPlayer);
-        ScenesController.instance.OnBattleSceneLoadingStart += CheckBattleData;
+
+        ScenesController.Instance.OnBattleSceneLoadingStart += CheckBattleData;
     }
 
     private void CheckBattleData()
     {
+        Players = new List<Player>();
+        if (GlobalGameController.Instance.UserPlayer != null)
+        {
+            Players.Add(GlobalGameController.Instance.UserPlayer);
+        }
         if ((Players != null)&&(Players.Count>0))
         {
             if (Players[0].PartyUnits.Count > 0)

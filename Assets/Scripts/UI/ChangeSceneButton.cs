@@ -16,8 +16,8 @@ public class ChangeSceneButton : MonoBehaviour
 
     void Start()
     {
-        _uiController = UIController.instance;
-        _scenesController = ScenesController.instance;
+        _uiController = UIController.Instance;
+        _scenesController = ScenesController.Instance;
         _button = this.GetComponent<Button>();
 
         _button.onClick.AddListener(() => { _uiController.SetButtonAction(ActionToSet); });    

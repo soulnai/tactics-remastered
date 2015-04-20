@@ -22,20 +22,20 @@ public class ScenarioController : MonoBehaviour {
 	private BattleDataController _battleData;
     private GlobalPrefabHolder _prefabHolder;
 
-	private static ScenarioController _instance;
-	public static ScenarioController instance
+	private static ScenarioController _Instance;
+	public static ScenarioController Instance
 	{
 		get
 		{
-			if (_instance == null)
+			if (_Instance == null)
 			{
-				_instance = GameObject.FindObjectOfType<ScenarioController>();
+				_Instance = GameObject.FindObjectOfType<ScenarioController>();
 				
 				//Tell unity not to destroy this object when loading a new scene!
-				DontDestroyOnLoad(_instance.gameObject);
+				DontDestroyOnLoad(_Instance.gameObject);
 			}
 			
-			return _instance;
+			return _Instance;
 		}
 	}
 
@@ -43,17 +43,17 @@ public class ScenarioController : MonoBehaviour {
 	
     // Use this for initialization
 	void Awake(){
-		if (_instance == null)
+		if (_Instance == null)
 		{
-			//If I am the first instance, make me the Singleton
-			_instance = this;
+			//If I am the first Instance, make me the Singleton
+			_Instance = this;
 			DontDestroyOnLoad(this);
 		}
 		else
 		{
 			//If a Singleton already exists and you find
 			//another reference in scene, destroy it!
-			if (this != _instance)
+			if (this != _Instance)
 				Destroy(this.gameObject);
 		}
 	}
@@ -61,8 +61,8 @@ public class ScenarioController : MonoBehaviour {
     // Инициализация сценария текущей битвы, заполнение всех полей, ссылок и пр.
     public void Init()
     {
-        _battleData = BattleDataController.instance;
-        _prefabHolder = GlobalPrefabHolder.instance;
+        _battleData = BattleDataController.Instance;
+        _prefabHolder = GlobalPrefabHolder.Instance;
         _mapController = MapUtils.Instance;
         CreateBattleScene(_battleData.Players);
     }

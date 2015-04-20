@@ -3,11 +3,11 @@ using System.Collections;
 
 public class SpawnMiscObjects : MonoBehaviour {
 	private ScenarioController gm;
-	public static SpawnMiscObjects instance;
+	public static SpawnMiscObjects Instance;
     private GlobalPrefabHolder _prefabHolder;
 
 	void OnAwake(){
-		instance = this;
+		Instance = this;
 	}
 
 	// Use this for initialization
@@ -21,8 +21,8 @@ public class SpawnMiscObjects : MonoBehaviour {
 	}
 
 	public void SpawnMapObject(Tile tile, int obj){
-		gm = ScenarioController.instance;
-        _prefabHolder = GlobalPrefabHolder.instance;
+		gm = ScenarioController.Instance;
+        _prefabHolder = GlobalPrefabHolder.Instance;
         Instantiate(_prefabHolder.MiscPrefabsHolder[obj], tile.transform.position + new Vector3(0f, .5f, 0f), Quaternion.identity);
 		tile.impassible = true;
 	}

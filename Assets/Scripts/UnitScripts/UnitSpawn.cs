@@ -21,7 +21,7 @@ public class UnitSpawn : MonoBehaviour {
 	            Quaternion.identity));
         Unit unit = go.GetComponent<Unit>();
 		unit.currentTile = tile;
-        BattleDataController.instance.CurrentUnit = unit;
+        BattleDataController.Instance.CurrentUnit = unit;
 		return unit;
 	}
 }

@@ -44,7 +44,7 @@ public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDra
 
     public void Start()
     {
-        _preBattleSceneController = PreBattleSceneController.instance;
+        _preBattleSceneController = PreBattleSceneController.Instance;
         _startParent = transform.parent;
     }
 
@@ -98,6 +98,6 @@ public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDra
             transform.SetParent(_preBattleSceneController.AvailableUnitsPanel.FirstEmptySlot.transform, false);
         }
         _startParent = transform.parent;
-        InputController.instance.OnUnitDroppedToSlot(Unit);
+        InputController.Instance.OnUnitDroppedToSlot(Unit);
     }
 }
