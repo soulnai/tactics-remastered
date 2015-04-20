@@ -28,7 +28,8 @@ public class MapUtils : Singleton<MapUtils>
 	
 	}
 
-	public void loadMapFromXml() {
+    public void loadMapFromXml(string mapFile)
+    {
         _prefabHolder = GlobalPrefabHolder.Instance;
 		gm = ScenarioController.Instance;
         MapXmlContainer container = MapSaveLoad.Load(mapFile);
@@ -82,7 +83,7 @@ public class MapUtils : Singleton<MapUtils>
 
     public void loadMapDetailsFromXml(string mapDetailesfile)
     {
-        gm = ScenarioController.instance;
+        gm = ScenarioController.Instance;
 		MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails(mapDetailesfile);
 		
 		Debug.Log("Mission name = "+container.missionName.name);
