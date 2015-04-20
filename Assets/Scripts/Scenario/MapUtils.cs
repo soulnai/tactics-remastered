@@ -53,10 +53,10 @@ public class MapUtils : MonoBehaviour {
 	
 	}
 
-	public void loadMapFromXml() {
+	public void loadMapFromXml(string mapFile) {
         _prefabHolder = GlobalPrefabHolder.instance;
 		gm = ScenarioController.instance;
-        MapXmlContainer container = MapSaveLoad.Load("Resources/Level1/map.xml");
+		MapXmlContainer container = MapSaveLoad.Load(mapFile);
 		
 		gm.mapSize = container.size;
 		
@@ -86,53 +86,49 @@ public class MapUtils : MonoBehaviour {
 				map[i][j].generateNeighbors();
 			}
 		}
-	}
 
-	public void loadStuffFromXml() {
-		gm = ScenarioController.instance;
-		MapStuffXmlContainer container = MapSaveLoad.LoadStuff("Resources/Level1/stuff.xml");
-		
 		int treesCount = container.trees.Count;
 		for (int i = 0; i < treesCount; i++) {
-				gm = ScenarioController.instance;
-				string stuffType = container.trees.ElementAt(i).prefabName;
-				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
-				Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
-				tileTospawn.impassible = true;
+			string stuffType = container.trees.ElementAt(i).prefabName;
+			Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
+			Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
+			tileTospawn.impassible = true;
 		}
-
+		
 		int cratesCount = container.crates.Count;
 		
 		for (int i = 0; i < cratesCount; i++) {
-			gm = ScenarioController.instance;
 			string stuffType = container.crates.ElementAt(i).prefabName;
 			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
 			Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
 		}
+	}
+
+    public void loadMapDetailsFromXml(string mapDetailesfile)
+    {
+        gm = ScenarioController.instance;
+		MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails(mapDetailesfile);
+		
+		Debug.Log("Mission name = "+container.missionName.name);
+        Debug.Log("Mission description = "+container.missionDescription.description);
+        Debug.Log("Mission target = "+container.missionTarget.target);
+        Debug.Log("Mission map = " +container.missionMap.map);
 
 		int spawnTilesCount = container.spawnTiles.Count;
 		Debug.Log (spawnTilesCount);
 		for (int i = 0; i < spawnTilesCount; i++) {
-			gm = ScenarioController.instance;
 			gm.spawnArea.Add(gm.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}
-
-        //int playersCount = container.players.Count;
-        //Debug.Log(playersCount);
-
-        Debug.Log(container.players[1].units[0].prefabName);
 		
-	}
-
-    public void loadMapDetailsFromXml()
-    {
-        gm = ScenarioController.instance;
-        MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails("Resources/Level1/mission.xml");
-
-        Debug.Log("Mission name = "+container.missionName.name);
-        Debug.Log("Mission description = "+container.missionDescription.description);
-        Debug.Log("Mission target = "+container.missionTarget.target);
-        Debug.Log("Mission map = " +container.missionMap.map);
+		//int playersCount = container.players.Count;
+		//Debug.Log(playersCount);
+		for (int i = 0; i < container.players.Count; i++) {
+			Debug.Log("Units of Player"+i+":");
+			for (int j = 0; j < container.players[i].units.Count; j++) {
+				Debug.Log(container.players[i].units[j].prefabName);
+			}
+		}
+		
     }
 }

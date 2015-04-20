@@ -4,4 +4,20 @@
     <MissionDescription description="Learn the history of West Rebellion"/>
     <MissionTarget target="Hold the position for 5 turns"/>
     <MissionMap map="map.xml"/>
+	
+   <SpawnArea>
+	<SpawnTile locX="2" locY="8"/>
+	<SpawnTile locX="3" locY="8"/>
+	<SpawnTile locX="4" locY="8"/>
+	<SpawnTile locX="5" locY="8"/>
+  </SpawnArea>
+  <Players>
+    <Player name="Bot1">
+      <Unit prefabName="archer"/>
+    </Player>
+    <Player name="Bot2">
+      <Unit prefabName="warrior"/>
+	  <Unit prefabName="archer"/>
+    </Player>
+  </Players>
 </MissionDetailsCollection>	
