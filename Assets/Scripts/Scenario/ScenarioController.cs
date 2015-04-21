@@ -88,6 +88,7 @@ public class ScenarioController : MonoBehaviour {
                 for (int i = 0; i < _battleData.Players[0].PartyUnits.Count; i++)
                 {
                     Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], _battleData.Players[0].PartyUnits[i].gameObject);
+					_battleData.Players[0].SpawnedPartyUnits.Add(unit);
                 }
             }
             else

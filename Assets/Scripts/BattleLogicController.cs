@@ -93,7 +93,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
 	public void CheckAP(Unit unit){
 		if (unit.AP <= 0) {
-			foreach (Unit u in _battleData.AllUnitsInScene){
+			foreach (Unit u in _battleData.Players[0].SpawnedPartyUnits){
 				if (u.AP > 0){
 					_battleData.CurrentUnit = u;
 				}
