@@ -16,6 +16,7 @@ public class BattleDataController : MonoBehaviour
     public List<Player> Players;
     public int currentRound = 0;
     public Unit CurrentUnit;
+	public List<Tile> blockedTiles;
     public bool ReadyToStart = false;
 
     public List<Unit> AllUnitsInScene
@@ -84,6 +85,7 @@ public class BattleDataController : MonoBehaviour
         if (GlobalGameController.Instance.UserPlayer != null)
         {
             Players.Add(GlobalGameController.Instance.UserPlayer);
+			Players.Add(GlobalGameController.Instance.AIPlayer);
         }
         if ((Players != null)&&(Players.Count>0))
         {

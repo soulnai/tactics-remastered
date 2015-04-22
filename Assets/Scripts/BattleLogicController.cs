@@ -48,6 +48,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void MoveUnit(Unit unit)
     {
+		//TODO replace comparasion of currentPath.Count to currentPath.Cost
 		if (unit.AP > 0 && unit.MovementRange>=unit.currentPath.Count) {
 			Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
 			Tile destTile = null;
@@ -73,11 +74,8 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void GeneratePath(Tile from, Tile to)
     {
-        Vector2[] blockedArray = null;
-		foreach (Player p in _battleData.Players) {
-			blockedArray = p.PartyUnits.Where (x => x.gridPosition != to.gridPosition && x.gridPosition != _battleData.CurrentUnit.gridPosition).Select (x => x.gridPosition).ToArray ();
-		}
-        List<Tile> path = TilePathFinder.FindPath(from, to, blockedArray, 50f);
+		//Tile[] blockedArray = GetBlockedTiles ();
+		List<Tile> path = TilePathFinder.FindPath(from, to, _battleData.blockedTiles.ToArray(), 0.5f);
         foreach (Tile tile in path)
         {
             tile.showHighlight(Color.red);
@@ -93,12 +91,53 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
 	public void CheckAP(Unit unit){
 		if (unit.AP <= 0) {
-			foreach (Unit u in _battleData.Players[0].SpawnedPartyUnits){
+			foreach (Player p in _battleData.Players){
+			foreach (Unit u in p.SpawnedPartyUnits){
 				if (u.AP > 0){
 					_battleData.CurrentUnit = u;
+						if (u.AIControlled == true){
+							AITurn(u);
+						}
+						break;
+				}
+			}
+			}
+		}
+	}
+
+	public void AITurn(Unit unitAI){
+		AIMoveToNearestEnemy (unitAI);
+	}
+
+	public void AIMoveToNearestEnemy(Unit unitAI){
+		Debug.Log ("AI turn starts");
+		//Tile[] blockedArray = GetBlockedTiles ();
+		List<Unit> opponentsInRange = null;
+		List<Tile> availableTiles = TilePathFinder.FindArea(_battleData.CurrentUnit.currentTile, _battleData.CurrentUnit.MovementRange+1, _battleData.blockedTiles.ToArray(), 100f);
+		foreach (Tile t in availableTiles) {
+			t.highlight.GetComponent<Renderer>().enabled = true;
+		}
+		foreach (Unit u in _battleData.Players[0].SpawnedPartyUnits) {
+			if (u != _battleData.CurrentUnit && u.AIControlled == false){
+				if (availableTiles.Contains(u.currentTile)){
+					opponentsInRange.Add(u);
 				}
 			}
 		}
+
+
+		Debug.Log (availableTiles.Count);
+		Debug.Log (opponentsInRange[0].name);
+	}
+
+	public Tile[] GetBlockedTiles(){
+		List <Tile> tempBlocked = _battleData.blockedTiles;
+		foreach (Player p in _battleData.Players) {
+			foreach(Unit u in p.SpawnedPartyUnits){ 
+				tempBlocked.Add(u.currentTile);
+			}
+		}
+		return tempBlocked.ToArray();
 	}
 
     public void OnDestroy()
