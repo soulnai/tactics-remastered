@@ -55,6 +55,7 @@ public class MapUtils : Singleton<MapUtils>
 				tile.setType((EnumSpace.TileType)container.tiles.Where(x => x.locX == i && x.locY == j).First().id);
 				tile.height = tileHeight;
 				row.Add (tile);
+				_battleData.allTiles.Add(tile);
 			}
 			map.Add(row);
 		}

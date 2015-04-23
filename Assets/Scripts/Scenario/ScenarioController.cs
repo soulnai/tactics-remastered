@@ -81,7 +81,7 @@ public class ScenarioController : MonoBehaviour {
 		_mapController.loadMapFromXml("Resources/Level1/map.xml");
 		_mapController.loadMapDetailsFromXml("Resources/Level1/mission.xml");
 
-		Unit unitAI = UnitSpawner.SpawnUnit(map[5][8], _battleData.Players[1].PartyUnits[0].gameObject);
+		Unit unitAI = UnitSpawner.SpawnUnit(map[5][11], _battleData.Players[1].PartyUnits[0].gameObject);
 		unitAI.AIControlled = true;
 		_battleData.Players[1].SpawnedPartyUnits.Add(unitAI);
 

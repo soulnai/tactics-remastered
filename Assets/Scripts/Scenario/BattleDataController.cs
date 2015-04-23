@@ -14,6 +14,7 @@ using System.Collections.Generic;
 public class BattleDataController : MonoBehaviour
 {
     public List<Player> Players;
+	public List<Tile> allTiles;
     public int currentRound = 0;
     public Unit CurrentUnit;
 	public List<Tile> blockedTiles;
