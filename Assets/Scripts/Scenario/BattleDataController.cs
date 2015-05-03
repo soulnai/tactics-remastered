@@ -14,8 +14,10 @@ using System.Collections.Generic;
 public class BattleDataController : MonoBehaviour
 {
     public List<Player> Players;
+	public List<Tile> allTiles;
     public int currentRound = 0;
     public Unit CurrentUnit;
+	public List<Tile> blockedTiles;
     public bool ReadyToStart = false;
 
     public List<Unit> AllUnitsInScene
@@ -74,16 +76,17 @@ public class BattleDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         ScenesController.Instance.OnBattleSceneLoadingStart += CheckBattleData;
     }
 
-    //TODO rename and extend
     private void CheckBattleData()
     {
         Players = new List<Player>();
         if (GlobalGameController.Instance.UserPlayer != null)
         {
             Players.Add(GlobalGameController.Instance.UserPlayer);
+			Players.Add(GlobalGameController.Instance.AIPlayer);
         }
         if ((Players != null)&&(Players.Count>0))
         {

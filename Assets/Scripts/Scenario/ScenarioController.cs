@@ -78,9 +78,13 @@ public class ScenarioController : MonoBehaviour {
 
     public void CreateBattleScene(List<Player> players )
     {
-        
-		_mapController.loadMapFromXml("Resources/Level1/"+ GlobalGameController.Instance.CurrentMission.MissionMap);
-		_mapController.loadMapDetailsFromXml("Resources/Level1/"+ GlobalGameController.Instance.CurrentMission.MissionMap);
+		_mapController.loadMapFromXml("Resources/Level1/map.xml");
+		_mapController.loadMapDetailsFromXml("Resources/Level1/mission.xml");
+
+		Unit unitAI = UnitSpawner.SpawnUnit(map[5][11], _battleData.Players[1].PartyUnits[0].gameObject);
+		unitAI.AIControlled = true;
+		_battleData.Players[1].SpawnedPartyUnits.Add(unitAI);
+
 
         if (_battleData.Players.Count > 0)
         {
@@ -89,6 +93,7 @@ public class ScenarioController : MonoBehaviour {
                 for (int i = 0; i < _battleData.Players[0].PartyUnits.Count; i++)
                 {
                     Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], _battleData.Players[0].PartyUnits[i].gameObject);
+					_battleData.Players[0].SpawnedPartyUnits.Add(unit);
                 }
             }
             else
@@ -100,6 +105,7 @@ public class ScenarioController : MonoBehaviour {
         {
             Debug.LogError("No players added to battle data controller");
         }
+		_battleData.CurrentUnit = _battleData.Players [0].SpawnedPartyUnits [0];
 
         Camera.main.transform.LookAt (spawnArea[0].transform.position);
     }

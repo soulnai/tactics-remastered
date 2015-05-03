@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public List<Unit> AvailableUnits = new List<Unit>();
     //юнити в пати данного игрока
     public List<Unit> PartyUnits = new List<Unit>();
+	public List<Unit> SpawnedPartyUnits = new List<Unit>();
       
 	// Use this for initialization
 	void Awake () {

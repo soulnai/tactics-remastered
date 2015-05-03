@@ -418,6 +418,7 @@ MonoBehaviour:
   Players: []
   currentRound: 0
   CurrentUnit: {fileID: 0}
+  blockedTiles: []
   ReadyToStart: 0
 --- !u!114 &163756431
 MonoBehaviour:
@@ -658,6 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UserPlayer: {fileID: 0}
+  AIPlayer: {fileID: 0}
 --- !u!114 &579202800
 MonoBehaviour:
   m_ObjectHideFlags: 0

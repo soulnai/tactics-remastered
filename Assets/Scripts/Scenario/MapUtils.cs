@@ -16,6 +16,7 @@ public class MapUtils : Singleton<MapUtils>
 	public List <List<Tile>> map = new List<List<Tile>>();
 	private ScenarioController gm;
     private GlobalPrefabHolder _prefabHolder;
+	private BattleDataController _battleData;
 
     // Use this for initialization
     void Start()
@@ -31,6 +32,7 @@ public class MapUtils : Singleton<MapUtils>
     public void loadMapFromXml(string mapFile)
     {
         _prefabHolder = GlobalPrefabHolder.Instance;
+		_battleData = BattleDataController.Instance;
 		gm = ScenarioController.Instance;
         MapXmlContainer container = MapSaveLoad.Load(mapFile);
 
@@ -53,6 +55,7 @@ public class MapUtils : Singleton<MapUtils>
 				tile.setType((EnumSpace.TileType)container.tiles.Where(x => x.locX == i && x.locY == j).First().id);
 				tile.height = tileHeight;
 				row.Add (tile);
+				_battleData.allTiles.Add(tile);
 			}
 			map.Add(row);
 		}
@@ -69,6 +72,7 @@ public class MapUtils : Singleton<MapUtils>
 				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
 				Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 				tileTospawn.impassible = true;
+				_battleData.blockedTiles.Add(tileTospawn);
 		}
 
 		int cratesCount = container.crates.Count;
@@ -78,6 +82,7 @@ public class MapUtils : Singleton<MapUtils>
 			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
 			Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
+			_battleData.blockedTiles.Add(tileTospawn);
 		}
 	}
 

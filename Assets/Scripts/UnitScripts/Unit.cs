@@ -12,6 +12,8 @@ public class Unit : MonoBehaviour
     public unitClass UnitClass;
     //владелец
     public Player OwnerPlayer = null;
+	//AI
+	public bool AIControlled = false;
     //уровень юнита
     public int Lvl = 0;
     //набранный опыт
@@ -31,6 +33,8 @@ public class Unit : MonoBehaviour
     public Vector2 gridPosition = Vector2.zero;
 	//количество очков действия
 	public int AP = 2;
+	//количество очков жизни
+	public int HP = 5;
     //текущее действие юнита
     public EnumSpace.unitActions CurrentAction;
     //иконка/портрет юнита
