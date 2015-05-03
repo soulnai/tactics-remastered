@@ -159,7 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &416762081
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +471,7 @@ RectTransform:
   - {fileID: 1804436214}
   - {fileID: 1510184939}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -594,65 +594,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionToSet: 1
---- !u!1001 &2132559631
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 440582, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: BASE_TILE_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: 775c8b9181fbbec48ae2b3900fc3cc5b, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_NORMAL_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: c83db7b0d78f109498d47c66651b080b, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_DIFFICULT_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: 502d9fa8f03323e41a61ab6e84b37ca6, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_VERY_DIFFICULT_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: fcb6df06e21c5a04b8c285bafa73ec58, type: 2}
-    - target: {fileID: 11412374, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-      propertyPath: TILE_IMPASSIBLE_PREFAB
-      value: 
-      objectReference: {fileID: 100000, guid: 365635e4e6a9fb3499b9138db1f4b661, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 09543c91daa4ab945873ba57ea9029d8, type: 2}
-  m_IsPrefabParent: 0

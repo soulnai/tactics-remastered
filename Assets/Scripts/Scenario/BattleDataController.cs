@@ -74,10 +74,10 @@ public class BattleDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         ScenesController.Instance.OnBattleSceneLoadingStart += CheckBattleData;
     }
 
+    //TODO rename and extend
     private void CheckBattleData()
     {
         Players = new List<Player>();

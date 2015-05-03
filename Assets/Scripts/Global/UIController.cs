@@ -30,6 +30,7 @@ public class UIController : Singleton<UIController>
         switch (ActionToSet)
         {
             case ScenesEnum.BattleScene:
+
                 _scenesController.TryLoadBattle();
                 break;
             case ScenesEnum.Tavern:

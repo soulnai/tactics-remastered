@@ -78,8 +78,9 @@ public class ScenarioController : MonoBehaviour {
 
     public void CreateBattleScene(List<Player> players )
     {
-		_mapController.loadMapFromXml("Resources/Level1/map.xml");
-		_mapController.loadMapDetailsFromXml("Resources/Level1/mission.xml");
+        
+		_mapController.loadMapFromXml("Resources/Level1/"+ GlobalGameController.Instance.CurrentMission.MissionMap);
+		_mapController.loadMapDetailsFromXml("Resources/Level1/"+ GlobalGameController.Instance.CurrentMission.MissionMap);
 
         if (_battleData.Players.Count > 0)
         {

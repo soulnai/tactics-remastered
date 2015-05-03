@@ -7,6 +7,7 @@ public class GlobalGameController : Singleton<GlobalGameController>
     protected GlobalGameController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     public Player UserPlayer;
+    public Mission CurrentMission;
 
     private bool _wasInited = false;
 
