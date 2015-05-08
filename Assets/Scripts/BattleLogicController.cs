@@ -48,8 +48,12 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void MoveUnit(Unit unit)
     {
+		int PathCost = 0;
+		for (int i = 0; i < unit.currentPath.Count; i++) {
+			PathCost+= unit.currentPath[i].movementCost;
+		}
 		//TODO replace comparasion of currentPath.Count to currentPath.Cost
-		if (unit.AP > 0 && unit.MovementRange>=unit.currentPath.Count) {
+		if (unit.AP > 0 && unit.MovementRange>=PathCost) {
 			Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
 			Tile destTile = null;
 			for (int i = 0; i < unit.currentPath.Count; i++) {
@@ -95,6 +99,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
 			foreach (Unit u in p.SpawnedPartyUnits){
 				if (u.AP > 0){
 					_battleData.CurrentUnit = u;
+						//TODO move out to AI unit turn check
 						if (u.AIControlled == true){
 							AITurn(u);
 						}
