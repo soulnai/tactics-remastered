@@ -130,17 +130,32 @@ public class BattleLogicController : Singleton<BattleLogicController>
 		CheckAP (unitAI);
 	}
 
+	public List<Unit> FindAllPlayerUnits(){
+		List<Unit> opponentsInRange = new List<Unit>();
+
+		foreach (Player p in _battleData.Players) {
+			if (p != _battleData.currentPlayer){
+				foreach (Unit u in p.SpawnedPartyUnits) {
+					if (u != _battleData.CurrentUnit && u.AIControlled == false) {
+						opponentsInRange.Add (u);
+					}
+				}
+			}
+		}
+		return opponentsInRange;
+	}
+
+	public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits){
+		Unit opponent = ListOfUnits.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, _battleData.blockedTiles.ToArray(), 100f).Count() : 1000).First ();
+		return opponent;
+	}
+
 	public void AIMoveToNearestEnemy(Unit unitAI){
 		Debug.Log ("AI turn starts");
 		List<Unit> opponentsInRange = new List<Unit>();
-
-		foreach (Unit u in _battleData.Players[0].SpawnedPartyUnits) {
-			if (u != _battleData.CurrentUnit && u.AIControlled == false) {
-				opponentsInRange.Add (u);
-			}
-		}
+		opponentsInRange = FindAllPlayerUnits ();
 		//find nearest opponent
-		Unit opponent = opponentsInRange.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unitAI.currentTile, x.currentTile, _battleData.blockedTiles.ToArray(), 100f).Count() : 1000).First ();
+		Unit opponent = FindNearestEnemy (unitAI, opponentsInRange);
 		List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, _battleData.blockedTiles.ToArray(), 100f);
 
 		unitAI.currentPath = pathToOpponent;
