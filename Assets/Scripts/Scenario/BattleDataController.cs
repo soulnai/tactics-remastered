@@ -17,6 +17,7 @@ public class BattleDataController : MonoBehaviour
 	public List<Tile> allTiles;
     public int currentRound = 0;
     public Unit CurrentUnit;
+	public Player currentPlayer;
 	public List<Tile> blockedTiles;
     public bool ReadyToStart = false;
 
@@ -93,6 +94,7 @@ public class BattleDataController : MonoBehaviour
             if (Players[0].PartyUnits.Count > 0)
             {
                 ReadyToStart = true;
+				currentPlayer = Players[0];
             }
             else
             {

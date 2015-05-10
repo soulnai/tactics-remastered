@@ -45,15 +45,17 @@ public class BattleLogicController : Singleton<BattleLogicController>
 		_battleData.CurrentUnit = unit;
 	}
 
-
-    public void MoveUnit(Unit unit)
-    {
+	public int CalcPathCost(Unit unit){
 		int PathCost = 0;
 		for (int i = 0; i < unit.currentPath.Count; i++) {
 			PathCost+= unit.currentPath[i].movementCost;
 		}
-		//TODO replace comparasion of currentPath.Count to currentPath.Cost
-		if (unit.AP > 0 && unit.MovementRange>=PathCost) {
+		return PathCost;
+	}
+
+    public void MoveUnit(Unit unit)
+    {
+		if (unit.AP > 0 && unit.MovementRange>=CalcPathCost(unit)) {
 			Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
 			Tile destTile = null;
 			for (int i = 0; i < unit.currentPath.Count; i++) {
@@ -95,23 +97,37 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
 	public void CheckAP(Unit unit){
 		if (unit.AP <= 0) {
-			foreach (Player p in _battleData.Players){
-			foreach (Unit u in p.SpawnedPartyUnits){
-				if (u.AP > 0){
-					_battleData.CurrentUnit = u;
-						//TODO move out to AI unit turn check
-						if (u.AIControlled == true){
-							AITurn(u);
-						}
-						break;
-				}
-			}
-			}
+			NextUnit();
+		}
+		if (unit.AP > 0 && unit.AIControlled == true) {
+			AITurn(unit);
 		}
 	}
 
+	public void NextUnit () {
+		foreach (Unit u in _battleData.currentPlayer.SpawnedPartyUnits) {
+			if (u.AP > 0) {
+				_battleData.CurrentUnit = u;
+				if (_battleData.CurrentUnit.AIControlled == true){
+					AITurn(_battleData.CurrentUnit);
+				}
+				break;
+			}
+			NextPlayer();
+		}
+	}
+
+	public void NextPlayer () {
+		foreach (Player p in _battleData.Players) {
+			if (p != _battleData.currentPlayer){
+				_battleData.currentPlayer = p;
+				break;
+			}
+		}
+	}
 	public void AITurn(Unit unitAI){
 		AIMoveToNearestEnemy (unitAI);
+		CheckAP (unitAI);
 	}
 
 	public void AIMoveToNearestEnemy(Unit unitAI){
@@ -126,18 +142,25 @@ public class BattleLogicController : Singleton<BattleLogicController>
 		//find nearest opponent
 		Unit opponent = opponentsInRange.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unitAI.currentTile, x.currentTile, _battleData.blockedTiles.ToArray(), 100f).Count() : 1000).First ();
 		List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, _battleData.blockedTiles.ToArray(), 100f);
-		/*int movementCost = 0;
-		int pathEndPoint;
-		for(int i=0;i<pathToOpponent.Count-1;i++)
-		{
-			movementCost +=pathToOpponent[i].movementCost;
-			if(movementCost <= unitAI.MovementRange)
-			{
-				pathEndPoint = i;
-			}
-		}*/
-		pathToOpponent.Remove (pathToOpponent [pathToOpponent.Count - 1]);
+
 		unitAI.currentPath = pathToOpponent;
+		if (CalcPathCost (unitAI) > unitAI.MovementRange) {
+			Debug.Log("Path reduce");
+			int movementCost = 0;
+			int pathEndPoint;
+			for(int i=0;i<pathToOpponent.Count;i++)
+			{
+				movementCost +=pathToOpponent[i].movementCost;
+				if(movementCost > unitAI.MovementRange)
+				{
+					int countToRemove = pathToOpponent.Count - i;
+					pathToOpponent.RemoveRange(i, countToRemove);
+				}
+			}
+		} else {
+			pathToOpponent.Remove (pathToOpponent [pathToOpponent.Count - 1]);
+		}
+
 		MoveUnit (unitAI);
 	}
 
