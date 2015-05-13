@@ -146,7 +146,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
 	}
 
 	public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits){
-		Unit opponent = ListOfUnits.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, _battleData.blockedTiles.ToArray(), 100f).Count() : 1000).First ();
+		Unit opponent = ListOfUnits.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, GetBlockedTiles(), 100f).Count() : 1000).First ();
 		return opponent;
 	}
 
@@ -179,13 +179,10 @@ public class BattleLogicController : Singleton<BattleLogicController>
 		MoveUnit (unitAI);
 	}
 
-	public Tile[] GetBlockedTiles(Unit exludeUnit){
+	public Tile[] GetBlockedTiles(){
 		List <Tile> tempBlocked = new List<Tile>(_battleData.blockedTiles);
-		foreach (Player p in _battleData.Players) {
-			foreach(Unit u in p.SpawnedPartyUnits){ 
-				if (u == exludeUnit) continue;
+			foreach(Unit u in _battleData.currentPlayer.SpawnedPartyUnits){ 
 				tempBlocked.Add(u.currentTile);
-			}
 		}
 		return tempBlocked.ToArray();
 	}

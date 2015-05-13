@@ -32,7 +32,7 @@ public class ScenarioController : MonoBehaviour {
 				_Instance = GameObject.FindObjectOfType<ScenarioController>();
 				
 				//Tell unity not to destroy this object when loading a new scene!
-				DontDestroyOnLoad(_Instance.gameObject);
+				//DontDestroyOnLoad(_Instance.gameObject);
 			}
 			
 			return _Instance;
@@ -47,7 +47,7 @@ public class ScenarioController : MonoBehaviour {
 		{
 			//If I am the first Instance, make me the Singleton
 			_Instance = this;
-			DontDestroyOnLoad(this);
+			//DontDestroyOnLoad(this);
 		}
 		else
 		{
@@ -80,10 +80,13 @@ public class ScenarioController : MonoBehaviour {
     {
 		_mapController.loadMapFromXml("Resources/Level1/map.xml");
 		_mapController.loadMapDetailsFromXml("Resources/Level1/mission.xml");
-
-		Unit unitAI = UnitSpawner.SpawnUnit(map[5][11], _battleData.Players[1].PartyUnits[0].gameObject);
-		unitAI.AIControlled = true;
-		_battleData.Players[1].SpawnedPartyUnits.Add(unitAI);
+		int t = 0;
+		foreach (Unit u in _battleData.Players[1].PartyUnits){
+			Unit unitAI = UnitSpawner.SpawnUnit(map[5][11+t], u.gameObject);
+			unitAI.AIControlled = true;
+			_battleData.Players[1].SpawnedPartyUnits.Add(unitAI);
+			t++;
+		}
 
 
         if (_battleData.Players.Count > 0)

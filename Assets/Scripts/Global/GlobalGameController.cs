@@ -4,7 +4,7 @@ using System.Security.Policy;
 
 public class GlobalGameController : Singleton<GlobalGameController>
 {
-    protected GlobalGameController() { } // guarantee this will be always a singleton only - can't use the constructor!
+    protected GlobalGameController() { } // guarantee this will be always a singleton only - can't use the 
 
     public Player UserPlayer;
 	public Player AIPlayer;
@@ -53,8 +53,20 @@ public class GlobalGameController : Singleton<GlobalGameController>
 		//TODO replace with final solution
 		AIPlayer.name = "AIPlayer";
 		AIPlayer.PlayerName = "Artifica";
-		AIPlayer.AvailableUnits.Add(GlobalPrefabHolder.Instance.Prefabs["Archer_01"].GetComponent<Unit>());
-		AIPlayer.PartyUnits.Add (AIPlayer.AvailableUnits[0]);
+		loadAIunitsDetailsFromXml("Resources/Level1/mission.xml");
+		foreach (Unit u in AIPlayer.AvailableUnits) {
+			AIPlayer.PartyUnits.Add (u);
+		}
+	}
+
+	public void loadAIunitsDetailsFromXml(string mapDetailesfile)
+	{
+		MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails (mapDetailesfile);
+		
+		for (int j = 0; j < container.players[1].units.Count; j++) {
+			AIPlayer.AvailableUnits.Add (GlobalPrefabHolder.Instance.Prefabs [container.players [1].units [j].prefabName].GetComponent<Unit> ());
+			Debug.Log (container.players [1].units [j].prefabName);
+		}
 	}
     // Update is called once per frame
     void Update () {

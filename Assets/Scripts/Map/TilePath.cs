@@ -4,30 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class TilePath {
-	public List<Tile> listOfTiles = new List<Tile>();
+	public List<Tile> Tiles = new List<Tile>();
 	
-	public int costOfPath = 0;	
+	public int Cost = 0;	
 	
 	public Tile lastTile;
 	
 	public TilePath() {}
 	
 	public TilePath(TilePath tp) {
-		listOfTiles = tp.listOfTiles.ToList();
-		costOfPath = tp.costOfPath;
+		Tiles = tp.Tiles.ToList();
+		Cost = tp.Cost;
 		lastTile = tp.lastTile;
 	}
 	
 	public void addTile(Tile t) {
-/*		if (GameManager.Instance.CurrentUnit.currentTile == t) {
-			costOfPath += 0;
-		} else if (GameManager.Instance.CurrentUnit.isFlying == true) {
-			costOfPath += 1;
-		} else {
-			costOfPath += t.movementCost;
-		}*/
-		costOfPath += t.movementCost;
-		listOfTiles.Add(t);
+		Cost += t.movementCost;
+		Tiles.Add(t);
 		lastTile = t;
 	}
 }

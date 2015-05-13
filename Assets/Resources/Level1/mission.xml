@@ -11,13 +11,16 @@
 	<SpawnTile locX="4" locY="8"/>
 	<SpawnTile locX="5" locY="8"/>
   </SpawnArea>
+  <SpawnArea>
+	<SpawnTile locX="5" locY="11"/>
+  </SpawnArea>
   <Players>
     <Player name="Bot1">
       <Unit prefabName="archer"/>
     </Player>
     <Player name="Bot2">
-      <Unit prefabName="warrior"/>
-	  <Unit prefabName="archer"/>
+	  <Unit prefabName="Archer_01"/>
+	  <Unit prefabName="Warrior_02"/>
     </Player>
   </Players>
 </MissionDetailsCollection>	

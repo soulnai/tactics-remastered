@@ -17,7 +17,7 @@ public class TilePathFinder : MonoBehaviour {
 		open.Add(originPath);
 		
 		while (open.Count > 0) {
-			//open = open.OrderBy(x => x.costOfPath).ToList();
+			//open = open.OrderBy(x => x.Cost).ToList();
 			TilePath current = open[0];
 			open.Remove(open[0]);
 			
@@ -25,9 +25,9 @@ public class TilePathFinder : MonoBehaviour {
 				continue;
 			} 
 			if (current.lastTile == destinationTile) {
-				current.listOfTiles.Distinct();
-				current.listOfTiles.Remove(originTile);
-				return current.listOfTiles;
+				current.Tiles.Distinct();
+				current.Tiles.Remove(originTile);
+				return current.Tiles;
 			}
 			
 			closed.Add(current.lastTile);
@@ -59,7 +59,7 @@ public class TilePathFinder : MonoBehaviour {
 				if (closed.Contains(current.lastTile)) {
 					continue;
 				} 
-				if (current.costOfPath > movementPoints) {
+				if (current.Cost > movementPoints) {
 					continue;
 				}
 				

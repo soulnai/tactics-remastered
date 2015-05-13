@@ -104,12 +104,15 @@ public class MapUtils : Singleton<MapUtils>
 
         //int playersCount = container.players.Count;
         //Debug.Log(playersCount);
-		for (int i = 0; i < container.players.Count; i++) {
-			Debug.Log("Units of Player"+i+":");
-			for (int j = 0; j < container.players[i].units.Count; j++) {
-				Debug.Log(container.players[i].units[j].prefabName);
-			}
-	}
+		//for (int i = 0; i < container.players.Count; i++) {
+		//	Debug.Log("Units of Player"+i+":");
+		/*	for (int j = 0; j < container.players[1].units.Count; j++) {
+				GlobalGameController.Instance.AIPlayer.AvailableUnits.Add(GlobalPrefabHolder.Instance.Prefabs[container.players[1].units[j].prefabName].GetComponent<Unit>());
+				Debug.Log(container.players[1].units[j].prefabName);
+			}*/
+	//}
 
     }
+
+
 }
