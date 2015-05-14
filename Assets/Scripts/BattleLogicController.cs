@@ -113,18 +113,34 @@ public class BattleLogicController : Singleton<BattleLogicController>
 				}
 				break;
 			}
-			NextPlayer();
+				NextPlayer();
+		}
+	}
+	
+
+	public void NextPlayer () {
+		bool changePlayer = false;
+		foreach (Unit u in _battleData.currentPlayer.SpawnedPartyUnits) {
+			if (u.AP > 0) {
+				changePlayer = false;
+				break;
+			} else {
+				changePlayer = true;
+			}
+		}
+
+		if (changePlayer == true) {
+			foreach (Player p in _battleData.Players) {
+				if (p != _battleData.currentPlayer) {
+					_battleData.currentPlayer = p;
+					break;
+				}
+			}
+			_battleData.CurrentUnit = _battleData.currentPlayer.SpawnedPartyUnits[0];
+			AITurn(_battleData.currentPlayer.SpawnedPartyUnits[0]);
 		}
 	}
 
-	public void NextPlayer () {
-		foreach (Player p in _battleData.Players) {
-			if (p != _battleData.currentPlayer){
-				_battleData.currentPlayer = p;
-				break;
-			}
-		}
-	}
 	public void AITurn(Unit unitAI){
 		AIMoveToNearestEnemy (unitAI);
 		CheckAP (unitAI);
@@ -146,17 +162,23 @@ public class BattleLogicController : Singleton<BattleLogicController>
 	}
 
 	public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits){
-		Unit opponent = ListOfUnits.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, GetBlockedTiles(), 100f).Count() : 1000).First ();
+		Debug.Log (unit.name);
+		foreach (Unit u in ListOfUnits) {
+			Debug.Log (u.currentTile.gridPosition);
+		}
+		Tile[] blocked = GetBlockedTiles();
+		Unit opponent = ListOfUnits.OrderBy (x => x != null ? -x.HP : 1000).ThenBy (x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, blocked, 100f).Count() : 1000).First ();
 		return opponent;
 	}
 
 	public void AIMoveToNearestEnemy(Unit unitAI){
-		Debug.Log ("AI turn starts");
+		Debug.Log ("AI turn starts"+_battleData.CurrentUnit.name);
 		List<Unit> opponentsInRange = new List<Unit>();
 		opponentsInRange = FindAllPlayerUnits ();
 		//find nearest opponent
 		Unit opponent = FindNearestEnemy (unitAI, opponentsInRange);
-		List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, _battleData.blockedTiles.ToArray(), 100f);
+		Tile[] blocked = GetBlockedTiles();
+		List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, 100f);
 
 		unitAI.currentPath = pathToOpponent;
 		if (CalcPathCost (unitAI) > unitAI.MovementRange) {
