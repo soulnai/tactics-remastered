@@ -19,9 +19,6 @@ public class ScenarioController : MonoBehaviour {
 	public UnitSpawn UnitSpawner;
 	public SpawnMiscObjects ObjSpawner;
 
-	private BattleDataController _battleData;
-    private GlobalPrefabHolder _prefabHolder;
-
 	private static ScenarioController _Instance;
 	public static ScenarioController Instance
 	{
@@ -38,8 +35,6 @@ public class ScenarioController : MonoBehaviour {
 			return _Instance;
 		}
 	}
-
-    private MapUtils _mapController;
 	
     // Use this for initialization
 	void Awake(){
@@ -61,14 +56,7 @@ public class ScenarioController : MonoBehaviour {
     // Инициализация сценария текущей битвы, заполнение всех полей, ссылок и пр.
     public void Init()
     {
-        _battleData = BattleDataController.Instance;
-        _prefabHolder = GlobalPrefabHolder.Instance;
-        _mapController = MapUtils.Instance;
-        CreateBattleScene(_battleData.Players);
-    }
-
-    void Start () {
-        Init();
+        CreateBattleScene(GM.BattleData.Players);
     }
 	
 	// Update is called once per frame
@@ -78,25 +66,25 @@ public class ScenarioController : MonoBehaviour {
 
     public void CreateBattleScene(List<Player> players )
     {
-		_mapController.loadMapFromXml("Resources/Level1/Map.xml");
-		_mapController.loadMapDetailsFromXml("Resources/Level1/mission.xml");
-		int t = 0;
-		foreach (Unit u in _battleData.Players[1].PartyUnits){
+		GM.Map.loadMapFromXml("Resources/Level1/Map.xml");
+		GM.Map.loadMapDetailsFromXml("Resources/Level1/mission.xml");
+		
+		/* foreach (Unit u in GM.BattleData.Players[1].PartyUnits){
 			Unit unitAI = UnitSpawner.SpawnUnit(map[5][11+t], u.gameObject);
 			unitAI.AIControlled = true;
-			_battleData.Players[1].SpawnedPartyUnits.Add(unitAI);
+			GM.BattleData.Players[1].SpawnedPartyUnits.Add(unitAI);
 			t++;
-		}
+		} */
 
 
-        if (_battleData.Players.Count > 0)
+        if (GM.BattleData.Players.Count > 0)
         {
-            if (spawnArea.Count >= _battleData.AllUnitsInScene.Count)
+            if (spawnArea.Count >= GM.BattleData.AllUnitsInScene.Count)
             {
-                for (int i = 0; i < _battleData.Players[0].PartyUnits.Count; i++)
+                for (int i = 0; i < GM.BattleData.Players[0].PartyUnits.Count; i++)
                 {
-                    Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], _battleData.Players[0].PartyUnits[i].gameObject);
-					_battleData.Players[0].SpawnedPartyUnits.Add(unit);
+                    Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], GM.BattleData.Players[0].PartyUnits[i].gameObject);
+                    GM.BattleData.Players[0].SpawnedPartyUnits.Add(unit);
                 }
             }
             else
@@ -108,8 +96,7 @@ public class ScenarioController : MonoBehaviour {
         {
             Debug.LogError("No players added to battle data controller");
         }
-		_battleData.CurrentUnit = _battleData.Players [0].SpawnedPartyUnits [0];
-
+        
         Camera.main.transform.LookAt (spawnArea[0].transform.position);
     }
 }

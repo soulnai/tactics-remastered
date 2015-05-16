@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using System.Linq;
+using UnityEditor;
 
 /*-----------------------------------------------------
 
@@ -27,20 +28,34 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     protected BattleLogicController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
-    // Use this for initialization
-    void Start () {
-        InitBattleLogic();
+    public void PlayerTurnEnded(Player player)
+    {
+        if (OnPlayerTurnEnd != null) {OnPlayerTurnEnd(player);}
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    void InitBattleLogic()
+    public void PlayerTurnStarted(Player player)
+    {
+        if (OnPlayerTurnStart != null) { OnPlayerTurnStart(player); }
+    }
+
+    public void UnitTurnStarted(Unit unit)
+    {
+        if (OnUnitTurnStart != null) { OnUnitTurnStart(unit); }
+    }
+
+    public void UnitTurnEnded(Unit unit)
+    {
+        if (OnUnitTurnEnd != null) { OnUnitTurnEnd(unit); }
+    }
+ 
+
+    public void Init()
     {
         InputController.Instance.OnTileClick += TileClick;
 		InputController.Instance.OnUnitClick += SetCurrentUnit;
+
+        GM.BattleData.currentPlayer = GM.BattleData.Players[0];
+        GM.BattleData.CurrentUnit = GM.BattleData.Players[0].SpawnedPartyUnits[0];
     }
 
     public void TileClick(Tile tile)
@@ -51,15 +66,6 @@ public class BattleLogicController : Singleton<BattleLogicController>
     public void SetCurrentUnit(Unit unit){
 		GM.BattleData.CurrentUnit = unit;
 	}
-
-
-
-
-	
-    //TODO fix out of bounds error
-	
-
-
 
     public void CheckAP(Unit unit)
     {
@@ -73,16 +79,25 @@ public class BattleLogicController : Singleton<BattleLogicController>
         }
     }
 
-	public void NextUnit () {
+    public void PlayerTurnLogic()
+    {
+        OnPlayerTurnStart(GM.BattleData.currentPlayer);
+    }
+
+    public void UnitTurnLogic()
+    {
+        OnUnitTurnStart(GM.BattleData.CurrentUnit);
+    }
+
+    public void NextUnit () {
 		foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits) {
 			if (u.AP > 0) {
 				GM.BattleData.CurrentUnit = u;
 				if (GM.BattleData.CurrentUnit.AIControlled == true){
 					AITurn(GM.BattleData.CurrentUnit);
-				}
-				break;
+                }
+			    break;
 			}
-				NextPlayer();
 		}
 	}
 
@@ -90,7 +105,6 @@ public class BattleLogicController : Singleton<BattleLogicController>
 		bool changePlayer = false;
 		foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits) {
 			if (u.AP > 0) {
-				changePlayer = false;
 				break;
 			} else {
 				changePlayer = true;

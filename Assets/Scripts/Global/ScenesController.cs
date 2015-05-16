@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using EnumSpace;
 
 /*-----------------------------------------------------
 
@@ -13,6 +14,7 @@ public class ScenesController : Singleton<ScenesController>
     protected ScenesController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     public Action OnBattleSceneLoadingStart;
+    public Action<ScenesEnum> OnLevelLoadComplete;
 
     public string sceneMainMenuName = "MainMenu";
     public string sceneTavernName = "Tavern";
@@ -60,6 +62,14 @@ public class ScenesController : Singleton<ScenesController>
         else
         {
             Debug.Log("Battle Data not ready");
+        }
+    }
+
+    public void OnLevelWasLoaded(int levelInt)
+    {
+        if (OnLevelLoadComplete != null)
+        {
+            OnLevelLoadComplete((ScenesEnum)levelInt);
         }
     }
 

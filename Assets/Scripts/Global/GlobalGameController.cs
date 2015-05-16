@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Security.Policy;
+using EnumSpace;
 
 public class GlobalGameController : Singleton<GlobalGameController>
 {
@@ -21,6 +22,18 @@ public class GlobalGameController : Singleton<GlobalGameController>
     {
         if (!_wasInited)
             Init();
+
+        GM.Scenes.OnLevelLoadComplete += InitScene;
+    }
+
+    private void InitScene(EnumSpace.ScenesEnum scenesEnum)
+    {
+        switch (scenesEnum)
+        {
+                case ScenesEnum.BattleScene:
+                InitBattle();
+                break;
+        }
     }
 
     private void Init()
@@ -68,8 +81,10 @@ public class GlobalGameController : Singleton<GlobalGameController>
 			Debug.Log (container.players [1].units [j].prefabName);
 		}
 	}
-    // Update is called once per frame
-    void Update () {
-	
-	}
+
+    public void InitBattle()
+    {
+        GM.Scenario.Init();
+        GM.BattleLogic.Init();
+    } 
 }
