@@ -94,7 +94,7 @@ public class MapUtils : Singleton<MapUtils>
 		Debug.Log("Mission name = "+container.missionName.name);
         Debug.Log("Mission description = "+container.missionDescription.description);
         Debug.Log("Mission target = "+container.missionTarget.target);
-        Debug.Log("Mission map = " +container.missionMap.map);
+        Debug.Log("Mission Map = " +container.missionMap.map);
 
 		int spawnTilesCount = container.spawnTiles.Count;
 		Debug.Log (spawnTilesCount);
@@ -114,5 +114,71 @@ public class MapUtils : Singleton<MapUtils>
 
     }
 
+    public void GeneratePath(Tile from, Tile to)
+    {
+        //Tile[] blockedArray = GetBlockedTiles ();
+        List<Tile> path = TilePathFinder.FindPath(from, to, _battleData.blockedTiles.ToArray(), 0.5f);
+        foreach (Tile tile in path)
+        {
+            tile.showHighlight(Color.red);
+        }
+        _battleData.CurrentUnit.currentPath = path;
+    }
+
+    public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits)
+    {
+        Debug.Log(unit.name);
+        foreach (Unit u in ListOfUnits)
+        {
+            Debug.Log(u.currentTile.gridPosition);
+        }
+        Tile[] blocked = GetBlockedTiles();
+        Unit opponent = ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, blocked, 100f).Count() : 1000).First();
+        return opponent;
+    }
+
+    public Tile[] GetBlockedTiles()
+    {
+        List<Tile> tempBlocked = new List<Tile>(_battleData.blockedTiles);
+        foreach (Unit u in _battleData.currentPlayer.SpawnedPartyUnits)
+        {
+            tempBlocked.Add(u.currentTile);
+        }
+        return tempBlocked.ToArray();
+    }
+
+    public List<Unit> getAllUnitsinArea(Tile center, int radius)
+    {
+        List<Tile> availableTiles = new List<Tile>();
+        List<Unit> opponentsInRange = new List<Unit>();
+        //find all available tiles in area
+        availableTiles = TilePathFinder.FindArea(center, radius, _battleData.blockedTiles.ToArray(), 100f);
+        foreach (Tile t in availableTiles)
+        {
+            t.highlight.GetComponent<Renderer>().enabled = true;
+        }
+        //find all units in area
+        foreach (Unit u in _battleData.Players[0].SpawnedPartyUnits)
+        {
+            if (u != _battleData.CurrentUnit && u.AIControlled == false)
+            {
+                if (availableTiles.Contains(u.currentTile))
+                {
+                    opponentsInRange.Add(u);
+                }
+            }
+        }
+        return opponentsInRange;
+    }
+
+    public int CalcPathCost(Unit unit)
+    {
+        int PathCost = 0;
+        for (int i = 0; i < unit.currentPath.Count; i++)
+        {
+            PathCost += unit.currentPath[i].movementCost;
+        }
+        return PathCost;
+    }
 
 }

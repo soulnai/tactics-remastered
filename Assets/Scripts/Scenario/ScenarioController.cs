@@ -78,7 +78,7 @@ public class ScenarioController : MonoBehaviour {
 
     public void CreateBattleScene(List<Player> players )
     {
-		_mapController.loadMapFromXml("Resources/Level1/map.xml");
+		_mapController.loadMapFromXml("Resources/Level1/Map.xml");
 		_mapController.loadMapDetailsFromXml("Resources/Level1/mission.xml");
 		int t = 0;
 		foreach (Unit u in _battleData.Players[1].PartyUnits){

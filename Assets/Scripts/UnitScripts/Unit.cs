@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using EnumSpace;
 using UnityEngine.UI;
 
@@ -41,27 +42,63 @@ public class Unit : MonoBehaviour
     public Image IconImage;
 
     // Use this for initialization
-    void Start () {
-	
-	}
+    void Start ()
+    {
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
 
-	void OnMouseDown(){
-		Unit unit;
-		if (Input.GetMouseButtonDown(0)) 
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if(Physics.Raycast(ray,out hit))
-			{
-				Debug.Log(hit.collider.gameObject.name);
-				unit = hit.collider.gameObject.GetComponent<Unit>();
-					InputController.Instance.OnUnitClicked(this);
-			}
-		}
-	}
+    public void Move(Tile destinationTile)
+    {
+        GM.Map.GeneratePath(currentTile, destinationTile);
+        Move(this);
+        //TODO CheckAP(this);
+        
+        //_battleData.CurrentUnit.currentPath = null;
+    }
+
+    public void Move(Unit unit)
+    {
+        if (unit.AP > 0 && unit.MovementRange >= GM.Map.CalcPathCost(unit))
+        {
+            Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
+            Tile destTile = null;
+            for (int i = 0; i < unit.currentPath.Count; i++)
+            {
+                VectorPath[i] = new Vector3(unit.currentPath[i].transform.position.x, unit.currentPath[i].transform.position.y, unit.currentPath[i].transform.position.z);
+                destTile = unit.currentPath[i];
+            }
+            float pathTime = unit.currentPath.Count * 0.5f;
+            unit.transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt); ;
+            unit.currentTile = destTile;
+            foreach (Tile t in unit.currentPath)
+            {
+                t.hideHighlight();
+            }
+            ReduceAP();
+        }
+        else
+        {
+            Debug.Log("Недостаточно АР");
+        }
+    }
+
+    void ChangeLookAt(int waypointIndex)
+    {
+        transform.LookAt(currentPath[waypointIndex].transform.position);
+    }
+
+    public void ReduceAP()
+    {
+        if (AP > 0)
+        {
+            AP -= 1;
+        }
+    }
+
+
 }

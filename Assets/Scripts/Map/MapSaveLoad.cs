@@ -102,7 +102,7 @@ public class MissionTargetXml
 
 public class MissionMapXml
 {
-    [XmlAttribute("map")]
+    [XmlAttribute("Map")]
     public string map;
 }
 

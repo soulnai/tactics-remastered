@@ -3,7 +3,7 @@
     <MissionName name="Rise of the West"/>
     <MissionDescription description="Learn the history of West Rebellion"/>
     <MissionTarget target="Hold the position for 5 turns"/>
-    <MissionMap map="map.xml"/>
+    <MissionMap Map="Map.xml"/>
 	
    <SpawnArea>
 	<SpawnTile locX="2" locY="8"/>
