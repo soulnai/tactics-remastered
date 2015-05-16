@@ -14,9 +14,6 @@ public class MapUtils : Singleton<MapUtils>
 	public int mapSize;
 	public Transform mapTransform;
 	public List <List<Tile>> map = new List<List<Tile>>();
-	private ScenarioController gm;
-    private GlobalPrefabHolder _prefabHolder;
-	private BattleDataController _battleData;
 
     // Use this for initialization
     void Start()
@@ -31,12 +28,9 @@ public class MapUtils : Singleton<MapUtils>
 
     public void loadMapFromXml(string mapFile)
     {
-        _prefabHolder = GlobalPrefabHolder.Instance;
-		_battleData = BattleDataController.Instance;
-		gm = ScenarioController.Instance;
         MapXmlContainer container = MapSaveLoad.Load(mapFile);
 
-        gm.mapSize = container.size;
+        GM.Scenario.mapSize = container.size;
 		
 		//initially remove all children
 		for(int i = 0; i < mapTransform.childCount; i++) {
@@ -44,24 +38,26 @@ public class MapUtils : Singleton<MapUtils>
 		}
 		
 		map = new List<List<Tile>>();
-		for (int i = 0; i < gm.mapSize; i++) {
+		for (int i = 0; i < GM.Scenario.mapSize; i++) {
 			List <Tile> row = new List<Tile>();
-			for (int j = 0; j < gm.mapSize; j++) {
+			for (int j = 0; j < GM.Scenario.mapSize; j++) {
 				float tileHeight = container.tiles.Where(x => x.locX == i && x.locY == j).First().height;
-                Tile tile = ((GameObject)Instantiate(_prefabHolder.BASE_TILE_PREFAB, new Vector3(i - Mathf.Floor(gm.mapSize / 2), tileHeight, -j + Mathf.Floor(gm.mapSize / 2)), Quaternion.Euler(new Vector3()))).GetComponent<Tile>();
+                Tile tile = ((GameObject)Instantiate(GM.Prefabs.BASE_TILE_PREFAB, new Vector3(i - Mathf.Floor(GM.Scenario.mapSize / 2), tileHeight, -j + Mathf.Floor(GM.Scenario.mapSize / 2)), Quaternion.Euler(new Vector3()))).GetComponent<Tile>();
 				
 				tile.transform.parent = mapTransform;
 				tile.gridPosition = new Vector2(i, j);
 				tile.setType((EnumSpace.TileType)container.tiles.Where(x => x.locX == i && x.locY == j).First().id);
 				tile.height = tileHeight;
 				row.Add (tile);
-				_battleData.allTiles.Add(tile);
+				GM.BattleData.allTiles.Add(tile);
 			}
 			map.Add(row);
 		}
-		gm.map = map;
-		for (int i = 0; i < gm.mapSize; i++) {
-			for (int j = 0; j < gm.mapSize; j++) {
+		GM.Scenario.map = map;
+        for (int i = 0; i < GM.Scenario.mapSize; i++)
+        {
+            for (int j = 0; j < GM.Scenario.mapSize; j++)
+            {
 				map[i][j].generateNeighbors();
 			}
 		}
@@ -69,26 +65,25 @@ public class MapUtils : Singleton<MapUtils>
 		int treesCount = container.trees.Count;
 		for (int i = 0; i < treesCount; i++) {
 				string stuffType = container.trees.ElementAt(i).prefabName;
-				Tile tileTospawn = gm.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
-				Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
+                Tile tileTospawn = GM.Scenario.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
+				Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 				tileTospawn.impassible = true;
-				_battleData.blockedTiles.Add(tileTospawn);
+				GM.BattleData.blockedTiles.Add(tileTospawn);
 		}
 
 		int cratesCount = container.crates.Count;
 		
 		for (int i = 0; i < cratesCount; i++) {
 			string stuffType = container.crates.ElementAt(i).prefabName;
-			Tile tileTospawn = gm.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
-			Instantiate(_prefabHolder.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
+            Tile tileTospawn = GM.Scenario.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
+			Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
-			_battleData.blockedTiles.Add(tileTospawn);
+			GM.BattleData.blockedTiles.Add(tileTospawn);
 		}
 	}
 
     public void loadMapDetailsFromXml(string mapDetailesfile)
     {
-        gm = ScenarioController.Instance;
 		MissionDetailsXmlContainer container = MapSaveLoad.LoadMapDetails(mapDetailesfile);
 		
 		Debug.Log("Mission name = "+container.missionName.name);
@@ -99,7 +94,7 @@ public class MapUtils : Singleton<MapUtils>
 		int spawnTilesCount = container.spawnTiles.Count;
 		Debug.Log (spawnTilesCount);
 		for (int i = 0; i < spawnTilesCount; i++) {
-			gm.spawnArea.Add(gm.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
+			GM.Scenario.spawnArea.Add(GM.Scenario.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}
 
         //int playersCount = container.players.Count;
@@ -117,12 +112,12 @@ public class MapUtils : Singleton<MapUtils>
     public void GeneratePath(Tile from, Tile to)
     {
         //Tile[] blockedArray = GetBlockedTiles ();
-        List<Tile> path = TilePathFinder.FindPath(from, to, _battleData.blockedTiles.ToArray(), 0.5f);
+        List<Tile> path = TilePathFinder.FindPath(from, to, GM.BattleData.blockedTiles.ToArray(), 0.5f);
         foreach (Tile tile in path)
         {
             tile.showHighlight(Color.red);
         }
-        _battleData.CurrentUnit.currentPath = path;
+        GM.BattleData.CurrentUnit.currentPath = path;
     }
 
     public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits)
@@ -139,8 +134,8 @@ public class MapUtils : Singleton<MapUtils>
 
     public Tile[] GetBlockedTiles()
     {
-        List<Tile> tempBlocked = new List<Tile>(_battleData.blockedTiles);
-        foreach (Unit u in _battleData.currentPlayer.SpawnedPartyUnits)
+        List<Tile> tempBlocked = new List<Tile>(GM.BattleData.blockedTiles);
+        foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits)
         {
             tempBlocked.Add(u.currentTile);
         }
@@ -152,15 +147,15 @@ public class MapUtils : Singleton<MapUtils>
         List<Tile> availableTiles = new List<Tile>();
         List<Unit> opponentsInRange = new List<Unit>();
         //find all available tiles in area
-        availableTiles = TilePathFinder.FindArea(center, radius, _battleData.blockedTiles.ToArray(), 100f);
+        availableTiles = TilePathFinder.FindArea(center, radius, GM.BattleData.blockedTiles.ToArray(), 100f);
         foreach (Tile t in availableTiles)
         {
             t.highlight.GetComponent<Renderer>().enabled = true;
         }
         //find all units in area
-        foreach (Unit u in _battleData.Players[0].SpawnedPartyUnits)
+        foreach (Unit u in GM.BattleData.Players[0].SpawnedPartyUnits)
         {
-            if (u != _battleData.CurrentUnit && u.AIControlled == false)
+            if (u != GM.BattleData.CurrentUnit && u.AIControlled == false)
             {
                 if (availableTiles.Contains(u.currentTile))
                 {
