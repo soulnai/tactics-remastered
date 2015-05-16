@@ -15,7 +15,7 @@ public class ScenarioController : MonoBehaviour {
     //TODO create a list of spawn areas that will be used for different players/enemies/etc. this are for this party etc.
     public List<Tile> spawnArea = new List<Tile>();
 	public int mapSize;
-    //TODO Move all functions here as second class or use Spawner for all elements - Units / Props and other elements
+    //TODO MoveTo all functions here as second class or use Spawner for all elements - Units / Props and other elements
 	public UnitSpawn UnitSpawner;
 	public SpawnMiscObjects ObjSpawner;
 

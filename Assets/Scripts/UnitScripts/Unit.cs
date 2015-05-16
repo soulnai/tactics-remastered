@@ -52,30 +52,30 @@ public class Unit : MonoBehaviour
 	
 	}
 
-    public void Move(Tile destinationTile)
+    public void MoveTo(Tile destinationTile)
     {
         GM.Map.GeneratePath(currentTile, destinationTile);
-        Move(this);
+        Move();
         //TODO CheckAP(this);
         
         //_battleData.CurrentUnit.currentPath = null;
     }
 
-    public void Move(Unit unit)
+    public void Move()
     {
-        if (unit.AP > 0 && unit.MovementRange >= GM.Map.CalcPathCost(unit))
+        if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
         {
-            Vector3[] VectorPath = new Vector3[unit.currentPath.Count];
+            Vector3[] VectorPath = new Vector3[currentPath.Count];
             Tile destTile = null;
-            for (int i = 0; i < unit.currentPath.Count; i++)
+            for (int i = 0; i < currentPath.Count; i++)
             {
-                VectorPath[i] = new Vector3(unit.currentPath[i].transform.position.x, unit.currentPath[i].transform.position.y, unit.currentPath[i].transform.position.z);
-                destTile = unit.currentPath[i];
+                VectorPath[i] = currentPath[i].transform.position;
+                destTile = currentPath[i];
             }
-            float pathTime = unit.currentPath.Count * 0.5f;
-            unit.transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt); ;
-            unit.currentTile = destTile;
-            foreach (Tile t in unit.currentPath)
+            float pathTime = currentPath.Count * 0.5f;
+            transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt); ;
+            currentTile = destTile;
+            foreach (Tile t in currentPath)
             {
                 t.hideHighlight();
             }

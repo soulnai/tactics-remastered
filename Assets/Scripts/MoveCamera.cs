@@ -69,7 +69,7 @@ public class MoveCamera : MonoBehaviour
 			transform.RotateAround(transform.position, Vector3.up, pos.x * turnSpeed);
 		}
 		
-		// Move the camera on it's XY plane
+		// MoveTo the camera on it's XY plane
 		if ((isPanning)&&(!GUImanager.mouseOverGUI))
 		{
 	        	Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin).normalized;
@@ -80,7 +80,7 @@ public class MoveCamera : MonoBehaviour
 	        	transform.Translate(move, Space.World);
 		}
 		
-		// Move the camera linearly along Z axis
+		// MoveTo the camera linearly along Z axis
 		if ((isZooming)&&(!GUImanager.mouseOverGUI))
 		{
 				float val = Input.GetAxis("Mouse ScrollWheel");

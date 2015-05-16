@@ -45,7 +45,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void TileClick(Tile tile)
     {
-        GM.BattleData.CurrentUnit.Move(tile);
+        GM.BattleData.CurrentUnit.MoveTo(tile);
     }
 
     public void SetCurrentUnit(Unit unit){
