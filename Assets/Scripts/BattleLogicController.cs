@@ -79,14 +79,30 @@ public class BattleLogicController : Singleton<BattleLogicController>
         }
     }
 
-    public void PlayerTurnLogic()
+    public void StartPlayerTurn()
     {
-        OnPlayerTurnStart(GM.BattleData.currentPlayer);
+        PlayerTurnStarted(GM.BattleData.currentPlayer);
     }
 
+    public void EndPlayerTurn()
+    {
+        PlayerTurnEnded(GM.BattleData.currentPlayer);
+        NextPlayer();
+    }
+
+    public void StartUnitTurn()
+    {
+        UnitTurnStarted(GM.BattleData.CurrentUnit);
+    }
+
+    public void EndUnitTurn()
+    {
+        UnitTurnEnded(GM.BattleData.CurrentUnit);
+        NextUnit();
+    }
     public void UnitTurnLogic()
     {
-        OnUnitTurnStart(GM.BattleData.CurrentUnit);
+        UnitTurnStarted(GM.BattleData.CurrentUnit);
     }
 
     public void NextUnit () {
@@ -102,26 +118,16 @@ public class BattleLogicController : Singleton<BattleLogicController>
 	}
 
 	public void NextPlayer () {
-		bool changePlayer = false;
-		foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits) {
-			if (u.AP > 0) {
-				break;
-			} else {
-				changePlayer = true;
-			}
-		}
+	    if (GM.BattleData.Players.FindIndex(x => x == GM.BattleData.currentPlayer) < GM.BattleData.Players.Count - 1)
+	    {
+            GM.BattleData.currentPlayer = GM.BattleData.Players[GM.BattleData.Players.FindIndex(x => x == GM.BattleData.currentPlayer) + 1];
+	    }
+	    else
+	    {
+	        GM.BattleData.currentPlayer = GM.BattleData.Players[0];
+	    }
 
-		if (changePlayer == true) {
-			foreach (Player p in GM.BattleData.Players) {
-                if (p != GM.BattleData.currentPlayer)
-                {
-                    GM.BattleData.currentPlayer = p;
-					break;
-				}
-			}
-            GM.BattleData.CurrentUnit = GM.BattleData.currentPlayer.SpawnedPartyUnits[0];
-            AITurn(GM.BattleData.currentPlayer.SpawnedPartyUnits[0]);
-		}
+        PlayerTurnStarted(GM.BattleData.currentPlayer);
 	}
 
 	public void AITurn(Unit unitAI){
