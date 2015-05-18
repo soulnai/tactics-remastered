@@ -28,6 +28,7 @@ public class MapUtils : Singleton<MapUtils>
 
     public void loadMapFromXml(string mapFile)
     {
+        mapTransform = GameObject.Find("Map").transform;
         MapXmlContainer container = MapSaveLoad.Load(mapFile);
 
         GM.Scenario.mapSize = container.size;
@@ -93,6 +94,8 @@ public class MapUtils : Singleton<MapUtils>
 
 		int spawnTilesCount = container.spawnTiles.Count;
 		Debug.Log (spawnTilesCount);
+
+        GM.Scenario.spawnArea.Clear();
 		for (int i = 0; i < spawnTilesCount; i++) {
 			GM.Scenario.spawnArea.Add(GM.Scenario.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}

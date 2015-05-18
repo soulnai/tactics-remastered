@@ -253,6 +253,48 @@ Skybox:
   m_GameObject: {fileID: 416762081}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 496cc854400f4e242a8586e4d80bb234, type: 2}
+--- !u!1001 &1152048053
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.511466503
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .437846184
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .204972267
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 456696, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ad38184fea4ac6c47a746e8dabe246b5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1202870438
 GameObject:
   m_ObjectHideFlags: 0

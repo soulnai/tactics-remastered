@@ -84,10 +84,10 @@ public class BattleDataController : MonoBehaviour
     private void CheckBattleData()
     {
         Players = new List<Player>();
-        if (GlobalGameController.Instance.UserPlayer != null)
+        if (GM.GlobalGame.UserPlayer != null)
         {
-            Players.Add(GlobalGameController.Instance.UserPlayer);
-			Players.Add(GlobalGameController.Instance.AIPlayer);
+            Players.Add(GM.GlobalGame.UserPlayer);
+            Players.Add(GM.GlobalGame.AIPlayer);
         }
         if ((Players != null)&&(Players.Count>0))
         {

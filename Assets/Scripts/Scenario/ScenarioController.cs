@@ -11,9 +11,9 @@ using DG.Tweening;
 -----------------------------------------------------*/
 
 public class ScenarioController : MonoBehaviour {
-	public List <List<Tile>> map = new List<List<Tile>>();
+	public List <List<Tile>> map;
     //TODO create a list of spawn areas that will be used for different players/enemies/etc. this are for this party etc.
-    public List<Tile> spawnArea = new List<Tile>();
+    public List<Tile> spawnArea;
 	public int mapSize;
     //TODO MoveTo all functions here as second class or use Spawner for all elements - Units / Props and other elements
 	public UnitSpawn UnitSpawner;
@@ -68,17 +68,11 @@ public class ScenarioController : MonoBehaviour {
     {
 		GM.Map.loadMapFromXml("Resources/Level1/Map.xml");
 		GM.Map.loadMapDetailsFromXml("Resources/Level1/mission.xml");
-		
-		/* foreach (Unit u in GM.BattleData.Players[1].PartyUnits){
-			Unit unitAI = UnitSpawner.SpawnUnit(map[5][11+t], u.gameObject);
-			unitAI.AIControlled = true;
-			GM.BattleData.Players[1].SpawnedPartyUnits.Add(unitAI);
-			t++;
-		} */
-
 
         if (GM.BattleData.Players.Count > 0)
         {
+            GM.BattleData.Players[0].SpawnedPartyUnits.Clear();;
+
             if (spawnArea.Count >= GM.BattleData.AllUnitsInScene.Count)
             {
                 for (int i = 0; i < GM.BattleData.Players[0].PartyUnits.Count; i++)
