@@ -71,6 +71,12 @@ public class UnitXml
 {
     [XmlAttribute("prefabName")]
     public string prefabName;
+
+	[XmlAttribute("locX")]
+	public int locX;
+	
+	[XmlAttribute("locY")]
+	public int locY;
 }
 
 public class PlayerXml

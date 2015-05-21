@@ -71,3 +71,5 @@ $RECYCLE.BIN/
 *.lnk
 *.suo
 Assets/TextMesh Pro/User Guide.meta
+
+*.meta
