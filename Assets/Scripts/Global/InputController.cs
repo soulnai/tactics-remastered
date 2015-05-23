@@ -15,6 +15,7 @@ public class InputController : Singleton<InputController>
 
     public Action<Tile> OnTileClick;
 	public Action<Unit> OnUnitClick;
+    public Action<Ability> OnAbilityClick;
     public Action<Unit> OnUnitDropToSlot;
     public Action OnBattleLoad;
 
@@ -23,6 +24,12 @@ public class InputController : Singleton<InputController>
     void Awake()
     {
 
+    }
+
+    public void OnAbilityClicked(Ability a)
+    {
+        if (OnAbilityClick != null)
+            OnAbilityClick(a);
     }
 
     public void OnTileClicked(Tile t)

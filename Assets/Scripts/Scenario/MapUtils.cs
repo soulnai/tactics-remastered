@@ -179,4 +179,8 @@ public class MapUtils : Singleton<MapUtils>
         return PathCost;
     }
 
+    public List<Tile> getAllTilesinArea(Tile center, int radius)
+    {
+        return TilePathFinder.FindArea(center, radius, GM.BattleData.blockedTiles.ToArray(), 100f);
+    }
 }

@@ -3,6 +3,38 @@ using System.Collections;
 
 namespace EnumSpace {
 
+    public enum BuffType
+    {
+        CanBeDebuffed = 0,
+        Permanent = 1
+    }
+
+    public enum ChangeType
+    {
+        Once = 0,
+        EachTurn = 1
+    }
+
+    public enum SelectionType
+    {
+        Single = 0,
+        AllInRadius = 1,
+        All = 2,
+        Self = 3
+    }
+    [HideInInspector]
+    public enum TargetOwner
+    {
+        Ally = 0,
+        Enemy = 1,
+        Any = 2
+    }
+    public enum TargetType
+    {
+        Unit = 0,
+        Tile = 1
+    }
+
     public enum UnitListPanelType
     {
         AvailableUnitsPanel = 0,
