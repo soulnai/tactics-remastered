@@ -11,6 +11,9 @@ GameObject:
   - 114: {fileID: 11429602}
   - 114: {fileID: 11459466}
   - 114: {fileID: 11496576}
+  - 114: {fileID: 11440572}
+  - 114: {fileID: 11449814}
+  - 114: {fileID: 11425112}
   m_Layer: 0
   m_Name: BaseAbility
   m_TagString: Untagged
@@ -25,11 +28,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.511466503, y: .437846184, z: .204972267}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11425112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba7f6260de7a8e468a5a07264dacf4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 0
 --- !u!114 &11429602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,7 +57,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: BaseAbility
+  Icon: {fileID: 0}
   Selected: 0
+--- !u!114 &11440572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2124a6fb8313de84f9b5c1d1ce612322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CostAttribute: 3
+  CostType: 0
+  Value: 0
+--- !u!114 &11449814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc0a38c18cd9094491bec72ef84e5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11459466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3742dde080de46e40a2972f36bf15807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 0
   TargetOwner: 2
-  Selection: 1
+  Selection: 0
   Radius: 4
 --- !u!114 &11496576
 MonoBehaviour:
@@ -70,9 +111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attribute: 1
-  ChangeType: 1
-  Rounds: 0
-  Value: 0
+  ChangeType: 0
+  ModType: 0
+  BuffType: 1
+  Turns: 10
+  Value: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

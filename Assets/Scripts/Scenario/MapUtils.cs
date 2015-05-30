@@ -183,4 +183,10 @@ public class MapUtils : Singleton<MapUtils>
     {
         return TilePathFinder.FindArea(center, radius, GM.BattleData.blockedTiles.ToArray(), 100f);
     }
+
+    public List<Tile> GetAllTiles()
+    {
+        //todo Get All Tiles
+        return null;
+    }
 }

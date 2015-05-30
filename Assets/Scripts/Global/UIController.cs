@@ -10,6 +10,7 @@ public class UIController : Singleton<UIController>
     public GameObject LoadingScreen; 
 
     private ScenesController _scenesController;
+    [HideInInspector]
     public bool mouseOverGUI = false;
 
 

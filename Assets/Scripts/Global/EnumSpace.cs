@@ -3,9 +3,16 @@ using System.Collections;
 
 namespace EnumSpace {
 
+    public enum ModType
+    {
+        Sum = 0,
+        Percent = 1,
+        Change = 2
+    }
+
     public enum BuffType
     {
-        CanBeDebuffed = 0,
+        Buff = 0,
         Permanent = 1
     }
 

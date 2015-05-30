@@ -184,14 +184,4 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
 		//TODO MoveUnit (unitAI);
 	}
-
-	
-
-
-
-    public void OnDestroy()
-    {
-        InputController.Instance.OnTileClick -= TileClick;
-        InputController.Instance.OnUnitClick -= SetCurrentUnit;
-    }
 }
