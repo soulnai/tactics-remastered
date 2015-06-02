@@ -52,7 +52,8 @@ namespace EnumSpace {
     {
         mainMenu = 0,
         Tavern = 1,
-        BattleScene = 2
+        BattleScene = 2,
+        MapCreatorScene = 3
     };
 
 	public enum unitStates{

@@ -34,6 +34,14 @@ public class InputController : Singleton<InputController>
 
     public void OnTileClicked(Tile t)
     {
+		if (Application.loadedLevelName == "MapCreatorScene") {
+            Debug.Log(t.gridPosition.x + "tile clicked");
+            MapCreatorManager.instance.tileSelected = t;
+			if(MapCreatorManager.instance.editorState == editorStates.setType)
+				t.setType(MapCreatorManager.instance.palletSelection);
+			else if(MapCreatorManager.instance.editorState == editorStates.setHeight)
+				t.changeHeight(MapCreatorManager.instance.up);
+		} else
         if (OnTileClick != null)
             OnTileClick(t);
     }

@@ -44,6 +44,12 @@ public class ScenesController : Singleton<ScenesController>
         _uiController.ShowLoadingScreen();
         Application.LoadLevel(sceneMainMenuName);
     }
+
+    public void LoadEditor()
+    {
+        _uiController.ShowLoadingScreen();
+        Application.LoadLevel("MapCreatorScene");
+    }
     public void LoadTavern()
     {
         _uiController.ShowLoadingScreen();

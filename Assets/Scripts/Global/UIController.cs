@@ -40,6 +40,9 @@ public class UIController : Singleton<UIController>
             case ScenesEnum.mainMenu:
                 _scenesController.LoadMainMenu();
                 break;
+            case ScenesEnum.MapCreatorScene:
+                _scenesController.LoadEditor();
+                break;
         }
     }
 

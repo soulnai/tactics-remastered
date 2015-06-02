@@ -92,7 +92,9 @@ MonoBehaviour:
   UnitPrefabsHolder:
   - {fileID: 100060, guid: 44d077ace9df0704ebb00a3e7759b200, type: 2}
   - {fileID: 0}
-  MiscPrefabsHolder: []
+  MiscPrefabsHolder:
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &11438334
 MonoBehaviour:
