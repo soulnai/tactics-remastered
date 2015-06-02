@@ -139,9 +139,12 @@ public class MissionDetailsXmlContainer
 
 
 public static class MapSaveLoad {
-	public static MapXmlContainer CreateMapContainer(List <List<Tile>> map) {
+    public static MapXmlContainer CreateMapContainer(List<List<Tile>> map, List<MiscObject> cratesIn, List<MiscObject> treesIn)
+    {
 
 		List<TileXml> tiles = new List<TileXml>();
+        List<CrateXml> crates = new List<CrateXml>();
+        List<TreeXml> trees = new List<TreeXml>();
 
 		for(int i = 0; i < map.Count; i++) {
 			for (int j = 0; j < map.Count; j++) {
@@ -149,9 +152,22 @@ public static class MapSaveLoad {
 			}
 		}
 
+        for (int i = 0; i < cratesIn.Count; i++)
+        {
+                crates.Add(MapSaveLoad.CreateCrateXml(cratesIn[i]));
+        }
+
+        for (int i = 0; i < treesIn.Count; i++)
+        {
+            trees.Add(MapSaveLoad.CreateTreeXml(treesIn[i]));
+        }
+
+
 		return new MapXmlContainer() {
 			size = map.Count,
-			tiles = tiles
+			tiles = tiles,
+            crates = crates,
+            trees = trees
 		};
 	}
 
@@ -164,9 +180,30 @@ public static class MapSaveLoad {
 		};
 	}
 
+    //TODO create class for miscobjects
+    public static CrateXml CreateCrateXml(MiscObject crate)
+    {
+        return new CrateXml()
+        {
+            locX = crate.locX,
+            locY =crate.locY,
+            prefabName = crate.prefabName
+        };
+    }
+
+    public static TreeXml CreateTreeXml(MiscObject tree)
+    {
+        return new TreeXml()
+        {
+            locX = tree.locX,
+            locY = tree.locY,
+            prefabName = tree.prefabName
+        };
+    }
+
 	public static void Save(MapXmlContainer mapContainer, string filename) {
 		var serializer = new XmlSerializer(typeof(MapXmlContainer));
-		using(var stream = new FileStream(filename, FileMode.Create))
+        using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Create))
 		{
 			serializer.Serialize(stream, mapContainer);
 		}
