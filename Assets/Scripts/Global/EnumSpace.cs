@@ -112,7 +112,7 @@ namespace EnumSpace {
 		iceDef = 14,
 
         //Additional parameters
-        movementPerActionPoint = 15
+        movementDistance = 15
 	}
 
 	public enum damageTypes{
