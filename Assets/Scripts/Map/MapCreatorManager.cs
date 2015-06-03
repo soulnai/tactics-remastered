@@ -154,6 +154,7 @@ public class MapCreatorManager : MonoBehaviour {
         if (GUI.Button(rect, "Crate"))
         {
             MiscObject crate = ((GameObject)Instantiate(GM.Prefabs.MiscPrefabsHolder[0], tileSelected.transform.position + new Vector3(0f, .5f, 0f), Quaternion.identity)).GetComponent<MiscObject>();
+            crate.transform.parent = tileSelected.transform;
             crate.locX = (int)tileSelected.gridPosition.x;
             crate.locY = (int)tileSelected.gridPosition.y;
             crate.prefabName = GM.Prefabs.MiscPrefabsHolder[0].name;
@@ -165,6 +166,7 @@ public class MapCreatorManager : MonoBehaviour {
         if (GUI.Button(rect, "Tree"))
         {
             MiscObject tree = ((GameObject)Instantiate(GM.Prefabs.MiscPrefabsHolder[1], tileSelected.transform.position + new Vector3(0f, .5f, 0f), Quaternion.identity)).GetComponent<MiscObject>();
+            tree.transform.parent = tileSelected.transform;
             tree.locX = (int)tileSelected.gridPosition.x;
             tree.locY = (int)tileSelected.gridPosition.y;
             tree.prefabName = GM.Prefabs.MiscPrefabsHolder[1].name;
