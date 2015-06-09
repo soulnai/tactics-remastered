@@ -67,18 +67,16 @@ public class Unit : MonoBehaviour
         {
             Vector3[] VectorPath = new Vector3[currentPath.Count];
             Tile destTile = null;
-            for (int i = 0; i < currentPath.Count; i++)
-            {
-                VectorPath[i] = currentPath[i].transform.position;
-                destTile = currentPath[i];
-            }
-            float pathTime = currentPath.Count * 0.5f;
-            transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt); ;
-            currentTile = destTile;
+            int i = 0;
             foreach (Tile t in currentPath)
             {
+                VectorPath[i] = t.transform.position;
+                i++;
                 t.hideHighlight();
             }
+            float pathTime = currentPath.Count * 0.5f;
+            transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt);
+            currentTile = destTile;
             ReduceAP();
         }
         else
@@ -90,6 +88,7 @@ public class Unit : MonoBehaviour
     void ChangeLookAt(int waypointIndex)
     {
         transform.LookAt(currentPath[waypointIndex].transform.position);
+        currentTile = currentPath[waypointIndex];
     }
 
     public void ReduceAP()
