@@ -60,6 +60,8 @@ public class MapCreatorManager : MonoBehaviour {
 	void loadMapFromXml() {
 		MapXmlContainer container = MapSaveLoad.Load("map.xml");
 
+        MissionDetailsXmlContainer missionContainer = MapSaveLoad.LoadMapDetails("map-test-mission.xml");
+
 		mapSize = container.size;
 
         for (int i = 0; i < mapTransform.childCount; i++)
@@ -113,6 +115,18 @@ public class MapCreatorManager : MonoBehaviour {
             Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
             tileTospawn.impassible = true;
             GM.BattleData.blockedTiles.Add(tileTospawn);
+        }
+
+        spawnTiles.Clear();
+
+        for (int i = 0; i < missionContainer.spawnTiles.Count; i++ )
+        {
+            GameObject sp = new GameObject();
+            sp.AddComponent<MiscObject>();
+            MiscObject spawn = sp.GetComponent<MiscObject>();
+            spawn.locX = missionContainer.spawnTiles[i].locX;
+            spawn.locY = missionContainer.spawnTiles[i].locY;
+            spawnTiles.Add(spawn);
         }
 	}
 
