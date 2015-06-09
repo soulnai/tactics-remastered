@@ -163,7 +163,8 @@ namespace EnumSpace {
 	public enum editorStates{
         none = 0,
 		setType = 1,
-		setHeight = 2
+		setHeight = 2,
+        setSpawnZone = 3
 	}
 
 	public enum tooltipTypes{

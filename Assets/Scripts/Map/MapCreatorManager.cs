@@ -11,6 +11,7 @@ public class MapCreatorManager : MonoBehaviour {
 	public List <List<Tile>> map = new List<List<Tile>>();
     public List<MiscObject> crates = new List<MiscObject>();
     public List<MiscObject> trees = new List<MiscObject>();
+    public List<MiscObject> spawnTiles = new List<MiscObject>();
 
 	public TileType palletSelection = TileType.Normal;
 	public EnumSpace.editorStates editorState;
@@ -117,6 +118,8 @@ public class MapCreatorManager : MonoBehaviour {
 
 	void saveMapToXml() {
 		MapSaveLoad.Save(MapSaveLoad.CreateMapContainer(map, crates, trees), "map-test.xml");
+        MapSaveLoad.SaveMission(MapSaveLoad.CreateMissionContainer(spawnTiles), "map-test-mission.xml");
+
 	}
 
 	void OnGUI() {
@@ -172,6 +175,19 @@ public class MapCreatorManager : MonoBehaviour {
             tree.prefabName = GM.Prefabs.MiscPrefabsHolder[1].name;
             trees.Add(tree);
         }
+
+        rect = new Rect(10 + (100 + 10) * 6, Screen.height - 80, 100, 60);
+
+        if (GUI.Button(rect, "SpawnZone"))
+        {
+            GameObject sp = new GameObject();
+            sp.AddComponent<MiscObject>();
+            MiscObject spawn = sp.GetComponent<MiscObject>();
+            editorState = editorStates.setSpawnZone;
+            spawn.locX = (int)tileSelected.gridPosition.x;
+            spawn.locY = (int)tileSelected.gridPosition.y;
+            spawnTiles.Add(spawn);
+        }
 		//
 
 		//IO 
@@ -179,6 +195,9 @@ public class MapCreatorManager : MonoBehaviour {
 		
 		if (GUI.Button(rect, "Clear Map")) {
 			generateBlankMap(mapSize);
+            trees.Clear();
+            crates.Clear();
+            spawnTiles.Clear();
 		}
 
 		rect = new Rect(Screen.width - (10 + (100 + 10) * 2), Screen.height - 80, 100, 60);

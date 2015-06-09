@@ -171,6 +171,24 @@ public static class MapSaveLoad {
 		};
 	}
 
+    public static MissionDetailsXmlContainer CreateMissionContainer(List<MiscObject> spawnsIn)
+    {
+
+        List<SpawnTileXml> spawnTiles = new List<SpawnTileXml>();
+
+
+        for (int i = 0; i < spawnsIn.Count; i++)
+        {
+            spawnTiles.Add(MapSaveLoad.CreateSpawnTileXml(spawnsIn[i]));
+        }
+
+
+        return new MissionDetailsXmlContainer()
+        {
+            spawnTiles = spawnTiles
+        };
+    }
+
 	public static TileXml CreateTileXml(Tile tile) {
 		return new TileXml() {
 			id = (int)tile.type,
@@ -180,7 +198,6 @@ public static class MapSaveLoad {
 		};
 	}
 
-    //TODO create class for miscobjects
     public static CrateXml CreateCrateXml(MiscObject crate)
     {
         return new CrateXml()
@@ -198,6 +215,15 @@ public static class MapSaveLoad {
             locX = tree.locX,
             locY = tree.locY,
             prefabName = tree.prefabName
+        };
+    }
+
+    public static SpawnTileXml CreateSpawnTileXml(MiscObject spawn)
+    {
+        return new SpawnTileXml()
+        {
+            locX = spawn.locX,
+            locY = spawn.locY,
         };
     }
 
@@ -227,5 +253,14 @@ public static class MapSaveLoad {
             return serializer.Deserialize(stream) as MissionDetailsXmlContainer;
         }
 
+    }
+
+    public static void SaveMission(MissionDetailsXmlContainer mapDetailsContainer, string filename)
+    {
+        var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
+        using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Create))
+        {
+            serializer.Serialize(stream, mapDetailsContainer);
+        }
     }
 }

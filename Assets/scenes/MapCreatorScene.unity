@@ -266,7 +266,8 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: f5fb8403b91d2464bab748b101e36fc1, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &605252258
@@ -708,7 +709,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1188373257}
-  - 114: {fileID: 1188373256}
   - 114: {fileID: 1188373258}
   m_Layer: 0
   m_Name: MapCreatorManager
@@ -717,17 +717,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1188373256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1188373255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cd192e20498ff44ae54c7c3dd27269, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1188373257
 Transform:
   m_ObjectHideFlags: 0
@@ -757,6 +746,7 @@ MonoBehaviour:
   mapSize: 15
   crates: []
   trees: []
+  spawnTiles: []
   palletSelection: 0
   editorState: 0
   up: 0
@@ -840,9 +830,8 @@ GameObject:
   - 124: {fileID: 1757925849}
   - 81: {fileID: 1757925848}
   - 143: {fileID: 1757925847}
-  - 114: {fileID: 1757925846}
-  - 114: {fileID: 1757925845}
   - 45: {fileID: 1757925844}
+  - 114: {fileID: 1757925845}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -862,27 +851,17 @@ Skybox:
 --- !u!114 &1757925845
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: f5fb8403b91d2464bab748b101e36fc1,
-    type: 2}
-  m_PrefabInternal: {fileID: 560909532}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1757925843}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c04f3c5d1bd4d64588d7d58f07bf9da, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9990c26135a754a88a5fc8e4c32fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1757925846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: f5fb8403b91d2464bab748b101e36fc1,
-    type: 2}
-  m_PrefabInternal: {fileID: 560909532}
-  m_GameObject: {fileID: 1757925843}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f279f5b4020419b48b080ee919be096f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  turnSpeed: 2.6500001
+  panSpeed: 1.29999995
+  zoomSpeed: 1.24000001
 --- !u!143 &1757925847
 CharacterController:
   m_ObjectHideFlags: 0
