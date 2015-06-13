@@ -9,9 +9,11 @@ public class MapCreatorManager : MonoBehaviour {
 
 	public int mapSize;
 	public List <List<Tile>> map = new List<List<Tile>>();
-    public List<MiscObject> crates = new List<MiscObject>();
-    public List<MiscObject> trees = new List<MiscObject>();
+    //public List<MiscObject> crates = new List<MiscObject>();
+    //public List<MiscObject> trees = new List<MiscObject>();
     public List<MiscObject> spawnTiles = new List<MiscObject>();
+
+    public List<MiscObject> miscObjects = new List<MiscObject>();
 
 	public TileType palletSelection = TileType.Normal;
 	public EnumSpace.editorStates editorState;
@@ -58,7 +60,7 @@ public class MapCreatorManager : MonoBehaviour {
 	}
 
 	void loadMapFromXml() {
-		MapXmlContainer container = MapSaveLoad.Load("map.xml");
+		MapXmlContainer container = MapSaveLoad.Load("map-test.xml");
 
         MissionDetailsXmlContainer missionContainer = MapSaveLoad.LoadMapDetails("map-test-mission.xml");
 
@@ -96,17 +98,19 @@ public class MapCreatorManager : MonoBehaviour {
             }
         }
 
-        int treesCount = container.trees.Count;
-        for (int i = 0; i < treesCount; i++)
+        int objectsCount = container.objects.Count;
+        for (int i = 0; i < objectsCount; i++)
         {
-            string stuffType = container.trees.ElementAt(i).prefabName;
-            Tile tileTospawn = GM.Scenario.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
-            Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
+            string stuffType = container.objects.ElementAt(i).prefabName;
+            Tile tileTospawn = GM.Scenario.map[container.objects.ElementAt(i).locX][container.objects.ElementAt(i).locY];
+            MiscObject obj = ((GameObject)Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position + new Vector3(0f, .5f, 0f), Quaternion.Euler(-90, 90, 0))).GetComponent<MiscObject>();
+            obj.transform.parent = tileTospawn.transform;
             tileTospawn.impassible = true;
             GM.BattleData.blockedTiles.Add(tileTospawn);
+            miscObjects.Add(obj);
         }
 
-        int cratesCount = container.crates.Count;
+        /*int cratesCount = container.crates.Count;
 
         for (int i = 0; i < cratesCount; i++)
         {
@@ -115,7 +119,7 @@ public class MapCreatorManager : MonoBehaviour {
             Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
             tileTospawn.impassible = true;
             GM.BattleData.blockedTiles.Add(tileTospawn);
-        }
+        }*/
 
         spawnTiles.Clear();
 
@@ -131,7 +135,8 @@ public class MapCreatorManager : MonoBehaviour {
 	}
 
 	void saveMapToXml() {
-		MapSaveLoad.Save(MapSaveLoad.CreateMapContainer(map, crates, trees), "map-test.xml");
+		//MapSaveLoad.Save(MapSaveLoad.CreateMapContainer(map, crates, trees), "map-test.xml");
+        MapSaveLoad.Save(MapSaveLoad.CreateMapContainer(map, miscObjects), "map-test.xml");
         MapSaveLoad.SaveMission(MapSaveLoad.CreateMissionContainer(spawnTiles), "map-test-mission.xml");
 
 	}
@@ -168,7 +173,7 @@ public class MapCreatorManager : MonoBehaviour {
 
         rect = new Rect(10 + (100 + 10) * 4, Screen.height - 80, 100, 60);
 
-        if (GUI.Button(rect, "Crate"))
+        /*if (GUI.Button(rect, "Crate"))
         {
             MiscObject crate = ((GameObject)Instantiate(GM.Prefabs.MiscPrefabsHolder[0], tileSelected.transform.position + new Vector3(0f, .5f, 0f), Quaternion.identity)).GetComponent<MiscObject>();
             crate.transform.parent = tileSelected.transform;
@@ -188,7 +193,7 @@ public class MapCreatorManager : MonoBehaviour {
             tree.locY = (int)tileSelected.gridPosition.y;
             tree.prefabName = GM.Prefabs.MiscPrefabsHolder[1].name;
             trees.Add(tree);
-        }
+        }*/
 
         rect = new Rect(10 + (100 + 10) * 6, Screen.height - 80, 100, 60);
 
@@ -208,9 +213,14 @@ public class MapCreatorManager : MonoBehaviour {
 		rect = new Rect(Screen.width - (10 + (100 + 10) * 3), Screen.height - 80, 100, 60);
 		
 		if (GUI.Button(rect, "Clear Map")) {
+            for (int i = 0; i < mapTransform.childCount; i++)
+            {
+                Destroy(mapTransform.GetChild(i).gameObject);
+            }
 			generateBlankMap(mapSize);
-            trees.Clear();
-            crates.Clear();
+            //trees.Clear();
+            //crates.Clear();
+            miscObjects.Clear();
             spawnTiles.Clear();
 		}
 
@@ -234,4 +244,15 @@ public class MapCreatorManager : MonoBehaviour {
 		editorState = editorStates.setHeight;
 		up = u;
 	}
+
+    public void handleButton(string prefabName)
+    {
+        Debug.Log("Button '" + prefabName + "' pressed!");
+        MiscObject mapObject = ((GameObject)Instantiate(GM.Prefabs.Prefabs[prefabName], tileSelected.transform.position + new Vector3(0f, .5f, 0f), Quaternion.Euler(-90, 90, 0))).GetComponent<MiscObject>();
+        mapObject.transform.parent = tileSelected.transform;
+        mapObject.locX = (int)tileSelected.gridPosition.x;
+        mapObject.locY = (int)tileSelected.gridPosition.y;
+        mapObject.prefabName = prefabName;
+        miscObjects.Add(mapObject);
+    }
 }

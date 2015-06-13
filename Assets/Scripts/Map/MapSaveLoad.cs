@@ -34,6 +34,10 @@ public class MapXmlContainer {
 	[XmlArray("Crates")]
 	[XmlArrayItem("Crate")]
 	public List<CrateXml> crates = new List<CrateXml>();
+
+    [XmlArray("MiscObjects")]
+    [XmlArrayItem("Object")]
+    public List<MiscObjectXml> objects = new List<MiscObjectXml>();
 }
 
 public class TreeXml {
@@ -56,6 +60,18 @@ public class CrateXml {
 	
 	[XmlAttribute("prefabName")]
 	public string prefabName;
+}
+
+public class MiscObjectXml
+{
+    [XmlAttribute("locX")]
+    public int locX;
+
+    [XmlAttribute("locY")]
+    public int locY;
+
+    [XmlAttribute("prefabName")]
+    public string prefabName;
 }
 
 public class SpawnTileXml {
@@ -139,7 +155,7 @@ public class MissionDetailsXmlContainer
 
 
 public static class MapSaveLoad {
-    public static MapXmlContainer CreateMapContainer(List<List<Tile>> map, List<MiscObject> cratesIn, List<MiscObject> treesIn)
+    /*public static MapXmlContainer CreateMapContainer(List<List<Tile>> map, List<MiscObject> objects, List<MiscObject> treesIn)
     {
 
 		List<TileXml> tiles = new List<TileXml>();
@@ -169,7 +185,35 @@ public static class MapSaveLoad {
             crates = crates,
             trees = trees
 		};
-	}
+	}*/
+
+    public static MapXmlContainer CreateMapContainer(List<List<Tile>> map, List<MiscObject> objectsIn)
+    {
+
+        List<TileXml> tiles = new List<TileXml>();
+        List<MiscObjectXml> objects = new List<MiscObjectXml>();
+
+        for (int i = 0; i < map.Count; i++)
+        {
+            for (int j = 0; j < map.Count; j++)
+            {
+                tiles.Add(MapSaveLoad.CreateTileXml(map[i][j]));
+            }
+        }
+
+        for (int i = 0; i < objectsIn.Count; i++)
+        {
+            objects.Add(MapSaveLoad.CreateObjectXml(objectsIn[i]));
+        }
+
+
+        return new MapXmlContainer()
+        {
+            size = map.Count,
+            tiles = tiles,
+            objects = objects
+        };
+    }
 
     public static MissionDetailsXmlContainer CreateMissionContainer(List<MiscObject> spawnsIn)
     {
@@ -215,6 +259,16 @@ public static class MapSaveLoad {
             locX = tree.locX,
             locY = tree.locY,
             prefabName = tree.prefabName
+        };
+    }
+
+    public static MiscObjectXml CreateObjectXml(MiscObject obj)
+    {
+        return new MiscObjectXml()
+        {
+            locX = obj.locX,
+            locY = obj.locY,
+            prefabName = obj.prefabName
         };
     }
 

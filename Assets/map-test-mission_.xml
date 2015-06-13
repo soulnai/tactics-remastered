@@ -4,6 +4,10 @@
   <MissionDescription />
   <MissionTarget />
   <MissionMap />
-  <SpawnArea />
+  <SpawnArea>
+    <SpawnTile locX="4" locY="9" />
+    <SpawnTile locX="2" locY="8" />
+    <SpawnTile locX="8" locY="10" />
+  </SpawnArea>
   <Players />
 </MissionDetailsCollection>
