@@ -20,6 +20,7 @@ public class MapCreatorManager : MonoBehaviour {
 	public bool up;
 	Transform mapTransform;
     public Tile tileSelected;
+    public string miscObjectToSpawnName;
 
 
 
@@ -106,6 +107,7 @@ public class MapCreatorManager : MonoBehaviour {
             MiscObject obj = ((GameObject)Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position + new Vector3(0f, .5f, 0f), Quaternion.Euler(-90, 90, 0))).GetComponent<MiscObject>();
             obj.transform.parent = tileTospawn.transform;
             tileTospawn.impassible = true;
+            tileTospawn.occupied = true;
             GM.BattleData.blockedTiles.Add(tileTospawn);
             miscObjects.Add(obj);
         }
@@ -222,6 +224,7 @@ public class MapCreatorManager : MonoBehaviour {
             //crates.Clear();
             miscObjects.Clear();
             spawnTiles.Clear();
+            miscObjectToSpawnName = "";
 		}
 
 		rect = new Rect(Screen.width - (10 + (100 + 10) * 2), Screen.height - 80, 100, 60);
@@ -248,11 +251,21 @@ public class MapCreatorManager : MonoBehaviour {
     public void handleButton(string prefabName)
     {
         Debug.Log("Button '" + prefabName + "' pressed!");
-        MiscObject mapObject = ((GameObject)Instantiate(GM.Prefabs.Prefabs[prefabName], tileSelected.transform.position + new Vector3(0f, .5f, 0f), Quaternion.Euler(-90, 90, 0))).GetComponent<MiscObject>();
-        mapObject.transform.parent = tileSelected.transform;
-        mapObject.locX = (int)tileSelected.gridPosition.x;
-        mapObject.locY = (int)tileSelected.gridPosition.y;
-        mapObject.prefabName = prefabName;
-        miscObjects.Add(mapObject);
+        editorState = editorStates.spawnObject;
+        miscObjectToSpawnName = prefabName;
+    }
+
+    public void spawnmiscobject(string objectname) 
+    {
+        if (tileSelected.occupied == false)
+        {
+            MiscObject mapObject = ((GameObject)Instantiate(GM.Prefabs.Prefabs[objectname], tileSelected.transform.position + new Vector3(0f, 0f, 0f), Quaternion.Euler(-90, 90, 0))).GetComponent<MiscObject>();
+            mapObject.transform.parent = tileSelected.transform;
+            mapObject.locX = (int)tileSelected.gridPosition.x;
+            mapObject.locY = (int)tileSelected.gridPosition.y;
+            mapObject.prefabName = objectname;
+            miscObjects.Add(mapObject);
+            tileSelected.occupied = true;
+        }
     }
 }

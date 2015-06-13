@@ -28,6 +28,8 @@ public class Tile : MonoBehaviour {
 	private ScenarioController gm;
 
     private GlobalPrefabHolder _prefabHolder;
+
+    public bool occupied;
 	// Use this for initialization
 	void Awake(){
 //		highlight.SetActive(false);
