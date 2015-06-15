@@ -14,12 +14,12 @@ public class ScrollableList : MonoBehaviour
 
     void Start()
     {
-        itemCount = GM.Prefabs.Prefabs.Count;
-        textures = new Texture2D[itemCount];
+        
+        
         Prefabs = new List<GameObject>();
         foreach (GameObject prefab in Resources.LoadAll("Level1/Prefabs", typeof(GameObject)))
         {
-            if (prefab.name == "Player")
+            if (prefab.name == "Player" || prefab.gameObject.GetComponent("MiscObject") as MiscObject ==null)
             {
                 continue;
             }
@@ -28,7 +28,8 @@ public class ScrollableList : MonoBehaviour
                 Prefabs.Add(prefab);
             }
         }
-
+        itemCount = Prefabs.Count;
+        textures = new Texture2D[itemCount];
         RectTransform rowRectTransform = itemPrefab.GetComponent<RectTransform>();
         RectTransform containerRectTransform = gameObject.GetComponent<RectTransform>();
 

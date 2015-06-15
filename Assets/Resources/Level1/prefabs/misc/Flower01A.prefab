@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11425352}
   m_Layer: 0
   m_Name: Flower01A
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.467495799, y: .530516386, z: .530516326, w: .467495888}
+  m_LocalRotation: {x: -.467495829, y: .530516446, z: .530516386, w: .467495918}
   m_LocalPosition: {x: -41.2182083, y: .80754447, z: -15.4163027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -73,6 +74,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generateTriangleStrips: 1
+--- !u!114 &11425352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd23588123010904e9a68334c3cb1208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locX: 0
+  locY: 0
+  prefabName: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
