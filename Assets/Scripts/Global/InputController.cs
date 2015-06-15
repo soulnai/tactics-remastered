@@ -42,8 +42,10 @@ public class InputController : Singleton<InputController>
             else if (MapCreatorManager.instance.editorState == editorStates.setHeight)
                 t.changeHeight(MapCreatorManager.instance.up);
             else if (MapCreatorManager.instance.editorState == editorStates.spawnObject)
+            {
                 MapCreatorManager.instance.tileSelected = t;
                 MapCreatorManager.instance.spawnmiscobject(MapCreatorManager.instance.miscObjectToSpawnName);
+            }
             
 		} else
         if (OnTileClick != null)
