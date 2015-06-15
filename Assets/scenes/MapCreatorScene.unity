@@ -884,13 +884,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 15
-  crates: []
-  trees: []
   spawnTiles: []
+  miscObjects: []
   palletSelection: 0
   editorState: 0
   up: 0
   tileSelected: {fileID: 0}
+  miscObjectToSpawnName: 
 --- !u!1 &1372638581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,9 +1108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9990c26135a754a88a5fc8e4c32fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 2.6500001
-  panSpeed: 1.29999995
-  zoomSpeed: 1.24000001
+  turnSpeed: 3.52999997
+  panSpeed: .409999996
+  zoomSpeed: 5.21999979
 --- !u!143 &1757925847
 CharacterController:
   m_ObjectHideFlags: 0
