@@ -53,6 +53,8 @@ public class InputController : Singleton<InputController>
                 MapCreatorManager.instance.miscObjects.Remove(obj);
                 GameObject destr = t.transform.Find(obj.name).gameObject;
                 Destroy(destr);
+                t.occupied = false;
+                t.impassible = false;
             }
             
 		} else
