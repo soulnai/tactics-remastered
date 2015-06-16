@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="windows-1251"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <MissionDetailsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <MissionName />
   <MissionDescription />
   <MissionTarget />
   <MissionMap />
-  <SpawnArea />
+  <SpawnArea>
+    <SpawnTile locX="4" locY="10" />
+    <SpawnTile locX="0" locY="7" />
+    <SpawnTile locX="0" locY="8" />
+  </SpawnArea>
   <Players />
 </MissionDetailsCollection>

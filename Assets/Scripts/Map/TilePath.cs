@@ -19,7 +19,14 @@ public class TilePath {
 	}
 	
 	public void addTile(Tile t) {
-		Cost += t.movementCost;
+        if (GM.BattleData.CurrentUnit.currentTile == t)
+        {
+            Cost += 0;
+        }
+        else
+        {
+            Cost += t.movementCost;
+        }
 		Tiles.Add(t);
 		lastTile = t;
 	}

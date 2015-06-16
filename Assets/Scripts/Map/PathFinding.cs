@@ -17,7 +17,7 @@ public class TilePathFinder : MonoBehaviour {
 		open.Add(originPath);
 		
 		while (open.Count > 0) {
-			//open = open.OrderBy(x => x.Cost).ToList();
+			open = open.OrderBy(x => x.Cost).ToList();
 			TilePath current = open[0];
 			open.Remove(open[0]);
 			
@@ -41,7 +41,6 @@ public class TilePathFinder : MonoBehaviour {
 		}
 		return closed;
 	}
-
 
 	public static List<Tile> FindArea(Tile originTile, int movementPoints, Tile[] occupied,float maxHeightDiff = 100f) {
 			List<Tile> closed = new List<Tile>();

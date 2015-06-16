@@ -73,7 +73,7 @@ public class ScenarioController : MonoBehaviour {
         {
             GM.BattleData.Players[0].SpawnedPartyUnits.Clear();;
 
-            if (spawnArea.Count >= GM.BattleData.AllUnitsInScene.Count)
+            if (spawnArea.Count >= GM.BattleData.Players[0].PartyUnits.Count)
             {
                 for (int i = 0; i < GM.BattleData.Players[0].PartyUnits.Count; i++)
                 {

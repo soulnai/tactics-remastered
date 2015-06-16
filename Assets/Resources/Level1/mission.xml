@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="windows-1251"?>
-<MissionDetailsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-Instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <MissionName name="Rise of the West"/>
-    <MissionDescription description="Learn the history of West Rebellion"/>
-    <MissionTarget target="Hold the position for 5 turns"/>
-    <MissionMap Map="Map.xml"/>
-	
-   <SpawnArea>
-	<SpawnTile locX="2" locY="8"/>
-	<SpawnTile locX="3" locY="8"/>
-	<SpawnTile locX="4" locY="8"/>
-	<SpawnTile locX="5" locY="8"/>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MissionDetailsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MissionName />
+  <MissionDescription />
+  <MissionTarget />
+  <MissionMap />
+  <SpawnArea>
+    <SpawnTile locX="0" locY="6" />
+    <SpawnTile locX="0" locY="7" />
+    <SpawnTile locX="0" locY="8" />
   </SpawnArea>
   <Players>
     <Player name="Bot1">
@@ -20,4 +18,4 @@
 	  <Unit prefabName="Warrior_02" locX="5" locY="12"/>
     </Player>
   </Players>
-</MissionDetailsCollection>	
+</MissionDetailsCollection>
