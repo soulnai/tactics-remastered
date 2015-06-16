@@ -46,6 +46,14 @@ public class InputController : Singleton<InputController>
                 MapCreatorManager.instance.tileSelected = t;
                 MapCreatorManager.instance.spawnmiscobject(MapCreatorManager.instance.miscObjectToSpawnName);
             }
+            else if (MapCreatorManager.instance.editorState == editorStates.deleteObject)
+            {
+                MapCreatorManager.instance.tileSelected = t;
+                MiscObject obj = t.GetComponentInChildren<MiscObject>();
+                MapCreatorManager.instance.miscObjects.Remove(obj);
+                GameObject destr = t.transform.Find(obj.name).gameObject;
+                Destroy(destr);
+            }
             
 		} else
         if (OnTileClick != null)

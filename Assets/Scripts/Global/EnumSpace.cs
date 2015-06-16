@@ -165,7 +165,8 @@ namespace EnumSpace {
 		setType = 1,
 		setHeight = 2,
         setSpawnZone = 3,
-        spawnObject = 4
+        spawnObject = 4,
+        deleteObject = 5
 	}
 
 	public enum tooltipTypes{

@@ -175,6 +175,17 @@ public class MapCreatorManager : MonoBehaviour {
 
         rect = new Rect(10 + (100 + 10) * 4, Screen.height - 80, 100, 60);
 
+        if (GUI.Button(rect, "SpawnZone"))
+        {
+            GameObject sp = new GameObject();
+            sp.AddComponent<MiscObject>();
+            MiscObject spawn = sp.GetComponent<MiscObject>();
+            editorState = editorStates.setSpawnZone;
+            spawn.locX = (int)tileSelected.gridPosition.x;
+            spawn.locY = (int)tileSelected.gridPosition.y;
+            spawnTiles.Add(spawn);
+        }
+
         /*if (GUI.Button(rect, "Crate"))
         {
             MiscObject crate = ((GameObject)Instantiate(GM.Prefabs.MiscPrefabsHolder[0], tileSelected.transform.position + new Vector3(0f, .5f, 0f), Quaternion.identity)).GetComponent<MiscObject>();
@@ -199,15 +210,9 @@ public class MapCreatorManager : MonoBehaviour {
 
         rect = new Rect(10 + (100 + 10) * 6, Screen.height - 80, 100, 60);
 
-        if (GUI.Button(rect, "SpawnZone"))
+        if (GUI.Button(rect, "DeleteObject"))
         {
-            GameObject sp = new GameObject();
-            sp.AddComponent<MiscObject>();
-            MiscObject spawn = sp.GetComponent<MiscObject>();
-            editorState = editorStates.setSpawnZone;
-            spawn.locX = (int)tileSelected.gridPosition.x;
-            spawn.locY = (int)tileSelected.gridPosition.y;
-            spawnTiles.Add(spawn);
+            editorState = editorStates.deleteObject;
         }
 		//
 
