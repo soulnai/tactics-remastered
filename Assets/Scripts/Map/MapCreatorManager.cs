@@ -15,6 +15,8 @@ public class MapCreatorManager : MonoBehaviour {
 
     public List<MiscObject> miscObjects = new List<MiscObject>();
 
+    public List<MiscObject> AIUnits = new List<MiscObject>();
+
 	public TileType palletSelection = TileType.Normal;
 	public EnumSpace.editorStates editorState;
 	public bool up;
@@ -139,7 +141,7 @@ public class MapCreatorManager : MonoBehaviour {
 	void saveMapToXml() {
 		//MapSaveLoad.Save(MapSaveLoad.CreateMapContainer(map, crates, trees), "map-test.xml");
         MapSaveLoad.Save(MapSaveLoad.CreateMapContainer(map, miscObjects), "map-test.xml");
-        MapSaveLoad.SaveMission(MapSaveLoad.CreateMissionContainer(spawnTiles), "map-test-mission.xml");
+        MapSaveLoad.SaveMission(MapSaveLoad.CreateMissionContainer(spawnTiles, AIUnits), "map-test-mission.xml");
 
 	}
 
@@ -269,7 +271,14 @@ public class MapCreatorManager : MonoBehaviour {
             mapObject.locX = (int)tileSelected.gridPosition.x;
             mapObject.locY = (int)tileSelected.gridPosition.y;
             mapObject.prefabName = objectname;
-            miscObjects.Add(mapObject);
+            if ((mapObject.GetComponent("Unit") as Unit) != null)
+            {
+                AIUnits.Add(mapObject);
+            }
+            else
+            {
+                miscObjects.Add(mapObject);
+            }
             tileSelected.occupied = true;
         }
     }

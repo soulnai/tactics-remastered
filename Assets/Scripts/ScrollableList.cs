@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-//using UnityEditor;
+using UnityEditor;
 using System.IO;
 
 public class ScrollableList : MonoBehaviour
@@ -46,7 +46,7 @@ public class ScrollableList : MonoBehaviour
              //Part of code to create prefab prewiew and save on disk
               
             int counter = 0;
-            /*Texture2D tex = null;
+            Texture2D tex = null;
             if (File.Exists(Application.dataPath + "/preview/imgs/" + Prefabs[i].name + ".png") == false)
             {
             while (tex == null && counter < 20)
@@ -67,7 +67,7 @@ public class ScrollableList : MonoBehaviour
                     //textures[i] = tex;
                 }
             }
-            }*/
+            }
             
 
             byte[] fileData;

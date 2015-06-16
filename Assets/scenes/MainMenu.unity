@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSize: 22
   mapTransform: {fileID: 0}
+  miscObjects: []
 --- !u!114 &776370978
 MonoBehaviour:
   m_ObjectHideFlags: 0

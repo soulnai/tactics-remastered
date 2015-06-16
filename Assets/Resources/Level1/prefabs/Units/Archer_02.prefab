@@ -12,6 +12,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11448624}
   - 136: {fileID: 13665878}
+  - 114: {fileID: 11486838}
   m_Layer: 0
   m_Name: Archer_02
   m_TagString: Untagged
@@ -1325,6 +1326,7 @@ MonoBehaviour:
   UnitName: Test
   UnitClass: 6
   OwnerPlayer: {fileID: 0}
+  AIControlled: 0
   Lvl: 0
   Expirience: 0
   Abilities: []
@@ -1335,8 +1337,23 @@ MonoBehaviour:
   currentPath: []
   gridPosition: {x: 0, y: 0}
   AP: 2
+  HP: 5
   CurrentAction: 0
   IconImage: {fileID: 0}
+--- !u!114 &11486838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd23588123010904e9a68334c3cb1208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locX: 0
+  locY: 0
+  prefabName: 
 --- !u!136 &13665878
 CapsuleCollider:
   m_ObjectHideFlags: 1

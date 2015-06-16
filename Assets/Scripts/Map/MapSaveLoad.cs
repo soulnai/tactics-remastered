@@ -216,10 +216,11 @@ public static class MapSaveLoad {
         };
     }
 
-    public static MissionDetailsXmlContainer CreateMissionContainer(List<MiscObject> spawnsIn)
+    public static MissionDetailsXmlContainer CreateMissionContainer(List<MiscObject> spawnsIn, List<MiscObject> unitsIn)
     {
 
         List<SpawnTileXml> spawnTiles = new List<SpawnTileXml>();
+        List<UnitXml> units = new List<UnitXml>();
 
 
         for (int i = 0; i < spawnsIn.Count; i++)
@@ -227,10 +228,20 @@ public static class MapSaveLoad {
             spawnTiles.Add(MapSaveLoad.CreateSpawnTileXml(spawnsIn[i]));
         }
 
+        for (int i = 0; i < unitsIn.Count; i++)
+        {
+            units.Add(MapSaveLoad.CreateUnitXml(unitsIn[i]));
+        }
 
+        List<PlayerXml> players = new List<PlayerXml>();
+        PlayerXml player = new PlayerXml();
+        player.units = units;
+        player.name = "Artifica";
+        players.Add(player);
         return new MissionDetailsXmlContainer()
         {
-            spawnTiles = spawnTiles
+            spawnTiles = spawnTiles,
+            players = players
         };
     }
 
@@ -279,6 +290,16 @@ public static class MapSaveLoad {
         {
             locX = spawn.locX,
             locY = spawn.locY,
+        };
+    }
+
+    public static UnitXml CreateUnitXml(MiscObject unit)
+    {
+        return new UnitXml()
+        {
+            locX = unit.locX,
+            locY = unit.locY,
+            prefabName = unit.prefabName
         };
     }
 

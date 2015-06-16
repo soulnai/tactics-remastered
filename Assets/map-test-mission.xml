@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MissionDetailsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MissionName />
+  <MissionDescription />
+  <MissionTarget />
+  <MissionMap />
+  <SpawnArea>
+    <SpawnTile locX="6" locY="6" />
+    <SpawnTile locX="1" locY="11" />
+    <SpawnTile locX="1" locY="9" />
+  </SpawnArea>
+  <Players>
+    <Player name="Artifica">
+      <Unit prefabName="Warrior_02" locX="6" locY="12" />
+      <Unit prefabName="Warrior_01" locX="4" locY="5" />
+    </Player>
+  </Players>
+</MissionDetailsCollection>

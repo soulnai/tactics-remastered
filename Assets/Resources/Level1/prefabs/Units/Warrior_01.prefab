@@ -464,6 +464,7 @@ GameObject:
   - 114: {fileID: 11491780}
   - 136: {fileID: 13691724}
   - 114: {fileID: 11422948}
+  - 114: {fileID: 11428344}
   m_Layer: 0
   m_Name: Warrior_01
   m_TagString: Untagged
@@ -1324,6 +1325,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interactible: 1
+--- !u!114 &11428344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd23588123010904e9a68334c3cb1208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locX: 0
+  locY: 0
+  prefabName: 
 --- !u!114 &11491780
 MonoBehaviour:
   m_ObjectHideFlags: 1

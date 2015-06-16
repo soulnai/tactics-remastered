@@ -50,9 +50,18 @@ public class InputController : Singleton<InputController>
             {
                 MapCreatorManager.instance.tileSelected = t;
                 MiscObject obj = t.GetComponentInChildren<MiscObject>();
-                MapCreatorManager.instance.miscObjects.Remove(obj);
-                GameObject destr = t.transform.Find(obj.name).gameObject;
-                Destroy(destr);
+                if ((t.GetComponentInChildren<Unit>()) != null)
+                {
+                    MapCreatorManager.instance.AIUnits.Remove(obj);
+                    GameObject destr = t.transform.Find(obj.name).gameObject;
+                    Destroy(destr);
+                }
+                else
+                {
+                    MapCreatorManager.instance.miscObjects.Remove(obj);
+                    GameObject destr = t.transform.Find(obj.name).gameObject;
+                    Destroy(destr);
+                }
                 t.occupied = false;
                 t.impassible = false;
             }
