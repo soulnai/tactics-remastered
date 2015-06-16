@@ -41,6 +41,16 @@ public class InputController : Singleton<InputController>
                 t.setType(MapCreatorManager.instance.palletSelection);
             else if (MapCreatorManager.instance.editorState == editorStates.setHeight)
                 t.changeHeight(MapCreatorManager.instance.up);
+            else if (MapCreatorManager.instance.editorState == editorStates.setSpawnZone)
+            {
+                MapCreatorManager.instance.tileSelected = t;
+                GameObject sp = new GameObject();
+                sp.AddComponent<MiscObject>();
+                MiscObject spawn = sp.GetComponent<MiscObject>();
+                spawn.locX = (int)MapCreatorManager.instance.tileSelected.gridPosition.x;
+                spawn.locY = (int)MapCreatorManager.instance.tileSelected.gridPosition.y;
+                MapCreatorManager.instance.spawnTiles.Add(spawn);
+            }
             else if (MapCreatorManager.instance.editorState == editorStates.spawnObject)
             {
                 MapCreatorManager.instance.tileSelected = t;

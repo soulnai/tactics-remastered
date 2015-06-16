@@ -179,13 +179,9 @@ public class MapCreatorManager : MonoBehaviour {
 
         if (GUI.Button(rect, "SpawnZone"))
         {
-            GameObject sp = new GameObject();
-            sp.AddComponent<MiscObject>();
-            MiscObject spawn = sp.GetComponent<MiscObject>();
+
             editorState = editorStates.setSpawnZone;
-            spawn.locX = (int)tileSelected.gridPosition.x;
-            spawn.locY = (int)tileSelected.gridPosition.y;
-            spawnTiles.Add(spawn);
+
         }
 
         /*if (GUI.Button(rect, "Crate"))
