@@ -228,16 +228,14 @@
     <Tile id="0" height="-0.6" locX="14" locY="14" />
   </Tiles>
   
-  <Trees>
-    <Tree  prefabName="Tree02A" locX="8" locY="8"/>
-	<Tree  prefabName="Tree03A" locX="2" locY="2"/>
-	<Tree  prefabName="Tree04B" locX="12" locY="12"/>
-  </Trees>
-  <Crates>
-	<Crate  prefabName="Barrel01A" locX="8" locY="4"/>
-	<Crate  prefabName="Chest01A" locX="1" locY="12"/>
-	<Crate  prefabName="Fence01A" locX="2" locY="12"/>
-	<Crate  prefabName="GraveTop01A" locX="6" locY="6"/>
-	<Crate  prefabName="TreesTrunk02A" locX="5" locY="5"/>
-  </Crates>
+  <MiscObjects>
+    <Object  prefabName="Tree02A" locX="8" locY="8"/>
+	<Object  prefabName="Tree03A" locX="2" locY="2"/>
+	<Object  prefabName="Tree04B" locX="12" locY="12"/>
+	<Object  prefabName="Barrel01A" locX="8" locY="4"/>
+	<Object  prefabName="Chest01A" locX="1" locY="12"/>
+	<Object  prefabName="Fence01A" locX="2" locY="12"/>
+	<Object  prefabName="GraveTop01A" locX="6" locY="6"/>
+	<Object  prefabName="TreesTrunk02A" locX="5" locY="5"/>
+  </MiscObjects>
 </MapCollection>

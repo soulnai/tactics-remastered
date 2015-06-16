@@ -14,6 +14,7 @@ public class MapUtils : Singleton<MapUtils>
 	public int mapSize;
 	public Transform mapTransform;
 	public List <List<Tile>> map = new List<List<Tile>>();
+    public List<MiscObject> miscObjects = new List<MiscObject>();
 
     // Use this for initialization
     void Start()
@@ -63,6 +64,19 @@ public class MapUtils : Singleton<MapUtils>
 			}
 		}
 
+        int objectsCount = container.objects.Count;
+        for (int i = 0; i < objectsCount; i++)
+        {
+            string stuffType = container.objects.ElementAt(i).prefabName;
+            Tile tileTospawn = GM.Scenario.map[container.objects.ElementAt(i).locX][container.objects.ElementAt(i).locY];
+            MiscObject obj = ((GameObject)Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position + new Vector3(0f, 0f, 0f), Quaternion.Euler(-90, 90, 0))).GetComponent<MiscObject>();
+            obj.transform.parent = tileTospawn.transform;
+            tileTospawn.impassible = true;
+            tileTospawn.occupied = true;
+            GM.BattleData.blockedTiles.Add(tileTospawn);
+            miscObjects.Add(obj);
+        }
+        /*
 		int treesCount = container.trees.Count;
 		for (int i = 0; i < treesCount; i++) {
 				string stuffType = container.trees.ElementAt(i).prefabName;
@@ -80,7 +94,7 @@ public class MapUtils : Singleton<MapUtils>
 			Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
 			tileTospawn.impassible = true;
 			GM.BattleData.blockedTiles.Add(tileTospawn);
-		}
+		}*/
 	}
 
     public void loadMapDetailsFromXml(string mapDetailesfile)

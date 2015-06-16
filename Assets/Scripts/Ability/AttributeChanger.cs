@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnumSpace;
-using UnityEditor;
+//using UnityEditor;
 
 public class AttributeChanger : MonoBehaviour {
     public unitAttributes Attribute;

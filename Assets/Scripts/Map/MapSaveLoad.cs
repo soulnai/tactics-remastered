@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using System.Text;
 
 public class TileXml {
 	[XmlAttribute("id")]
@@ -282,27 +283,49 @@ public static class MapSaveLoad {
     }
 
 	public static void Save(MapXmlContainer mapContainer, string filename) {
-		var serializer = new XmlSerializer(typeof(MapXmlContainer));
+		/*var serializer = new XmlSerializer(typeof(MapXmlContainer));
         using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Create))
 		{
 			serializer.Serialize(stream, mapContainer);
-		}
+		}*/
+
+        var serializer = new XmlSerializer(typeof(MapXmlContainer));
+        var encoding = Encoding.GetEncoding("UTF-8");
+
+        using (StreamWriter stream = new StreamWriter(Path.Combine(Application.dataPath, filename), false, encoding))
+        {
+            serializer.Serialize(stream, mapContainer);
+        }
 	}
 
 	public static MapXmlContainer Load(string filename) {
-		var serializer = new XmlSerializer(typeof(MapXmlContainer));
+		/*var serializer = new XmlSerializer(typeof(MapXmlContainer));
         using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Open))
 		{
 			return serializer.Deserialize(stream) as MapXmlContainer;
-		}
+		}*/
+        var serializer = new XmlSerializer(typeof(MapXmlContainer));
+        var encoding = Encoding.GetEncoding("UTF-8");
 
+        using (StreamReader stream = new StreamReader(Path.Combine(Application.dataPath, filename), encoding, false))
+        {
+            return serializer.Deserialize(stream) as MapXmlContainer;
+        }
 	}
 
 
     public static MissionDetailsXmlContainer LoadMapDetails(string filename)
     {
-        var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
+        /*var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
         using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Open))
+        {
+            return serializer.Deserialize(stream) as MissionDetailsXmlContainer;
+        }*/
+
+        var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
+        var encoding = Encoding.GetEncoding("UTF-8");
+
+        using (StreamReader stream = new StreamReader(Path.Combine(Application.dataPath, filename), encoding, false))
         {
             return serializer.Deserialize(stream) as MissionDetailsXmlContainer;
         }
@@ -311,8 +334,16 @@ public static class MapSaveLoad {
 
     public static void SaveMission(MissionDetailsXmlContainer mapDetailsContainer, string filename)
     {
-        var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
+        /*var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
         using (var stream = new FileStream(Path.Combine(Application.dataPath, filename), FileMode.Create))
+        {
+            serializer.Serialize(stream, mapDetailsContainer);
+        }*/
+
+        var serializer = new XmlSerializer(typeof(MissionDetailsXmlContainer));
+        var encoding = Encoding.GetEncoding("UTF-8");
+
+        using (StreamWriter stream = new StreamWriter(Path.Combine(Application.dataPath, filename), false, encoding))
         {
             serializer.Serialize(stream, mapDetailsContainer);
         }

@@ -61,9 +61,9 @@ public class MapCreatorManager : MonoBehaviour {
 	}
 
 	void loadMapFromXml() {
-		MapXmlContainer container = MapSaveLoad.Load("map-test.xml");
+        MapXmlContainer container = MapSaveLoad.Load("Resources/Level1/map.xml");
 
-        MissionDetailsXmlContainer missionContainer = MapSaveLoad.LoadMapDetails("map-test-mission.xml");
+        MissionDetailsXmlContainer missionContainer = MapSaveLoad.LoadMapDetails("Resources/Level1/mission.xml");
 
 		mapSize = container.size;
 
