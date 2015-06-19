@@ -184,4 +184,72 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
 		//TODO MoveUnit (unitAI);
 	}
+
+    public int CalculateDamage(Unit attacker, Unit defender) 
+    {
+        if (CheckHit(attacker, defender)) 
+        {
+            if (!CheckEvade(attacker, defender)) 
+            {
+                if (CheckCrit(attacker, defender))
+                {
+                    int CritDamageToApply = (int)(((UnityEngine.Random.RandomRange(((float)attacker.MinCurrentWeaponAtk, (float)attacker.MaxCurrentWeaponAtk)+attacker.Strength/2)-(float)defender.PhysicalDef)*attacker.CritMultiplier);
+                    if (CritDamageToApply<=0)
+                    {
+                        return 1;
+                    } else 
+                    {
+                        return CritDamageToApply;
+                    }
+                }
+                else {
+                    int DamageToApply = (int)((UnityEngine.Random.RandomRange(((float)attacker.MinCurrentWeaponAtk, (float)attacker.MaxCurrentWeaponAtk)+attacker.Strength/2)-(float)defender.PhysicalDef);
+                    if (DamageToApply<=0)
+                    {
+                        return 1;
+                    } else 
+                    {
+                        return DamageToApply;
+                    }   
+                }
+            }
+        }
+        return 0;
+    }
+
+    public bool CheckHit(Unit attacker, Unit defender) 
+    {
+        if (UnityEngine.Random.value <= attacker.ToHitChance)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    public bool CheckEvade(Unit attacker, Unit defender)
+    {
+        if (UnityEngine.Random.value <= attacker.EvadeChance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CheckCrit(Unit attacker, Unit defender)
+    {
+        if (UnityEngine.Random.value <= attacker.CritChance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

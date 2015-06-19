@@ -40,6 +40,25 @@ public class Unit : MonoBehaviour
     public EnumSpace.unitActions CurrentAction;
     //иконка/портрет юнита
     public Image IconImage;
+    //Шанс попасть по противнику
+    public int ToHitChance;
+    //Шанс увернуться от удара
+    public int EvadeChance;
+    //Шанс увернуться от удара
+    public int CritChance;
+    //Множитель критического удара
+    public int CritMultiplier;
+    //Минимальный урон текущего оружия
+    public int MinCurrentWeaponAtk;
+    //Максимальный урон текущего оружия
+    public int MaxCurrentWeaponAtk;
+
+    public int Strength;
+    public int Dexterity;
+    public int Magic;
+
+    //Физическая защита (поглощение урона)
+    public int PhysicalDef;
 
     // Use this for initialization
     void Start ()
