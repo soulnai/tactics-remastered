@@ -193,7 +193,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
             {
                 if (CheckCrit(attacker, defender))
                 {
-                    int CritDamageToApply = (int)(((UnityEngine.Random.RandomRange(((float)attacker.MinCurrentWeaponAtk, (float)attacker.MaxCurrentWeaponAtk)+attacker.Strength/2)-(float)defender.PhysicalDef)*attacker.CritMultiplier);
+                    int CritDamageToApply = (int)(((UnityEngine.Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk)+attacker.Strength/2)-(float)defender.PhysicalDef)*attacker.CritMultiplier);
                     if (CritDamageToApply<=0)
                     {
                         return 1;
@@ -203,14 +203,14 @@ public class BattleLogicController : Singleton<BattleLogicController>
                     }
                 }
                 else {
-                    int DamageToApply = (int)((UnityEngine.Random.RandomRange(((float)attacker.MinCurrentWeaponAtk, (float)attacker.MaxCurrentWeaponAtk)+attacker.Strength/2)-(float)defender.PhysicalDef);
+                    int DamageToApply = (int)(((UnityEngine.Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk)+attacker.Strength/2)-(float)defender.PhysicalDef));
                     if (DamageToApply<=0)
                     {
                         return 1;
                     } else 
                     {
                         return DamageToApply;
-                    }   
+                    }  
                 }
             }
         }
