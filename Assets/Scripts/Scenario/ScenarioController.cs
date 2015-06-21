@@ -72,7 +72,7 @@ public class ScenarioController : MonoBehaviour {
         GM.Map.loadMapFromXml("Resources/Level1/Map.xml");
         GM.Map.loadMapDetailsFromXml("Resources/Level1/mission.xml");
 
-        foreach (Player player in players)
+        /*foreach (Player player in players)
         {
             player.SpawnedPartyUnits.Clear();
             ;
@@ -89,7 +89,39 @@ public class ScenarioController : MonoBehaviour {
             {
                 Debug.LogError("Not enough spawn points");
             }
+        }*/
+
+        GM.BattleData.Players[0].SpawnedPartyUnits.Clear();
+        ;
+
+        if (spawnArea.Count >= GM.BattleData.Players[0].PartyUnits.Count)
+        {
+            for (int i = 0; i < GM.BattleData.Players[0].PartyUnits.Count; i++)
+            {
+                Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], GM.BattleData.Players[0].PartyUnits[i].gameObject, GM.BattleData.Players[0]);
+                GM.BattleData.Players[0].SpawnedPartyUnits.Add(unit);
+            }
         }
+        else
+        {
+            Debug.LogError("Not enough spawn points");
+        }
+
+        placeAiUnits();
         Camera.main.transform.LookAt(spawnArea[0].transform.position);
+    }
+
+    public void placeAiUnits() 
+    {
+        MissionDetailsXmlContainer missionContainer = MapSaveLoad.LoadMapDetails("Resources/Level1/mission.xml");
+
+        int unitsCount = missionContainer.players[1].units.Count;
+        for (int i = 0; i < unitsCount; i++)
+        {
+            string stuffType = missionContainer.players[1].units[i].prefabName;
+            Tile tileTospawn = GM.Scenario.map[missionContainer.players[1].units[i].locX][missionContainer.players[1].units[i].locY];
+            Unit unit = UnitSpawner.SpawnUnit(tileTospawn, GM.Prefabs.Prefabs[stuffType].gameObject, GM.BattleData.Players[1]);
+            GM.BattleData.Players[1].SpawnedPartyUnits.Add(unit);
+        }
     }
 }

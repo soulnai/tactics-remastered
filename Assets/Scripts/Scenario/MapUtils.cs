@@ -128,8 +128,8 @@ public class MapUtils : Singleton<MapUtils>
 
     public void GeneratePath(Tile from, Tile to)
     {
-        //Tile[] blockedArray = GetBlockedTiles ();
-        List<Tile> path = TilePathFinder.FindPath(from, to, GM.BattleData.blockedTiles.ToArray(), 0.5f);
+        Tile[] blockedArray = GetBlockedTiles ();
+        List<Tile> path = TilePathFinder.FindPath(from, to, blockedArray, 0.5f);
         foreach (Tile tile in path)
         {
             tile.showHighlight(Color.red);
@@ -145,16 +145,21 @@ public class MapUtils : Singleton<MapUtils>
             Debug.Log(u.currentTile.gridPosition);
         }
         Tile[] blocked = GetBlockedTiles();
-        Unit opponent = ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, blocked, 100f).Count() : 1000).First();
+        Unit opponent = new Unit();
+        if (ListOfUnits.Count > 0)
+        {
+            opponent = ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, blocked, 100f).Count() : 1000).First();
+        }
         return opponent;
     }
 
     public Tile[] GetBlockedTiles()
     {
-        List<Tile> tempBlocked = new List<Tile>(GM.BattleData.blockedTiles);
+        List<Tile> tempBlocked = new List<Tile>();
         foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits)
         {
             tempBlocked.Add(u.currentTile);
+            //Debug.Log(u.currentTile.gridPosition);
         }
         return tempBlocked.ToArray();
     }
@@ -200,7 +205,11 @@ public class MapUtils : Singleton<MapUtils>
 
     public List<Tile> GetAllTiles()
     {
-        //todo Get All Tiles
-        return null;
+        List<Tile> AllTiles = new List<Tile>();
+        foreach (Tile t in GM.BattleData.allTiles) 
+        {
+            AllTiles.Add(t);
+        }
+        return AllTiles;
     }
 }

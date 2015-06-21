@@ -464,6 +464,7 @@ GameObject:
   - 114: {fileID: 11421446}
   - 136: {fileID: 13627674}
   - 114: {fileID: 11446728}
+  - 114: {fileID: 11492066}
   m_Layer: 0
   m_Name: Warrior_03
   m_TagString: Untagged
@@ -1340,6 +1341,16 @@ MonoBehaviour:
   HP: 5
   CurrentAction: 0
   IconImage: {fileID: 0}
+  ToHitChance: 0
+  EvadeChance: 0
+  CritChance: 0
+  CritMultiplier: 0
+  MinCurrentWeaponAtk: 0
+  MaxCurrentWeaponAtk: 0
+  Strength: 0
+  Dexterity: 0
+  Magic: 0
+  PhysicalDef: 0
 --- !u!114 &11446728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1354,6 +1365,18 @@ MonoBehaviour:
   locX: 0
   locY: 0
   prefabName: 
+--- !u!114 &11492066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38059dd1ef820b458f528a991b95068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interactible: 1
 --- !u!136 &13627674
 CapsuleCollider:
   m_ObjectHideFlags: 1

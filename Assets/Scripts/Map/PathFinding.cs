@@ -33,7 +33,7 @@ public class TilePathFinder : MonoBehaviour {
 			closed.Add(current.lastTile);
 			
 			foreach (Tile t in current.lastTile.neighbors) {
-				if (t.impassible || occupied.Contains(t) || Mathf.Abs(current.lastTile.height-t.height)>maxHeightDiff) continue;
+                if (t.impassible || occupied.Contains(t) || GM.BattleData.blockedTiles.Contains(t) || Mathf.Abs(current.lastTile.height - t.height) > maxHeightDiff) continue;
 				TilePath newTilePath = new TilePath(current);
 				newTilePath.addTile(t);
 				open.Add(newTilePath);
@@ -52,6 +52,7 @@ public class TilePathFinder : MonoBehaviour {
 			open.Add(originPath);
 			
 			while (open.Count > 0) {
+                open = open.OrderBy(x => x.Cost).ToList();
 				TilePath current = open[0];
 				open.Remove(open[0]);
 				

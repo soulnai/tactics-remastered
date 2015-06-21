@@ -52,6 +52,7 @@ public class GlobalGameController : Singleton<GlobalGameController>
         //TODO replace with final solution
         UserPlayer.name = "UserPlayer";
         UserPlayer.PlayerName = "Bob";
+        UserPlayer.UserControlled = true;
         UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.Instance.Prefabs["Warrior_01"].GetComponent<Unit>());
         UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.Instance.Prefabs["Warrior_02"].GetComponent<Unit>());
         UserPlayer.AvailableUnits.Add(GlobalPrefabHolder.Instance.Prefabs["Warrior_01"].GetComponent<Unit>());

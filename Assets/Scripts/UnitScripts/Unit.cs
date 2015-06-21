@@ -84,6 +84,7 @@ public class Unit : MonoBehaviour
     {
         if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
         {
+            GM.BattleData.blockedTiles.Remove(currentTile);
             Vector3[] VectorPath = new Vector3[currentPath.Count];
             Tile destTile = null;
             int i = 0;
@@ -96,6 +97,7 @@ public class Unit : MonoBehaviour
             float pathTime = currentPath.Count * 0.5f;
             transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt);
             currentTile = destTile;
+            GM.BattleData.blockedTiles.Add(currentTile);
             ReduceAP();
         }
         else

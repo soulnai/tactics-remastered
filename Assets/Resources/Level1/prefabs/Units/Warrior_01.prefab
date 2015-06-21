@@ -1367,6 +1367,16 @@ MonoBehaviour:
   HP: 5
   CurrentAction: 0
   IconImage: {fileID: 0}
+  ToHitChance: 0
+  EvadeChance: 0
+  CritChance: 0
+  CritMultiplier: 0
+  MinCurrentWeaponAtk: 0
+  MaxCurrentWeaponAtk: 0
+  Strength: 0
+  Dexterity: 0
+  Magic: 0
+  PhysicalDef: 0
 --- !u!136 &13691724
 CapsuleCollider:
   m_ObjectHideFlags: 1

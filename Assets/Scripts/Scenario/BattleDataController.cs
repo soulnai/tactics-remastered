@@ -95,7 +95,7 @@ public class BattleDataController : MonoBehaviour
         if (GM.GlobalGame.UserPlayer != null)
         {
             Players.Add(GM.GlobalGame.UserPlayer);
-            //Players.Add(GM.GlobalGame.AIPlayer);
+            Players.Add(GM.GlobalGame.AIPlayer);
         }
         if ((Players != null)&&(Players.Count>0))
         {

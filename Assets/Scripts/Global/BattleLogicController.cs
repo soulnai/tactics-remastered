@@ -39,6 +39,10 @@ public class BattleLogicController : Singleton<BattleLogicController>
     {
         GM.Events.PlayerTurnEnded(GM.BattleData.currentPlayer);
         StartPlayerTurn(GM.BattleData.NextPlayer);
+        if (!GM.BattleData.currentPlayer.UserControlled) 
+        {
+            AIPlayerTurn(GM.BattleData.currentPlayer);
+        }
     }
 
     public void StartUnitTurn(Unit unit)
@@ -60,18 +64,29 @@ public class BattleLogicController : Singleton<BattleLogicController>
         StartUnitTurn(GM.BattleData.NextUnit);
     }
 
-	public void AITurn(Unit unitAI){
+    public void AIPlayerTurn(Player AI)
+    {
+        foreach (Unit u in AI.SpawnedPartyUnits) 
+        {
+            StartUnitTurn(u);
+            AIUnitTurn(u);
+            EndUnitTurn(u);
+        }
+    }
+
+	public void AIUnitTurn(Unit unitAI){
 		AIMoveToNearestEnemy (unitAI);
 	}
 
 	public void AIMoveToNearestEnemy(Unit unitAI){
         Debug.Log("AI turn starts" + GM.BattleData.CurrentUnit.name);
 		List<Unit> opponentsInRange = new List<Unit>();
-		
+        Debug.Log("------------>"+GM.BattleData.CurrentUnit);
+        opponentsInRange = MapUtils.Instance.getAllUnitsinArea(unitAI.currentTile, unitAI.MovementRange * 2);
 		//find nearest opponent
 		Unit opponent = GM.Map.FindNearestEnemy (unitAI, opponentsInRange);
 		Tile[] blocked = GM.Map.GetBlockedTiles();
-		List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, 100f);
+        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, 100f);
 
 		unitAI.currentPath = pathToOpponent;
 	    if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
@@ -93,7 +108,6 @@ public class BattleLogicController : Singleton<BattleLogicController>
 	    {
 	        pathToOpponent.Remove(pathToOpponent[pathToOpponent.Count - 1]);
 	    }
-
-	    //TODO MoveUnit (unitAI);
+        unitAI.Move();
 	}
 }
