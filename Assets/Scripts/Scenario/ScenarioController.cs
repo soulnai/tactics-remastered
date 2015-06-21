@@ -64,20 +64,24 @@ public class ScenarioController : MonoBehaviour {
 	
 	}
 
-    public void CreateBattleScene(List<Player> players )
+    public void CreateBattleScene(List<Player> players)
     {
-		GM.Map.loadMapFromXml("Resources/Level1/Map.xml");
-		GM.Map.loadMapDetailsFromXml("Resources/Level1/mission.xml");
+        if(players.Count == 0)
+            Debug.LogError("No players added to battle");
 
-        if (GM.BattleData.Players.Count > 0)
+        GM.Map.loadMapFromXml("Resources/Level1/Map.xml");
+        GM.Map.loadMapDetailsFromXml("Resources/Level1/mission.xml");
+
+        foreach (Player player in players)
         {
-            GM.BattleData.Players[0].SpawnedPartyUnits.Clear();;
+            player.SpawnedPartyUnits.Clear();
+            ;
 
-            if (spawnArea.Count >= GM.BattleData.Players[0].PartyUnits.Count)
+            if (spawnArea.Count >= player.PartyUnits.Count)
             {
-                for (int i = 0; i < GM.BattleData.Players[0].PartyUnits.Count; i++)
+                for (int i = 0; i < player.PartyUnits.Count; i++)
                 {
-                    Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], GM.BattleData.Players[0].PartyUnits[i].gameObject);
+                    Unit unit = UnitSpawner.SpawnUnit(spawnArea[i], player.PartyUnits[i].gameObject, player);
                     GM.BattleData.Players[0].SpawnedPartyUnits.Add(unit);
                 }
             }
@@ -86,11 +90,6 @@ public class ScenarioController : MonoBehaviour {
                 Debug.LogError("Not enough spawn points");
             }
         }
-        else
-        {
-            Debug.LogError("No players added to battle data controller");
-        }
-        
-        Camera.main.transform.LookAt (spawnArea[0].transform.position);
+        Camera.main.transform.LookAt(spawnArea[0].transform.position);
     }
 }

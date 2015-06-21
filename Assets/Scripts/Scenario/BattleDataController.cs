@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 /*-----------------------------------------------------
@@ -16,8 +15,17 @@ public class BattleDataController : MonoBehaviour
     public List<Player> Players;
 	public List<Tile> allTiles;
     public int currentRound = 0;
-    public Unit CurrentUnit;
-	public Player currentPlayer;
+
+    private Unit _currentUnit;
+    public Unit CurrentUnit
+    {
+        get { return _currentUnit; }
+        set { _currentUnit = value;
+            GM.Events.CurrentUnitChanged(_currentUnit);
+        }
+    }
+
+    public Player currentPlayer;
 	public List<Tile> blockedTiles;
     public bool ReadyToStart = false;
 
@@ -38,6 +46,7 @@ public class BattleDataController : MonoBehaviour
     }
 
     private static BattleDataController _Instance;
+
 
 
     public static BattleDataController Instance
@@ -77,7 +86,6 @@ public class BattleDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         ScenesController.Instance.OnBattleSceneLoadingStart += CheckBattleData;
     }
 
@@ -87,14 +95,14 @@ public class BattleDataController : MonoBehaviour
         if (GM.GlobalGame.UserPlayer != null)
         {
             Players.Add(GM.GlobalGame.UserPlayer);
-            Players.Add(GM.GlobalGame.AIPlayer);
+            //Players.Add(GM.GlobalGame.AIPlayer);
         }
         if ((Players != null)&&(Players.Count>0))
         {
             if (Players[0].PartyUnits.Count > 0)
             {
                 ReadyToStart = true;
-				currentPlayer = Players[0];
+                currentPlayer = Players[0];
             }
             else
             {
@@ -103,9 +111,50 @@ public class BattleDataController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init()
     {
+        currentRound = 0;
+        currentPlayer = Players[0];
+        CurrentUnit = Players[0].SpawnedPartyUnits[0];
+    }
 
+    public Unit NextUnit
+    {
+        get
+        {
+            foreach (Unit u in currentPlayer.SpawnedPartyUnits)
+            {
+                if (u.AP > 0)
+                {
+                    return u;
+                    if (CurrentUnit.AIControlled)
+                    {
+                        //TODO AI
+                    }
+                    break;
+                }
+            }
+            return null;
+        }
+    }
+
+    public Player NextPlayer
+    {
+        get
+        {
+            if (Players.FindIndex(x => x == currentPlayer) < Players.Count - 1)
+            {
+                return Players[Players.FindIndex(x => x == currentPlayer) + 1];
+            }
+            else
+            {
+                return Players[0];
+            }
+        }
+    }
+
+    public void SetCurrentUnit(Unit unit)
+    {
+        CurrentUnit = unit;
     }
 }

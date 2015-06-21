@@ -445,7 +445,6 @@ MonoBehaviour:
   Players: []
   allTiles: []
   currentRound: 0
-  CurrentUnit: {fileID: 0}
   currentPlayer: {fileID: 0}
   blockedTiles: []
   ReadyToStart: 0

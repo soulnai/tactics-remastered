@@ -13,7 +13,7 @@ public class UnitSpawn : MonoBehaviour {
 	
 	}
 
-	public Unit SpawnUnit(Tile tile, GameObject unitPrefab){
+	public Unit SpawnUnit(Tile tile, GameObject unitPrefab, Player ownerPlayer){
 	    GameObject go =
 	        ((GameObject)
 	            Instantiate(unitPrefab,
@@ -21,7 +21,7 @@ public class UnitSpawn : MonoBehaviour {
 	            Quaternion.identity));
         Unit unit = go.GetComponent<Unit>();
 		unit.currentTile = tile;
-        BattleDataController.Instance.CurrentUnit = unit;
-		return unit;
+	    unit.OwnerPlayer = ownerPlayer;
+        return unit;
 	}
 }

@@ -1,14 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using EnumSpace;
-using UnityEngine.EventSystems;
+﻿using EnumSpace;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeSceneButton : MonoBehaviour
 {
 
     private UIController _uiController;
-    private ScenesController _scenesController;
 
     public ScenesEnum ActionToSet;
 
@@ -17,8 +14,7 @@ public class ChangeSceneButton : MonoBehaviour
     void Start()
     {
         _uiController = UIController.Instance;
-        _scenesController = ScenesController.Instance;
-        _button = this.GetComponent<Button>();
+        _button = GetComponent<Button>();
 
         _button.onClick.AddListener(() => { _uiController.SetButtonAction(ActionToSet); });    
     }

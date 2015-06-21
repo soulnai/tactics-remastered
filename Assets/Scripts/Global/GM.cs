@@ -12,5 +12,6 @@ public static class GM
     public static UIController          UI          { get { return UIController.Instance; } }
     public static ScenesController      Scenes      { get { return ScenesController.Instance; } }
     public static GlobalPrefabHolder    Prefabs     { get { return GlobalPrefabHolder.Instance; } }
+    public static EventManager Events { get { return EventManager.Instance; } }
 
 }

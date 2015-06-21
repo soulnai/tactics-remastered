@@ -60,16 +60,16 @@ public class Unit : MonoBehaviour
     //Физическая защита (поглощение урона)
     public int PhysicalDef;
 
-    // Use this for initialization
-    void Start ()
+    public void Start()
     {
-
+        GM.Events.OnPlayerTurnStart += TurnInit;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public void TurnInit(Player p)
+    {
+        if(p == OwnerPlayer)
+            AP = 2;
+    }
 
     public void MoveTo(Tile destinationTile)
     {
@@ -116,7 +116,9 @@ public class Unit : MonoBehaviour
         {
             AP -= 1;
         }
+        else if (AP <= 0)
+        {
+            GM.BattleLogic.EndUnitTurn(this);
+        }
     }
-
-
 }

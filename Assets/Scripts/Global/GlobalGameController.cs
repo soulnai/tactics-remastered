@@ -85,6 +85,7 @@ public class GlobalGameController : Singleton<GlobalGameController>
     public void InitBattle()
     {
         GM.Scenario.Init();
+        GM.BattleData.Init();
         GM.BattleLogic.Init();
     } 
 }
