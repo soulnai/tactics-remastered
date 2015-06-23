@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using System.Linq;
+using EnumSpace;
 
 public class EventManager : Singleton<EventManager>
 {
@@ -14,6 +15,8 @@ public class EventManager : Singleton<EventManager>
     //unit turn events
     public Action<Unit> OnUnitTurnEnd;
     public Action<Unit> OnUnitTurnStart;
+    public Action<Unit> OnUnitMoveComplete; 
+    public Action<Unit, unitActions> OnUnitActionChange; 
     
     //change action state
     public Action<Unit, EnumSpace.unitActions> OnUnitStateChange;
@@ -74,5 +77,23 @@ public class EventManager : Singleton<EventManager>
 
         }
         Debug.Log("Unit - " + unit.UnitName + " current unit changed");
+    }
+
+    public void UnitActionChanged(Unit unit, unitActions action)
+    {
+        if (OnUnitActionChange != null)
+        {
+            OnUnitActionChange(unit,action);
+        }
+        Debug.Log("Unit changed action - " + unit.UnitName + " to - " + action);
+    }
+
+    public void UnitMoveCompleted(Unit unit)
+    {
+        if (OnUnitMoveComplete != null)
+        {
+            OnUnitMoveComplete(unit);
+        }
+        Debug.Log("Unit completed movement - " + unit.UnitName);    
     }
 }

@@ -153,6 +153,24 @@ public class BattleDataController : MonoBehaviour
         }
     }
 
+    public Unit NextUnitWithAP
+    {
+        get
+        {
+            foreach (Unit unit in currentPlayer.SpawnedPartyUnits)
+            {
+                if (unit.AP > 0)
+                {
+                    return unit;
+                }
+            }
+            return null;
+        }
+        set
+        {
+        }
+    }
+
     public void SetCurrentUnit(Unit unit)
     {
         CurrentUnit = unit;

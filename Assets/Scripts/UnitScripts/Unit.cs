@@ -37,7 +37,8 @@ public class Unit : MonoBehaviour
 	//количество очков жизни
 	public int HP = 5;
     //текущее действие юнита
-    public EnumSpace.unitActions CurrentAction;
+    private unitActions _currentAction;
+    public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction); } }
     //иконка/портрет юнита
     public Image IconImage;
     //Шанс попасть по противнику
@@ -60,9 +61,11 @@ public class Unit : MonoBehaviour
     //Физическая защита (поглощение урона)
     public int PhysicalDef;
 
+
     public void Start()
     {
         GM.Events.OnPlayerTurnStart += TurnInit;
+        CurrentAction = unitActions.idle;
     }
 
     public void TurnInit(Player p)
@@ -74,6 +77,7 @@ public class Unit : MonoBehaviour
     public void MoveTo(Tile destinationTile)
     {
         GM.Map.GeneratePath(currentTile, destinationTile);
+        CurrentAction = unitActions.moving;
         Move();
         //TODO CheckAP(this);
         
@@ -95,7 +99,7 @@ public class Unit : MonoBehaviour
                 t.hideHighlight();
             }
             float pathTime = currentPath.Count * 0.5f;
-            transform.DOPath(VectorPath, pathTime).OnWaypointChange(ChangeLookAt);
+            transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
             currentTile = destTile;
             GM.BattleData.blockedTiles.Add(currentTile);
             ReduceAP();
@@ -106,7 +110,13 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void ChangeLookAt(int waypointIndex)
+    private void OnMoveComplete()
+    {
+        CurrentAction = unitActions.idle;
+        GM.Events.UnitMoveCompleted(this);
+    }
+
+    void OnWaypointChange(int waypointIndex)
     {
         transform.LookAt(currentPath[waypointIndex].transform.position);
         currentTile = currentPath[waypointIndex];

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using EnumSpace;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 //using UnityEditor;
 
@@ -66,17 +68,35 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void AIPlayerTurn(Player AI)
     {
-        foreach (Unit u in AI.SpawnedPartyUnits) 
-        {
-            StartUnitTurn(u);
-            AIUnitTurn(u);
-            EndUnitTurn(u);
-        }
+        GM.Events.OnUnitMoveComplete += AILogic;
+        AILogic(AI.SpawnedPartyUnits[0]);
     }
 
-	public void AIUnitTurn(Unit unitAI){
-		AIMoveToNearestEnemy (unitAI);
-	}
+    public void AILogic(Unit unit)
+    {
+        if ((unit != null)&&(unit.OwnerPlayer.UserControlled == false))
+        {
+            List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.currentTile,1);
+            if (enemyUnits.Count > 0)
+            {
+                unit.ReduceAP();
+                Debug.Log("AI unit - " + unit.UnitName + " - near enemy unit.Ready to attack");
+                AILogic(GM.BattleData.NextUnitWithAP);
+            }
+            if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
+            {
+                AIMoveToNearestEnemy(unit);
+            }
+            else
+            {
+                AILogic(GM.BattleData.NextUnitWithAP);
+            }
+        }
+        else
+        {
+            EndPlayerTurn();
+        }
+    }
 
 	public void AIMoveToNearestEnemy(Unit unitAI){
         Debug.Log("AI turn starts" + GM.BattleData.CurrentUnit.name);
