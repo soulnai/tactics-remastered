@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class GameMath {
-    public int CalculateDamage(Unit attacker, Unit defender)
+public static class GameMath {
+    public static int CalculateDamage(Unit attacker, Unit defender)
     {
         if (CheckHit(attacker, defender))
         {
@@ -27,7 +27,7 @@ public class GameMath {
         return 0;
     }
 
-    public bool CheckHit(Unit attacker, Unit defender)
+    public static bool CheckHit(Unit attacker, Unit defender)
     {
         if (Random.value <= attacker.ToHitChance)
         {
@@ -36,7 +36,7 @@ public class GameMath {
         return false;
     }
 
-    public bool CheckEvade(Unit attacker, Unit defender)
+    public static bool CheckEvade(Unit attacker, Unit defender)
     {
         if (Random.value <= attacker.EvadeChance)
         {
@@ -45,12 +45,17 @@ public class GameMath {
         return false;
     }
 
-    public bool CheckCrit(Unit attacker, Unit defender)
+    public static bool CheckCrit(Unit attacker, Unit defender)
     {
         if (Random.value <= attacker.CritChance)
         {
             return true;
         }
         return false;
+    }
+
+    public static void applyDamage(Unit target, int damage) 
+    {
+        target.HP -= damage;
     }
 }

@@ -74,11 +74,14 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void AILogic(Unit unit)
     {
-        if ((unit != null)&&(unit.OwnerPlayer.UserControlled == false))
+        if ((unit != null) && (unit.OwnerPlayer.UserControlled == false))
         {
             List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.currentTile,1);
             if (enemyUnits.Count > 0)
             {
+                int damage = GameMath.CalculateDamage(unit, enemyUnits[0]);
+                GameMath.applyDamage(enemyUnits[0], damage);
+                Debug.Log("Damage was applied "+damage);
                 unit.ReduceAP();
                 Debug.Log("AI unit - " + unit.UnitName + " - near enemy unit.Ready to attack");
                 AILogic(GM.BattleData.NextUnitWithAP);

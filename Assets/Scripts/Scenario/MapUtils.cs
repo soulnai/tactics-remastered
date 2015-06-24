@@ -172,7 +172,7 @@ public class MapUtils : Singleton<MapUtils>
         availableTiles = TilePathFinder.FindArea(center, radius, GM.BattleData.blockedTiles.ToArray(), 100f);
         foreach (Tile t in availableTiles)
         {
-            t.highlight.GetComponent<Renderer>().enabled = true;
+            //t.highlight.GetComponent<Renderer>().enabled = true;
         }
         //find all units in area
         foreach (Unit u in GM.BattleData.Players[0].SpawnedPartyUnits)

@@ -42,13 +42,13 @@ public class Unit : MonoBehaviour
     //иконка/портрет юнита
     public Image IconImage;
     //Шанс попасть по противнику
-    public int ToHitChance;
+    public float ToHitChance;
     //Шанс увернуться от удара
-    public int EvadeChance;
+    public float EvadeChance;
     //Шанс увернуться от удара
-    public int CritChance;
+    public float CritChance;
     //Множитель критического удара
-    public int CritMultiplier;
+    public float CritMultiplier;
     //Минимальный урон текущего оружия
     public int MinCurrentWeaponAtk;
     //Максимальный урон текущего оружия
@@ -88,7 +88,7 @@ public class Unit : MonoBehaviour
     {
         if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
         {
-            GM.BattleData.blockedTiles.Remove(currentTile);
+            //GM.BattleData.blockedTiles.Remove(currentTile);
             Vector3[] VectorPath = new Vector3[currentPath.Count];
             Tile destTile = null;
             int i = 0;
@@ -101,7 +101,7 @@ public class Unit : MonoBehaviour
             float pathTime = currentPath.Count * 0.5f;
             transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
             currentTile = destTile;
-            GM.BattleData.blockedTiles.Add(currentTile);
+            //GM.BattleData.blockedTiles.Add(currentTile);
             ReduceAP();
         }
         else

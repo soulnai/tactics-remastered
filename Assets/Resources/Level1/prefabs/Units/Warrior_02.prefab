@@ -1365,18 +1365,17 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   AP: 2
   HP: 5
-  CurrentAction: 0
   IconImage: {fileID: 0}
-  ToHitChance: 0
-  EvadeChance: 0
-  CritChance: 0
-  CritMultiplier: 0
-  MinCurrentWeaponAtk: 0
-  MaxCurrentWeaponAtk: 0
-  Strength: 0
-  Dexterity: 0
-  Magic: 0
-  PhysicalDef: 0
+  ToHitChance: .800000012
+  EvadeChance: .0500000007
+  CritChance: .0500000007
+  CritMultiplier: 1.5
+  MinCurrentWeaponAtk: 1
+  MaxCurrentWeaponAtk: 5
+  Strength: 10
+  Dexterity: 3
+  Magic: 1
+  PhysicalDef: 5
 --- !u!136 &13642148
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1458,7 +1457,47 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: ToHitChance
+      value: .800000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EvadeChance
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CritChance
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CritMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinCurrentWeaponAtk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxCurrentWeaponAtk
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Strength
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Dexterity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Magic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PhysicalDef
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100060}
