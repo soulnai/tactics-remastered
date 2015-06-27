@@ -20,9 +20,22 @@ public class BattleLogicController : Singleton<BattleLogicController>
     public void Init()
     {
         InputController.Instance.OnTileClick += TileClick;
-        InputController.Instance.OnUnitClick += GM.BattleData.SetCurrentUnit;
+        InputController.Instance.OnUnitClick += UnitClick;
 
         StartPlayerTurn(GM.BattleData.currentPlayer);
+        GM.Events.OnUnitTurnStart += AILogic;
+        GM.Events.OnUnitMoveComplete += AILogic;
+    }
+
+    public void UnitClick(Unit unit)
+    {
+        if (unit != null)
+        {
+            if (unit.OwnerPlayer == GM.BattleData.currentPlayer)
+            {
+                GM.BattleData.CurrentUnit = unit;
+            }
+        }
     }
 
     public void TileClick(Tile tile)
@@ -34,22 +47,22 @@ public class BattleLogicController : Singleton<BattleLogicController>
     {
         GM.BattleData.currentPlayer = player;
         GM.Events.PlayerTurnStarted(player);
-        StartUnitTurn(GM.BattleData.currentPlayer.SpawnedPartyUnits[0]);
+        if (GM.BattleData.currentPlayer.SpawnedPartyUnits.Count > 0)
+            StartUnitTurn(GM.BattleData.currentPlayer.SpawnedPartyUnits[0]);
     }
 
     public void EndPlayerTurn()
     {
         GM.Events.PlayerTurnEnded(GM.BattleData.currentPlayer);
         StartPlayerTurn(GM.BattleData.NextPlayer);
-        if (!GM.BattleData.currentPlayer.UserControlled) 
-        {
-            AIPlayerTurn(GM.BattleData.currentPlayer);
-        }
     }
 
     public void StartUnitTurn(Unit unit)
     {
-        GM.BattleData.CurrentUnit = unit;
+        if (unit != null)
+        {
+            GM.BattleData.CurrentUnit = unit;
+        }
         GM.Events.UnitTurnStarted(unit);
     }
 
@@ -58,23 +71,13 @@ public class BattleLogicController : Singleton<BattleLogicController>
         if (unit != null)
         {
             GM.Events.UnitTurnEnded(unit);
+            StartUnitTurn(GM.BattleData.NextUnit);
         }
-        else
-        {
-            GM.Events.UnitTurnEnded(GM.BattleData.CurrentUnit);
-        }
-        StartUnitTurn(GM.BattleData.NextUnit);
-    }
-
-    public void AIPlayerTurn(Player AI)
-    {
-        GM.Events.OnUnitMoveComplete += AILogic;
-        AILogic(AI.SpawnedPartyUnits[0]);
     }
 
     public void AILogic(Unit unit)
     {
-        if ((unit != null) && (unit.OwnerPlayer.UserControlled == false))
+        if ((unit != null) && (unit.OwnerPlayer.UserControlled == false)&&(unit.OwnerPlayer == GM.BattleData.currentPlayer))
         {
             List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.currentTile,1);
             if (enemyUnits.Count > 0)
@@ -84,7 +87,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
                 Debug.Log("Damage was applied "+damage);
                 unit.ReduceAP();
                 Debug.Log("AI unit - " + unit.UnitName + " - near enemy unit.Ready to attack");
-                AILogic(GM.BattleData.NextUnitWithAP);
+                EndUnitTurn();
             }
             if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
             {
@@ -92,7 +95,7 @@ public class BattleLogicController : Singleton<BattleLogicController>
             }
             else
             {
-                AILogic(GM.BattleData.NextUnitWithAP);
+                EndUnitTurn();
             }
         }
         else

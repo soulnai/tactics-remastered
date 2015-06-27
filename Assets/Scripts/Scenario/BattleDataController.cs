@@ -127,11 +127,6 @@ public class BattleDataController : MonoBehaviour
                 if (u.AP > 0)
                 {
                     return u;
-                    if (CurrentUnit.AIControlled)
-                    {
-                        //TODO AI
-                    }
-                    break;
                 }
             }
             return null;
@@ -166,13 +161,5 @@ public class BattleDataController : MonoBehaviour
             }
             return null;
         }
-        set
-        {
-        }
-    }
-
-    public void SetCurrentUnit(Unit unit)
-    {
-        CurrentUnit = unit;
     }
 }
