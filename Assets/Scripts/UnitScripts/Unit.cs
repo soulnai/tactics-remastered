@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour
 	public int AP = 2;
 	//количество очков жизни
 	public int HP = 5;
+    public int maxHP = 10;
     //текущее действие юнита
     private unitActions _currentAction;
     public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction); } }
@@ -61,11 +62,14 @@ public class Unit : MonoBehaviour
     //Физическая защита (поглощение урона)
     public int PhysicalDef;
 
+    public GameObject healthBar;
+
 
     public void Start()
     {
         GM.Events.OnPlayerTurnStart += TurnInit;
         CurrentAction = unitActions.idle;
+        healthBar = GetComponentsInChildren<Image>()[0].gameObject;
     }
 
     public void TurnInit(Player p)
@@ -133,4 +137,18 @@ public class Unit : MonoBehaviour
             GM.BattleLogic.EndUnitTurn(this);
         }
     }
+
+    public void SetHealthVisual()
+    {
+        float healthNormalized = (float)HP / (float)maxHP;
+        healthBar.transform.localScale = new Vector3(healthNormalized,
+        healthBar.transform.localScale.y,
+        healthBar.transform.localScale.z);
+    }
+
+    public void Update() 
+    {
+        SetHealthVisual();
+    }
+
 }
