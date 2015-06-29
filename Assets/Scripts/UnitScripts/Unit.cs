@@ -87,27 +87,28 @@ public class Unit : MonoBehaviour
 
     public void Move()
     {
-        if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
+        if (currentPath.Count > 0)
         {
-            //GM.BattleData.blockedTiles.Remove(currentTile);
-            Vector3[] VectorPath = new Vector3[currentPath.Count];
-            Tile destTile = null;
-            int i = 0;
-            foreach (Tile t in currentPath)
+            if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
             {
-                VectorPath[i] = t.transform.position;
-                i++;
-                t.hideHighlight();
+                //GM.BattleData.blockedTiles.Remove(currentTile);
+                Vector3[] VectorPath = new Vector3[currentPath.Count];
+                int i = 0;
+                foreach (Tile t in currentPath)
+                {
+                    VectorPath[i] = t.transform.position;
+                    i++;
+                    t.hideHighlight();
+                }
+                float pathTime = currentPath.Count * 0.5f;
+                transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
+                //GM.BattleData.blockedTiles.Add(currentTile);
+                ReduceAP();
             }
-            float pathTime = currentPath.Count * 0.5f;
-            transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
-            currentTile = destTile;
-            //GM.BattleData.blockedTiles.Add(currentTile);
-            ReduceAP();
-        }
-        else
-        {
-            Debug.Log("Недостаточно АР");
+            else
+            {
+                Debug.Log("Недостаточно АР");
+            }
         }
     }
 
@@ -115,6 +116,8 @@ public class Unit : MonoBehaviour
     {
         CurrentAction = unitActions.idle;
         GM.Events.UnitMoveCompleted(this);
+        currentTile = currentPath[currentPath.Count-1];
+        currentPath.Clear();
     }
 
     void OnWaypointChange(int waypointIndex)

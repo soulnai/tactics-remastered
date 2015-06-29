@@ -87,20 +87,19 @@ public class BattleLogicController : Singleton<BattleLogicController>
                 Debug.Log("Damage was applied "+damage);
                 unit.ReduceAP();
                 Debug.Log("AI unit - " + unit.UnitName + " - near enemy unit.Ready to attack");
-                EndUnitTurn();
-            }
-            if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
+                EndUnitTurn(unit);
+            } else if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
             {
                 AIMoveToNearestEnemy(unit);
             }
             else
             {
-                EndUnitTurn();
+                EndUnitTurn(unit);
             }
         }
         else
         {
-            EndPlayerTurn();
+           // EndPlayerTurn();
         }
     }
 
