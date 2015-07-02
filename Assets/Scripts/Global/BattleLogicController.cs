@@ -21,17 +21,18 @@ public class BattleLogicController : Singleton<BattleLogicController>
     {
         InputController.Instance.OnTileClick += TileClick;
         InputController.Instance.OnUnitClick += UnitClick;
+        
+        GM.Events.OnPlayerTurnStart += AI.AITurn;
 
         StartPlayerTurn(GM.BattleData.currentPlayer);
-        GM.Events.OnUnitTurnStart += AILogic;
-        GM.Events.OnUnitMoveComplete += AILogic;
+
     }
 
     public void UnitClick(Unit unit)
     {
         if (unit != null)
         {
-            if (unit.OwnerPlayer == GM.BattleData.currentPlayer)
+          //  if (unit.OwnerPlayer == GM.BattleData.currentPlayer)
             {
                 GM.BattleData.CurrentUnit = unit;
             }
@@ -51,9 +52,9 @@ public class BattleLogicController : Singleton<BattleLogicController>
             StartUnitTurn(GM.BattleData.currentPlayer.SpawnedPartyUnits[0]);
     }
 
-    public void EndPlayerTurn()
+    public void EndPlayerTurn(Player player)
     {
-        GM.Events.PlayerTurnEnded(GM.BattleData.currentPlayer);
+        GM.Events.PlayerTurnEnded(player);
         StartPlayerTurn(GM.BattleData.NextPlayer);
     }
 
@@ -71,69 +72,10 @@ public class BattleLogicController : Singleton<BattleLogicController>
         if (unit != null)
         {
             GM.Events.UnitTurnEnded(unit);
-            StartUnitTurn(GM.BattleData.NextUnit);
         }
     }
 
-    public void AILogic(Unit unit)
-    {
-        if ((unit != null) && (unit.OwnerPlayer.UserControlled == false)&&(unit.OwnerPlayer == GM.BattleData.currentPlayer))
-        {
-            List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.currentTile,1);
-            if (enemyUnits.Count > 0)
-            {
-                int damage = GameMath.CalculateDamage(unit, enemyUnits[0]);
-                GameMath.applyDamage(enemyUnits[0], damage);
-                Debug.Log("Damage was applied "+damage);
-                unit.ReduceAP();
-                Debug.Log("AI unit - " + unit.UnitName + " - near enemy unit.Ready to attack");
-                EndUnitTurn();
-            }
-            if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
-            {
-                AIMoveToNearestEnemy(unit);
-            }
-            else
-            {
-                EndUnitTurn();
-            }
-        }
-        else
-        {
-            EndPlayerTurn();
-        }
-    }
+    
 
-	public void AIMoveToNearestEnemy(Unit unitAI){
-        Debug.Log("AI turn starts" + GM.BattleData.CurrentUnit.name);
-		List<Unit> opponentsInRange = new List<Unit>();
-        Debug.Log("------------>"+GM.BattleData.CurrentUnit);
-        opponentsInRange = MapUtils.Instance.getAllUnitsinArea(unitAI.currentTile, unitAI.MovementRange * 2);
-		//find nearest opponent
-		Unit opponent = GM.Map.FindNearestEnemy (unitAI, opponentsInRange);
-		Tile[] blocked = GM.Map.GetBlockedTiles();
-        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, 100f);
-
-		unitAI.currentPath = pathToOpponent;
-	    if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
-	    {
-	        Debug.Log("Path reduce");
-	        int movementCost = 0;
-
-	        for (int i = 0; i < pathToOpponent.Count; i++)
-	        {
-	            movementCost += pathToOpponent[i].movementCost;
-	            if (movementCost > unitAI.MovementRange)
-	            {
-	                int countToRemove = pathToOpponent.Count - i;
-	                pathToOpponent.RemoveRange(i, countToRemove);
-	            }
-	        }
-	    }
-	    else
-	    {
-	        pathToOpponent.Remove(pathToOpponent[pathToOpponent.Count - 1]);
-	    }
-        unitAI.Move();
-	}
+	
 }

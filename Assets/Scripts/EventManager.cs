@@ -15,8 +15,8 @@ public class EventManager : Singleton<EventManager>
     //unit turn events
     public Action<Unit> OnUnitTurnEnd;
     public Action<Unit> OnUnitTurnStart;
-    public Action<Unit> OnUnitMoveComplete; 
-    public Action<Unit, unitActions> OnUnitActionChange; 
+    public Action<Unit> OnUnitActionComplete; 
+    public Action<Unit, unitActions,unitActions> OnUnitActionChange; 
     
     //change action state
     public Action<Unit, EnumSpace.unitActions> OnUnitStateChange;
@@ -56,7 +56,7 @@ public class EventManager : Singleton<EventManager>
             OnUnitTurnStart(unit);
             
         }
-        Debug.Log("Unit - " + unit.UnitName + " turn started");
+        Debug.Log(unit.OwnerPlayer + " - Unit - " + unit.UnitName + " turn started");
     }
 
     public void UnitTurnEnded(Unit unit)
@@ -66,7 +66,7 @@ public class EventManager : Singleton<EventManager>
             OnUnitTurnEnd(unit);
             
         }
-        Debug.Log("Unit - " + unit.UnitName + " turn ended");
+        Debug.Log(unit.OwnerPlayer +  " - Unit - " + unit.UnitName + " turn ended");
     }
 
     public void CurrentUnitChanged(Unit unit)
@@ -76,24 +76,24 @@ public class EventManager : Singleton<EventManager>
             OnCurrentUnitChanged(unit);
 
         }
-        Debug.Log("Unit - " + unit.UnitName + " current unit changed");
+        Debug.Log(unit.OwnerPlayer +  " - Unit - " + unit.UnitName + " current unit changed");
     }
 
-    public void UnitActionChanged(Unit unit, unitActions action)
+    public void UnitActionChanged(Unit unit, unitActions prevAction,unitActions currentAction)
     {
         if (OnUnitActionChange != null)
         {
-            OnUnitActionChange(unit,action);
+            OnUnitActionChange(unit, prevAction, currentAction);
         }
-        Debug.Log("Unit changed action - " + unit.UnitName + " to - " + action);
+        Debug.Log(unit.OwnerPlayer + " - Unit changed action - " + unit.UnitName + " - " + prevAction + "->" + currentAction);
     }
 
-    public void UnitMoveCompleted(Unit unit)
+    public void UnitActionCompleted(Unit unit)
     {
-        if (OnUnitMoveComplete != null)
+        if (OnUnitActionComplete != null)
         {
-            OnUnitMoveComplete(unit);
+            OnUnitActionComplete(unit);
         }
-        Debug.Log("Unit completed movement - " + unit.UnitName);    
+        Debug.Log(unit.OwnerPlayer + " - Unit completed ACTION - " + unit.UnitName);    
     }
 }

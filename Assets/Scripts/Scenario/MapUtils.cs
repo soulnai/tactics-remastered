@@ -128,7 +128,7 @@ public class MapUtils : Singleton<MapUtils>
 
     public void GeneratePath(Tile from, Tile to)
     {
-        Tile[] blockedArray = GetBlockedTiles ();
+        Tile[] blockedArray = BlockedTiles ();
         List<Tile> path = TilePathFinder.FindPath(from, to, blockedArray, 0.5f);
         foreach (Tile tile in path)
         {
@@ -144,16 +144,16 @@ public class MapUtils : Singleton<MapUtils>
         {
             Debug.Log(u.currentTile.gridPosition);
         }
-        Tile[] blocked = GetBlockedTiles();
+
         Unit opponent = new Unit();
         if (ListOfUnits.Count > 0)
         {
-            opponent = ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, blocked, 100f).Count() : 1000).First();
+            opponent = ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, BlockedTiles(), 100f).Count() : 1000).First();
         }
         return opponent;
     }
 
-    public Tile[] GetBlockedTiles()
+    public Tile[] BlockedTiles()
     {
         List<Tile> tempBlocked = new List<Tile>();
         foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits)

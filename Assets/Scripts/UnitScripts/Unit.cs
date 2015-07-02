@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour
     public int maxHP = 10;
     //текущее действие юнита
     private unitActions _currentAction;
-    public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction); } }
+    public unitActions CurrentAction { get { return _currentAction; } set { GM.Events.UnitActionChanged(this, _currentAction,value); _currentAction = value; } }
     //иконка/портрет юнита
     public Image IconImage;
     //Шанс попасть по противнику
@@ -78,20 +78,18 @@ public class Unit : MonoBehaviour
     public void MoveTo(Tile destinationTile)
     {
         GM.Map.GeneratePath(currentTile, destinationTile);
-        CurrentAction = unitActions.moving;
         Move();
         //TODO CheckAP(this);
         
-        //_battleData.CurrentUnit.currentPath = null;
     }
 
     public void Move()
     {
+        CurrentAction = unitActions.moving;
         if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
         {
             //GM.BattleData.blockedTiles.Remove(currentTile);
             Vector3[] VectorPath = new Vector3[currentPath.Count];
-            Tile destTile = null;
             int i = 0;
             foreach (Tile t in currentPath)
             {
@@ -101,7 +99,6 @@ public class Unit : MonoBehaviour
             }
             float pathTime = currentPath.Count * 0.5f;
             transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
-            currentTile = destTile;
             //GM.BattleData.blockedTiles.Add(currentTile);
             ReduceAP();
         }
@@ -114,7 +111,7 @@ public class Unit : MonoBehaviour
     private void OnMoveComplete()
     {
         CurrentAction = unitActions.idle;
-        GM.Events.UnitMoveCompleted(this);
+        GM.Events.UnitActionCompleted(this);
     }
 
     void OnWaypointChange(int waypointIndex)
@@ -128,10 +125,6 @@ public class Unit : MonoBehaviour
         if (AP > 0)
         {
             AP -= 1;
-        }
-        else if (AP <= 0)
-        {
-            GM.BattleLogic.EndUnitTurn(this);
         }
     }
 
