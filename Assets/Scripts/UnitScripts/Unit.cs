@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour
     public int maxHP = 10;
     //текущее действие юнита
     private unitActions _currentAction;
-    public unitActions CurrentAction { get { return _currentAction; } set { GM.Events.UnitActionChanged(this, _currentAction,value); _currentAction = value; } }
+    public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction); } }
     //иконка/портрет юнита
     public Image IconImage;
     //Шанс попасть по противнику
@@ -78,40 +78,46 @@ public class Unit : MonoBehaviour
     public void MoveTo(Tile destinationTile)
     {
         GM.Map.GeneratePath(currentTile, destinationTile);
+        CurrentAction = unitActions.moving;
         Move();
         //TODO CheckAP(this);
         
+        //_battleData.CurrentUnit.currentPath = null;
     }
 
     public void Move()
     {
-        CurrentAction = unitActions.moving;
-        if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
+        if (currentPath.Count > 0)
         {
-            //GM.BattleData.blockedTiles.Remove(currentTile);
-            Vector3[] VectorPath = new Vector3[currentPath.Count];
-            int i = 0;
-            foreach (Tile t in currentPath)
+            if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
             {
-                VectorPath[i] = t.transform.position;
-                i++;
-                t.hideHighlight();
+                //GM.BattleData.blockedTiles.Remove(currentTile);
+                Vector3[] VectorPath = new Vector3[currentPath.Count];
+                int i = 0;
+                foreach (Tile t in currentPath)
+                {
+                    VectorPath[i] = t.transform.position;
+                    i++;
+                    t.hideHighlight();
+                }
+                float pathTime = currentPath.Count * 0.5f;
+                transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
+                //GM.BattleData.blockedTiles.Add(currentTile);
+                ReduceAP();
             }
-            float pathTime = currentPath.Count * 0.5f;
-            transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
-            //GM.BattleData.blockedTiles.Add(currentTile);
-            ReduceAP();
-        }
-        else
-        {
-            Debug.Log("Недостаточно АР");
+            else
+            {
+                Debug.Log("Недостаточно АР");
+            }
         }
     }
 
     private void OnMoveComplete()
     {
         CurrentAction = unitActions.idle;
-        GM.Events.UnitActionCompleted(this);
+        GM.Events.UnitMoveCompleted(this);
+        currentTile = currentPath[currentPath.Count-1];
+        currentPath.Clear();
     }
 
     void OnWaypointChange(int waypointIndex)
@@ -125,6 +131,10 @@ public class Unit : MonoBehaviour
         if (AP > 0)
         {
             AP -= 1;
+        }
+        else if (AP <= 0)
+        {
+            GM.BattleLogic.EndUnitTurn(this);
         }
     }
 
