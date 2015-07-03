@@ -148,7 +148,8 @@ public class MapUtils : Singleton<MapUtils>
         Unit opponent = new Unit();
         if (ListOfUnits.Count > 0)
         {
-            opponent = ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, BlockedTiles(), 100f).Count() : 1000).First();
+            opponent = (ListOfUnits.OrderBy(x => x.HP).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, BlockedTiles(), unit.MaxHeight).Count() : 1000)).First();
+            Debug.Log("TARGET ============================> "+ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, BlockedTiles(), unit.MaxHeight).Count() : 1000).First());
         }
         return opponent;
     }

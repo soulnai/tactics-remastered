@@ -16,6 +16,7 @@ public static class AI  {
         {
             if (GM.BattleData.NextUnitWithAP != null)
             {
+                GM.BattleData.CurrentUnit = GM.BattleData.NextUnitWithAP;
                 AILogic(GM.BattleData.NextUnitWithAP);
             }
             else
@@ -79,7 +80,7 @@ public static class AI  {
         //find nearest opponent
         Unit opponent = GM.Map.FindNearestEnemy(unitAI, opponentsInRange);
         Tile[] blocked = GM.Map.BlockedTiles();
-        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, 100f);
+        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, unitAI.MaxHeight);
 
         unitAI.currentPath = pathToOpponent;
         if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
