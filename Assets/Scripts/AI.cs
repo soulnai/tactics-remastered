@@ -5,6 +5,11 @@ using EnumSpace;
 
 public static class AI  {
 
+    public static void InitAI()
+    {
+        //GM.Events.OnPlayerTurnStart += AITurn;
+    }
+
     public static void AITurn(Player player)
     {
         if (GM.BattleData.currentPlayer.UserControlled == false)
@@ -15,7 +20,7 @@ public static class AI  {
             }
             else
             {
-                GM.BattleLogic.EndPlayerTurn(player);
+                GM.BattleLogic.StartPlayerTurn(GM.BattleData.NextPlayer);
             }
         }
     }
@@ -61,7 +66,6 @@ public static class AI  {
     private static void AIUnitTurnEnd(Unit unit)
     {
         if(unit != null)
-            GM.BattleLogic.EndUnitTurn(unit);
         AITurn(GM.BattleData.currentPlayer);
     }
 

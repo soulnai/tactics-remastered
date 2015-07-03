@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using EnumSpace;
 
 /*-----------------------------------------------------
 
@@ -15,6 +16,7 @@ public class BattleDataController : MonoBehaviour
     public List<Player> Players;
 	public List<Tile> allTiles;
     public int currentRound = 0;
+    public unitTurnStates UnitControlState = unitTurnStates.none;
 
     private Unit _currentUnit;
     public Unit CurrentUnit

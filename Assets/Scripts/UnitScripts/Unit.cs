@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     public string UnitName;
     //класс
     public unitClass UnitClass;
+
     //владелец
     public Player OwnerPlayer = null;
 	//AI
@@ -39,7 +40,7 @@ public class Unit : MonoBehaviour
     public int maxHP = 10;
     //текущее действие юнита
     private unitActions _currentAction;
-    public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction); } }
+    public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction, value); } }
     //иконка/портрет юнита
     public Image IconImage;
     //Шанс попасть по противнику
@@ -65,14 +66,16 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
-        GM.Events.OnPlayerTurnStart += TurnInit;
+        //GM.Events.OnPlayerTurnStart += TurnInit;
         CurrentAction = unitActions.idle;
     }
 
     public void TurnInit(Player p)
     {
-        if(p == OwnerPlayer)
+        if (p == OwnerPlayer)
+        {
             AP = 2;
+        }
     }
 
     public void MoveTo(Tile destinationTile)
@@ -91,7 +94,8 @@ public class Unit : MonoBehaviour
         {
             if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
             {
-                //GM.BattleData.blockedTiles.Remove(currentTile);
+                GM.BattleData.UnitControlState = unitTurnStates.blockInteract;
+
                 Vector3[] VectorPath = new Vector3[currentPath.Count];
                 int i = 0;
                 foreach (Tile t in currentPath)
@@ -102,7 +106,7 @@ public class Unit : MonoBehaviour
                 }
                 float pathTime = currentPath.Count * 0.5f;
                 transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
-                //GM.BattleData.blockedTiles.Add(currentTile);
+
                 ReduceAP();
             }
             else
@@ -115,9 +119,10 @@ public class Unit : MonoBehaviour
     private void OnMoveComplete()
     {
         CurrentAction = unitActions.idle;
-        GM.Events.UnitMoveCompleted(this);
+        GM.Events.UnitActionCompleted(this);
         currentTile = currentPath[currentPath.Count-1];
         currentPath.Clear();
+        GM.BattleData.UnitControlState = unitTurnStates.canInteract;
     }
 
     void OnWaypointChange(int waypointIndex)
@@ -134,7 +139,6 @@ public class Unit : MonoBehaviour
         }
         else if (AP <= 0)
         {
-            GM.BattleLogic.EndUnitTurn(this);
         }
     }
 

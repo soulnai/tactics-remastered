@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumSpace;
 
 public class Player : MonoBehaviour
 {
@@ -13,15 +14,19 @@ public class Player : MonoBehaviour
     //юнити в пати данного игрока
     public List<Unit> PartyUnits = new List<Unit>();
 	public List<Unit> SpawnedPartyUnits = new List<Unit>();
+    public playerTurnStates TurnState;
       
 	// Use this for initialization
 	void Awake () {
 	    AvailableUnits = new List<Unit>();
         PartyUnits = new List<Unit>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public void InitTurn()
+    {
+        foreach (Unit unit in SpawnedPartyUnits)
+        {
+            unit.AP = 2;
+        }
+    }
 }
