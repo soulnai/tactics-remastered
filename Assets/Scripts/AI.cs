@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EnumSpace;
+using System.Linq;
 
 public static class AI  {
 
@@ -42,16 +43,24 @@ public static class AI  {
             
             if (enemyUnits.Count > 0)
             {
-                int damage = GameMath.CalculateDamage(unit, enemyUnits[0]);
-                GameMath.applyDamage(enemyUnits[0], damage);
-                Debug.Log("Damage was applied " + damage);
-                unit.ReduceAP();
-                Debug.Log("AI unit - " + unit.UnitName + " - near enemy unit.Ready to attack");
-                AIUnitTurnEnd(unit);
+                //TODO add range of available attacks check
+                Debug.Log("ATTACK");
+                AIAttack(unit, enemyUnits.OrderBy(x => x != null ? -x.HP : 1000).First());
             }
             else if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
             {
-                AIMoveToNearestEnemy(unit);
+                List<Unit> enemyUnitsToMove = GM.Map.getAllUnitsinArea(unit.currentTile, unit.MovementRange * 2);
+                if (enemyUnitsToMove.Count > 0)
+                {
+                    Debug.Log("Move1");
+                    AIMoveToNearestEnemy(unit, enemyUnitsToMove);
+                }
+                else 
+                {
+                    Debug.Log("Move2");
+                    enemyUnitsToMove = GM.BattleData.Players[0].SpawnedPartyUnits;
+                    AIMoveToNearestEnemy(unit, enemyUnitsToMove);
+                }
             }
             else
             {
@@ -70,13 +79,29 @@ public static class AI  {
         AITurn(GM.BattleData.currentPlayer);
     }
 
-    public static void AIMoveToNearestEnemy(Unit unitAI)
+    public static void AIAttack(Unit AIunit, Unit target) 
+    {
+        if (AIunit.AP > 0)
+        {
+            int damage = GameMath.CalculateDamage(AIunit, target);
+            GameMath.applyDamage(target, damage);
+            Debug.Log("Damage was applied " + damage);
+            AIunit.ReduceAP();
+            Debug.Log("AI unit - " + AIunit.UnitName + " - near enemy unit.Ready to attack");
+            AIUnitTurnEnd(AIunit);
+        }
+        else 
+        {
+            AIUnitTurnEnd(AIunit);
+        }
+    }
+    public static void AIMoveToNearestEnemy(Unit unitAI, List<Unit> opponents)
     {
         GM.Events.OnUnitActionChange += AILogic;
         Debug.Log("AI turn starts" + GM.BattleData.CurrentUnit.name);
         List<Unit> opponentsInRange = new List<Unit>();
         Debug.Log("------------>" + GM.BattleData.CurrentUnit);
-        opponentsInRange = MapUtils.Instance.getAllUnitsinArea(unitAI.currentTile, unitAI.MovementRange * 2);
+        opponentsInRange = opponents;
         //find nearest opponent
         Unit opponent = GM.Map.FindNearestEnemy(unitAI, opponentsInRange);
         Tile[] blocked = GM.Map.BlockedTiles();
