@@ -81,7 +81,7 @@ public class UnitListItem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDra
     {
         if (Unit)
         {
-            IconImage = Unit.IconImage;
+            IconImage.sprite = Unit.Icon;
             NameText.text = Unit.UnitName;
             ClassText.text = Unit.UnitClass.ToString();
         }

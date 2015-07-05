@@ -54,8 +54,7 @@ public class Unit : MonoBehaviour
     //текущее действие юнита
     private unitActions _currentAction;
     public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction, value); } }
-    //иконка/портрет юнита
-    public Image IconImage;
+    
     //Шанс попасть по противнику
     public float ToHitChance;
     //Шанс увернуться от удара
@@ -84,9 +83,6 @@ public class Unit : MonoBehaviour
         GM.Map.GeneratePath(CurrentTile, destinationTile);
         CurrentAction = unitActions.moving;
         Move();
-        //TODO CheckAP(this);
-        
-        //_battleData.CurrentUnit.currentPath = null;
     }
 
     public void Move()
@@ -142,5 +138,4 @@ public class Unit : MonoBehaviour
         {
         }
     }
-
 }

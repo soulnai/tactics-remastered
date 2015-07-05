@@ -10,7 +10,6 @@ using System.Xml.Serialization;
 public class BaseAttribute {
 	public string name;
 	public unitAttributes attribute;
-//    public Unit owner;
 
 	public int _value;
 	public int Value{
