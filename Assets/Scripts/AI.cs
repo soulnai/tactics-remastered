@@ -104,8 +104,7 @@ public static class AI  {
         opponentsInRange = opponents;
         //find nearest opponent
         Unit opponent = GM.Map.FindNearestEnemy(unitAI, opponentsInRange);
-        Tile[] blocked = GM.Map.BlockedTiles();
-        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.CurrentTile, opponent.CurrentTile, blocked, unitAI.MaxHeight);
+        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.CurrentTile, opponent.CurrentTile, unitAI.MaxHeight);
 
         unitAI.CurrentPath = pathToOpponent;
         if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
