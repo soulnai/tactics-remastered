@@ -1401,6 +1401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc21355c441e1a74aa2e26de0ddfd84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  isFlying: 0
   UnitName: Test
   UnitClass: 6
   OwnerPlayer: {fileID: 0}
@@ -1411,22 +1413,51 @@ MonoBehaviour:
   MovementRange: 5
   MaxHeight: 100
   State: 0
-  currentTile: {fileID: 0}
-  currentPath: []
-  gridPosition: {x: 0, y: 0}
-  AP: 2
-  HP: 5
-  maxHP: 10
-  IconImage: {fileID: 0}
-  ToHitChance: 0
+  CurrentTile: {fileID: 0}
+  CurrentPath: []
+  GridPosition: {x: 0, y: 0}
+  AP:
+    name: AP
+    attribute: 3
+    _value: 2
+  APMax:
+    name: APmax
+    attribute: 6
+    _value: 2
+  HP:
+    name: HP
+    attribute: 1
+    _value: 10
+  HPMax:
+    name: HPmax
+    attribute: 4
+    _value: 10
+  MP:
+    name: MP
+    attribute: 1
+    _value: 10
+  MPMax:
+    name: MPmax
+    attribute: 4
+    _value: 10
+  Dexterity:
+    name: Dex
+    attribute: 8
+    _value: 10
+  Strenght:
+    name: Str
+    attribute: 7
+    _value: 10
+  Magic:
+    name: Magic
+    attribute: 9
+    _value: 10
+  ToHitChance: 99999
   EvadeChance: 0
   CritChance: 0
   CritMultiplier: 0
   MinCurrentWeaponAtk: 0
   MaxCurrentWeaponAtk: 0
-  Strength: 0
-  Dexterity: 0
-  Magic: 0
   PhysicalDef: 0
 --- !u!114 &11451582
 MonoBehaviour:
@@ -1644,7 +1675,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: ToHitChance
+      value: 99999
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HPMax._value
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AP._value
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}

@@ -1378,42 +1378,41 @@ MonoBehaviour:
   CurrentPath: []
   GridPosition: {x: 0, y: 0}
   AP:
-    name: 
+    name: AP
     attribute: 3
     _value: 2
   APMax:
-    name: 
+    name: APmax
     attribute: 6
     _value: 2
   HP:
-    name: 
+    name: HP
     attribute: 1
     _value: 10
   HPMax:
-    name: 
+    name: HPmax
     attribute: 4
     _value: 10
   MP:
-    name: 
+    name: MP
     attribute: 1
     _value: 10
   MPMax:
-    name: 
+    name: MPmax
     attribute: 4
     _value: 10
   Dexterity:
-    name: 
+    name: Dex
     attribute: 8
     _value: 10
   Strenght:
-    name: 
+    name: Str
     attribute: 7
     _value: 10
   Magic:
-    name: 
+    name: Magic
     attribute: 9
     _value: 10
-  IconImage: {fileID: 0}
   ToHitChance: .899999976
   EvadeChance: .100000001
   CritChance: .0500000007

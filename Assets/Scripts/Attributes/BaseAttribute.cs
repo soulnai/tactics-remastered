@@ -27,4 +27,11 @@ public class BaseAttribute {
         attribute = attr;
         Value = val;
     }
+
+    public void Init(unitAttributes attr, int val, string n = "")
+    {
+        name = n;
+        attribute = attr;
+        Value = val;
+    }
 }

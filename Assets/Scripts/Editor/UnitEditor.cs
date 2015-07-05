@@ -22,14 +22,14 @@ public class UnitEditor : Editor {
 
     private void CreateBaseAttributes(Unit myUnit)
     {
-        myUnit.AP = new BaseAttribute(unitAttributes.AP, 2,"AP");
-        myUnit.APMax = new BaseAttribute(unitAttributes.APMax, 2,"APmax");
-        myUnit.HP = new BaseAttribute(unitAttributes.HP, 10,"HP");
-        myUnit.HPMax = new BaseAttribute(unitAttributes.HPMax, 10,"HPmax");
-        myUnit.MP = new BaseAttribute(unitAttributes.HP, 10,"MP");
-        myUnit.MPMax = new BaseAttribute(unitAttributes.HPMax, 10,"MPmax");
-        myUnit.Dexterity = new BaseAttribute(unitAttributes.dexterity, 10,"Dex");
-        myUnit.Strenght = new BaseAttribute(unitAttributes.strenght, 10,"Str");
-        myUnit.Magic = new BaseAttribute(unitAttributes.magic, 10,"Magic");
+        myUnit.AP.Init(unitAttributes.AP, 2,"AP");
+        myUnit.APMax.Init(unitAttributes.APMax, 2, "APmax");
+        myUnit.HP.Init(unitAttributes.HP, 10, "HP");
+        myUnit.HPMax.Init(unitAttributes.HPMax, 10, "HPmax");
+        myUnit.MP.Init(unitAttributes.HP, 10, "MP");
+        myUnit.MPMax.Init(unitAttributes.HPMax, 10, "MPmax");
+        myUnit.Dexterity.Init(unitAttributes.dexterity, 10, "Dex");
+        myUnit.Strenght.Init(unitAttributes.strenght, 10, "Str");
+        myUnit.Magic.Init(unitAttributes.magic, 10, "Magic");
     }
 }

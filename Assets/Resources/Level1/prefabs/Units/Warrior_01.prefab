@@ -1478,6 +1478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc21355c441e1a74aa2e26de0ddfd84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  isFlying: 0
   UnitName: Test
   UnitClass: 2
   OwnerPlayer: {fileID: 0}
@@ -1488,22 +1490,51 @@ MonoBehaviour:
   MovementRange: 5
   MaxHeight: 100
   State: 0
-  currentTile: {fileID: 0}
-  currentPath: []
-  gridPosition: {x: 0, y: 0}
-  AP: 2
-  HP: 5
-  maxHP: 10
-  IconImage: {fileID: 0}
+  CurrentTile: {fileID: 0}
+  CurrentPath: []
+  GridPosition: {x: 0, y: 0}
+  AP:
+    name: AP
+    attribute: 3
+    _value: 2
+  APMax:
+    name: APmax
+    attribute: 6
+    _value: 2
+  HP:
+    name: HP
+    attribute: 1
+    _value: 10
+  HPMax:
+    name: HPmax
+    attribute: 4
+    _value: 10
+  MP:
+    name: MP
+    attribute: 1
+    _value: 10
+  MPMax:
+    name: MPmax
+    attribute: 4
+    _value: 10
+  Dexterity:
+    name: Dex
+    attribute: 8
+    _value: 10
+  Strenght:
+    name: Str
+    attribute: 7
+    _value: 10
+  Magic:
+    name: Magic
+    attribute: 9
+    _value: 10
   ToHitChance: .800000012
   EvadeChance: .0500000007
   CritChance: .0500000007
   CritMultiplier: 1.5
   MinCurrentWeaponAtk: 1
   MaxCurrentWeaponAtk: 5
-  Strength: 10
-  Dexterity: 5
-  Magic: 1
   PhysicalDef: 5
 --- !u!136 &13691724
 CapsuleCollider:
