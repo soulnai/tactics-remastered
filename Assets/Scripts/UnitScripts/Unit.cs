@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    public Sprite Icon;
+    public bool isFlying = false;
+
     //имя
     public string UnitName;
     //класс
@@ -28,16 +31,26 @@ public class Unit : MonoBehaviour
     public int MaxHeight = 100;
     public unitStates State;
 	//Тайл на котором находится юнит
-	public Tile currentTile;
+	public Tile CurrentTile;
 	//Текущий путь
-	public List<Tile> currentPath;
+	public List<Tile> CurrentPath;
     //текущая позиция на карте
-    public Vector2 gridPosition = Vector2.zero;
+    public Vector2 GridPosition = Vector2.zero;
 	//количество очков действия
-	public int AP = 2;
-	//количество очков жизни
-	public int HP = 5;
-    public int maxHP = 10;
+
+    public BaseAttribute AP;
+    public BaseAttribute APMax;
+
+    public BaseAttribute HP;
+    public BaseAttribute HPMax;
+
+    public BaseAttribute MP;
+    public BaseAttribute MPMax;
+
+    public BaseAttribute Dexterity;
+    public BaseAttribute Strenght;
+    public BaseAttribute Magic;
+
     //текущее действие юнита
     private unitActions _currentAction;
     public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction, value); } }
@@ -56,10 +69,6 @@ public class Unit : MonoBehaviour
     //Максимальный урон текущего оружия
     public int MaxCurrentWeaponAtk;
 
-    public int Strength;
-    public int Dexterity;
-    public int Magic;
-
     //Физическая защита (поглощение урона)
     public int PhysicalDef;
 
@@ -70,17 +79,9 @@ public class Unit : MonoBehaviour
         CurrentAction = unitActions.idle;
     }
 
-    public void TurnInit(Player p)
-    {
-        if (p == OwnerPlayer)
-        {
-            AP = 2;
-        }
-    }
-
     public void MoveTo(Tile destinationTile)
     {
-        GM.Map.GeneratePath(currentTile, destinationTile);
+        GM.Map.GeneratePath(CurrentTile, destinationTile);
         CurrentAction = unitActions.moving;
         Move();
         //TODO CheckAP(this);
@@ -90,21 +91,21 @@ public class Unit : MonoBehaviour
 
     public void Move()
     {
-        if (currentPath.Count > 0)
+        if (CurrentPath.Count > 0)
         {
-            if (AP > 0 && MovementRange >= GM.Map.CalcPathCost(this))
+            if (AP.Value > 0 && MovementRange >= GM.Map.CalcPathCost(this))
             {
                 GM.BattleData.UnitControlState = unitTurnStates.blockInteract;
 
-                Vector3[] VectorPath = new Vector3[currentPath.Count];
+                Vector3[] VectorPath = new Vector3[CurrentPath.Count];
                 int i = 0;
-                foreach (Tile t in currentPath)
+                foreach (Tile t in CurrentPath)
                 {
                     VectorPath[i] = t.transform.position;
                     i++;
                     t.hideHighlight();
                 }
-                float pathTime = currentPath.Count * 0.5f;
+                float pathTime = CurrentPath.Count * 0.5f;
                 transform.DOPath(VectorPath, pathTime).OnWaypointChange(OnWaypointChange).OnComplete(OnMoveComplete);
 
                 ReduceAP();
@@ -120,24 +121,24 @@ public class Unit : MonoBehaviour
     {
         CurrentAction = unitActions.idle;
         GM.Events.UnitActionCompleted(this);
-        currentTile = currentPath[currentPath.Count-1];
-        currentPath.Clear();
+        CurrentTile = CurrentPath[CurrentPath.Count-1];
+        CurrentPath.Clear();
         GM.BattleData.UnitControlState = unitTurnStates.canInteract;
     }
 
     void OnWaypointChange(int waypointIndex)
     {
-        transform.LookAt(currentPath[waypointIndex].transform.position);
-        currentTile = currentPath[waypointIndex];
+        transform.LookAt(CurrentPath[waypointIndex].transform.position);
+        CurrentTile = CurrentPath[waypointIndex];
     }
 
     public void ReduceAP()
     {
-        if (AP > 0)
+        if (AP.Value > 0)
         {
-            AP -= 1;
+            AP.Value -= 1;
         }
-        else if (AP <= 0)
+        else if (AP.Value <= 0)
         {
         }
     }

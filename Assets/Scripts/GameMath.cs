@@ -9,19 +9,19 @@ public static class GameMath {
         switch(attacker.UnitClass)
         {
             case EnumSpace.unitClass.knigth:
-                MainStat = attacker.Strength;
+                MainStat = attacker.Strenght.Value;
                 break;
             case EnumSpace.unitClass.archer:
-                MainStat = attacker.Dexterity;
+                MainStat = attacker.Dexterity.Value;
                 break;
             case EnumSpace.unitClass.mage:
-                MainStat = attacker.Magic;
+                MainStat = attacker.Magic.Value;
                 break;
             case EnumSpace.unitClass.squire:
-                MainStat = attacker.Dexterity;
+                MainStat = attacker.Dexterity.Value;
                 break;
             case EnumSpace.unitClass.none:
-                MainStat = attacker.Strength;
+                MainStat = attacker.Strenght.Value;
                 break;
         }
 
@@ -96,12 +96,12 @@ public static class GameMath {
 
     public static void applyDamage(Unit target, int damage) 
     {
-        target.HP -= damage;
+        target.HP.Value -= damage;
     }
 
     public static bool checkHeight(Unit attacker, Unit defender) 
     {
-        if (Mathf.Abs(attacker.currentTile.height - defender.currentTile.height) > 1f)
+        if (Mathf.Abs(attacker.CurrentTile.height - defender.CurrentTile.height) > 1f)
         {
             return false;
         }
@@ -114,6 +114,6 @@ public static class GameMath {
 
     public static float checkHeightAdvantage(Unit attacker, Unit defender)
     {
-        return attacker.currentTile.height - defender.currentTile.height;
+        return attacker.CurrentTile.height - defender.CurrentTile.height;
     }
 }

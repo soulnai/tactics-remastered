@@ -1362,6 +1362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc21355c441e1a74aa2e26de0ddfd84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  isFlying: 0
   UnitName: Test
   UnitClass: 6
   OwnerPlayer: {fileID: 0}
@@ -1372,12 +1374,45 @@ MonoBehaviour:
   MovementRange: 5
   MaxHeight: 100
   State: 0
-  currentTile: {fileID: 0}
-  currentPath: []
-  gridPosition: {x: 0, y: 0}
-  AP: 2
-  HP: 5
-  maxHP: 5
+  CurrentTile: {fileID: 0}
+  CurrentPath: []
+  GridPosition: {x: 0, y: 0}
+  AP:
+    name: 
+    attribute: 3
+    _value: 2
+  APMax:
+    name: 
+    attribute: 6
+    _value: 2
+  HP:
+    name: 
+    attribute: 1
+    _value: 10
+  HPMax:
+    name: 
+    attribute: 4
+    _value: 10
+  MP:
+    name: 
+    attribute: 1
+    _value: 10
+  MPMax:
+    name: 
+    attribute: 4
+    _value: 10
+  Dexterity:
+    name: 
+    attribute: 8
+    _value: 10
+  Strenght:
+    name: 
+    attribute: 7
+    _value: 10
+  Magic:
+    name: 
+    attribute: 9
+    _value: 10
   IconImage: {fileID: 0}
   ToHitChance: .899999976
   EvadeChance: .100000001
@@ -1385,9 +1420,6 @@ MonoBehaviour:
   CritMultiplier: 1.5
   MinCurrentWeaponAtk: 1
   MaxCurrentWeaponAtk: 5
-  Strength: 5
-  Dexterity: 10
-  Magic: 5
   PhysicalDef: 3
 --- !u!114 &11411186
 MonoBehaviour:
@@ -1687,6 +1719,102 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxHP
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AP.name
+      value: AP
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AP.attribute
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: APMax.name
+      value: APmax
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: APMax.attribute
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HP.attribute
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HPMax.attribute
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HP.name
+      value: HP
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HPMax.name
+      value: HPmax
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MP.attribute
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MPMax.attribute
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Dexterity.attribute
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Strenght.attribute
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Magic.attribute
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Dexterity.name
+      value: Dexterity
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Strenght.name
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Magic.name
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MP.name
+      value: MP
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MPMax.name
+      value: MPmax
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AP._value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: APMax._value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HP._value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HPMax._value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MP._value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MPMax._value
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         foreach (Unit unit in SpawnedPartyUnits)
         {
-            unit.AP = 2;
+            unit.AP.Value = 2;
         }
     }
 }

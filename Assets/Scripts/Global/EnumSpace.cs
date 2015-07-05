@@ -94,9 +94,9 @@ namespace EnumSpace {
 		HP = 1,
 		MP =2,
 		AP = 3,
-		HPmax = 4,
-		MPmax = 5,
-		APmax = 6,
+		HPMax = 4,
+		MPMax = 5,
+		APMax = 6,
 
 		//Base Attributes
 		strenght = 7,

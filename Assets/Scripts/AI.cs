@@ -39,17 +39,17 @@ public static class AI  {
         {
             GM.Events.OnUnitActionChange -= AILogic;
 
-            List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.currentTile, 1);
+            List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.CurrentTile, 1);
             
             if (enemyUnits.Count > 0)
             {
                 //TODO add range of available attacks check
                 Debug.Log("ATTACK");
-                AIAttack(unit, enemyUnits.OrderBy(x => x != null ? -x.HP : 1000).First());
+                AIAttack(unit, enemyUnits.OrderBy(x => x != null ? -x.HP.Value : 1000).First());
             }
-            else if ((unit.CurrentAction == unitActions.idle) && (unit.AP > 0))
+            else if ((unit.CurrentAction == unitActions.idle) && (unit.AP.Value > 0))
             {
-                List<Unit> enemyUnitsToMove = GM.Map.getAllUnitsinArea(unit.currentTile, unit.MovementRange * 2);
+                List<Unit> enemyUnitsToMove = GM.Map.getAllUnitsinArea(unit.CurrentTile, unit.MovementRange * 2);
                 if (enemyUnitsToMove.Count > 0)
                 {
                     Debug.Log("Move1");
@@ -81,7 +81,7 @@ public static class AI  {
 
     public static void AIAttack(Unit AIunit, Unit target) 
     {
-        if (AIunit.AP > 0)
+        if (AIunit.AP.Value > 0)
         {
             int damage = GameMath.CalculateDamage(AIunit, target);
             GameMath.applyDamage(target, damage);
@@ -105,9 +105,9 @@ public static class AI  {
         //find nearest opponent
         Unit opponent = GM.Map.FindNearestEnemy(unitAI, opponentsInRange);
         Tile[] blocked = GM.Map.BlockedTiles();
-        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.currentTile, opponent.currentTile, blocked, unitAI.MaxHeight);
+        List<Tile> pathToOpponent = TilePathFinder.FindPath(unitAI.CurrentTile, opponent.CurrentTile, blocked, unitAI.MaxHeight);
 
-        unitAI.currentPath = pathToOpponent;
+        unitAI.CurrentPath = pathToOpponent;
         if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
         {
             Debug.Log("Path reduce");

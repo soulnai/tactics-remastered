@@ -16,7 +16,8 @@ public class EventManager : Singleton<EventManager>
     public Action<Unit> OnUnitTurnEnd;
     public Action<Unit> OnUnitTurnStart;
     public Action<Unit> OnUnitActionComplete; 
-    public Action<Unit, unitActions,unitActions> OnUnitActionChange; 
+    public Action<Unit, unitActions,unitActions> OnUnitActionChange;
+    public Action<BaseAttribute, float, float> OnUnitAttributeChange;
     
     //change action state
     public Action<Unit, EnumSpace.unitActions> OnUnitStateChange;
@@ -28,6 +29,16 @@ public class EventManager : Singleton<EventManager>
     public Action<Unit> OnCurrentUnitChanged;
  
     protected EventManager() { } // guarantee this will be always a singleton only - can't use the constructor!
+
+    public void UnitAttributeChanged(BaseAttribute attribute, float prevVal, float currVal)
+    {
+        if (OnUnitAttributeChange != null)
+        {
+            OnUnitAttributeChange(attribute,prevVal,currVal);  
+
+        }
+        Debug.Log(attribute.name + " - changed: "+prevVal + " -> "+currVal);
+    }
 
     public void PlayerTurnEnded(Player player)
     {

@@ -7,41 +7,25 @@ using System.Xml;
 using System.Xml.Serialization;
 
 [System.Serializable]
-public class BaseAttribute : ICloneable {
+public class BaseAttribute {
 	public string name;
 	public unitAttributes attribute;
+//    public Unit owner;
+
 	public int _value;
 	public int Value{
 		get{return _value;}
 		set{
-			_value = value;
-			//if(owner != null)
-				//TODO EventManager.UnitAttributeChanged(owner,this);
+            if(GM.Events != null)
+                GM.Events.UnitAttributeChanged(this, (float)_value, (float)value);
+   			_value = value;
 		}
 	}
 
-	private Unit owner;
-
-   /* internal static float GetMaxAttributeValue(BaseAttribute at)
+    public BaseAttribute(unitAttributes attr, int val,string n = "")
     {
-        if (at.owner != null)
-        {
-            switch (at.attribute)
-            {
-                case unitAttributes.AP:
-                    return at.owner.getAttribute(unitAttributes.APmax).valueMod;
-                case unitAttributes.HP:
-                    return at.owner.getAttribute(unitAttributes.HPmax).valueMod;
-                case unitAttributes.MP:
-                    return at.owner.getAttribute(unitAttributes.MPmax).valueMod;
-            }
-        }
-        return at.valueMod;
+        name = n;
+        attribute = attr;
+        Value = val;
     }
-     */
-
-	public object Clone()
-	{
-		return this.MemberwiseClone();
-	}
 }

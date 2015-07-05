@@ -134,7 +134,7 @@ public class MapUtils : Singleton<MapUtils>
         {
             tile.showHighlight(Color.red);
         }
-        GM.BattleData.CurrentUnit.currentPath = path;
+        GM.BattleData.CurrentUnit.CurrentPath = path;
     }
 
     public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits)
@@ -142,23 +142,23 @@ public class MapUtils : Singleton<MapUtils>
         Debug.Log(unit.name);
         foreach (Unit u in ListOfUnits)
         {
-            Debug.Log(u.currentTile.gridPosition);
+            Debug.Log(u.CurrentTile.gridPosition);
         }
 
         Unit opponent = new Unit();
         if (ListOfUnits.Count > 0)
         {
-            var opponentsSortedByHp = (ListOfUnits.OrderBy(x => x.HP));
-            var opponentsSortedByPath = opponentsSortedByHp.OrderBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, BlockedTiles(), unit.MaxHeight).Count() : 1000);
+            var opponentsSortedByHp = (ListOfUnits.OrderBy(x => x.HP.Value));
+            var opponentsSortedByPath = opponentsSortedByHp.OrderBy(x => x != null ? TilePathFinder.FindPath(unit.CurrentTile, x.CurrentTile, BlockedTiles(), unit.MaxHeight).Count() : 1000);
             foreach (Unit opp in opponentsSortedByPath) 
             {
-                if (TilePathFinder.FindPath(unit.currentTile, opp.currentTile, BlockedTiles(), unit.MaxHeight).Count()<GM.BattleData.allTiles.Count()-GM.BattleData.blockedTiles.Count())
+                if (TilePathFinder.FindPath(unit.CurrentTile, opp.CurrentTile, BlockedTiles(), unit.MaxHeight).Count()<GM.BattleData.allTiles.Count()-GM.BattleData.blockedTiles.Count())
                 {
                     opponent = opp;
                     break;
                 }
             }
-            Debug.Log("TARGET ============================> "+ListOfUnits.OrderBy(x => x != null ? -x.HP : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.currentTile, x.currentTile, BlockedTiles(), unit.MaxHeight).Count() : 1000).First());
+            Debug.Log("TARGET ============================> "+ListOfUnits.OrderBy(x => x != null ? -x.HP.Value : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.CurrentTile, x.CurrentTile, BlockedTiles(), unit.MaxHeight).Count() : 1000).First());
         }
         return opponent;
     }
@@ -168,7 +168,7 @@ public class MapUtils : Singleton<MapUtils>
         List<Tile> tempBlocked = new List<Tile>();
         foreach (Unit u in GM.BattleData.currentPlayer.SpawnedPartyUnits)
         {
-            tempBlocked.Add(u.currentTile);
+            tempBlocked.Add(u.CurrentTile);
             //Debug.Log(u.currentTile.gridPosition);
         }
         return tempBlocked.ToArray();
@@ -189,7 +189,7 @@ public class MapUtils : Singleton<MapUtils>
         {
             if (u != GM.BattleData.CurrentUnit && u.AIControlled == false)
             {
-                if (availableTiles.Contains(u.currentTile))
+                if (availableTiles.Contains(u.CurrentTile))
                 {
                     opponentsInRange.Add(u);
                 }
@@ -201,9 +201,9 @@ public class MapUtils : Singleton<MapUtils>
     public int CalcPathCost(Unit unit)
     {
         int PathCost = 0;
-        for (int i = 0; i < unit.currentPath.Count; i++)
+        for (int i = 0; i < unit.CurrentPath.Count; i++)
         {
-            PathCost += unit.currentPath[i].movementCost;
+            PathCost += unit.CurrentPath[i].movementCost;
         }
         return PathCost;
     }

@@ -20,7 +20,7 @@ public class UnitSpawn : MonoBehaviour {
                 tile.transform.position,
 	            Quaternion.identity));
         Unit unit = go.GetComponent<Unit>();
-		unit.currentTile = tile;
+		unit.CurrentTile = tile;
 	    unit.OwnerPlayer = ownerPlayer;
         return unit;
 	}

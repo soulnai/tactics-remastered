@@ -24,7 +24,7 @@ public class AbilityEditor : Editor {
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         GUILayout.Label(myScript.AbilityName);
-        GUILayout.FlexibleSpace();
+        GUILayout.FlexibleSpace();  
         GUILayout.EndHorizontal();
 
         EditorGUILayout.Space();

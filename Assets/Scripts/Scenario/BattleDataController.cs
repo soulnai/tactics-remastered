@@ -126,7 +126,7 @@ public class BattleDataController : MonoBehaviour
         {
             foreach (Unit u in currentPlayer.SpawnedPartyUnits)
             {
-                if (u.AP > 0)
+                if (u.AP.Value > 0)
                 {
                     return u;
                 }
@@ -156,7 +156,7 @@ public class BattleDataController : MonoBehaviour
         {
             foreach (Unit unit in currentPlayer.SpawnedPartyUnits)
             {
-                if (unit.AP > 0)
+                if (unit.AP.Value > 0)
                 {
                     return unit;
                 }

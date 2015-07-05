@@ -120,7 +120,7 @@ public class Targeting : MonoBehaviour {
                 break;
             
             case SelectionType.Self:
-                TileTargets.Add(GM.BattleData.CurrentUnit.currentTile);
+                TileTargets.Add(GM.BattleData.CurrentUnit.CurrentTile);
                 break;
         }
         _ability.OnTilesSelected(TileTargets);
@@ -136,7 +136,7 @@ public class Targeting : MonoBehaviour {
                 break;
 
             case SelectionType.AllInRadius:
-                foreach (Unit u in GM.Map.getAllUnitsinArea(unit.currentTile, Radius))
+                foreach (Unit u in GM.Map.getAllUnitsinArea(unit.CurrentTile, Radius))
                 {
                     AddUnit(unit);
                 }
