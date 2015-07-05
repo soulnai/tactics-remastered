@@ -39,7 +39,7 @@ public static class AI  {
         {
             GM.Events.OnUnitActionChange -= AILogic;
 
-            List<Unit> enemyUnits = GM.Map.getAllUnitsinArea(unit.CurrentTile, 1);
+            List<Unit> enemyUnits = GM.Map.getAllUnitsinAreaForAttack(unit.CurrentTile, 1);
             
             if (enemyUnits.Count > 0)
             {

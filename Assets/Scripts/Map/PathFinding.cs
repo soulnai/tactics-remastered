@@ -76,4 +76,44 @@ public class TilePathFinder : MonoBehaviour {
 			closed.Distinct();
 			return closed;
 		}
+
+    public static List<Tile> FindAreaForAttack(Tile originTile, int movementPoints, Tile[] occupied, float maxHeightDiff = 100f)
+    {
+        List<Tile> closed = new List<Tile>();
+        List<TilePath> open = new List<TilePath>();
+
+        TilePath originPath = new TilePath();
+        originPath.addTile(originTile);
+
+        open.Add(originPath);
+
+        while (open.Count > 0)
+        {
+            open = open.OrderBy(x => x.Cost).ToList();
+            TilePath current = open[0];
+            open.Remove(open[0]);
+
+            if (closed.Contains(current.lastTile))
+            {
+                continue;
+            }
+            if (current.Cost > movementPoints)
+            {
+                continue;
+            }
+
+            closed.Add(current.lastTile);
+
+            foreach (Tile t in current.lastTile.neighbors)
+            {
+                if (t.impassible || occupied.Contains(t)) continue;
+                TilePath newTilePath = new TilePath(current);
+                newTilePath.addTileWithoutCost(t);
+                open.Add(newTilePath);
+            }
+        }
+        closed.Remove(originTile);
+        closed.Distinct();
+        return closed;
+    }
 }

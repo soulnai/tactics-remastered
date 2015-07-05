@@ -198,6 +198,30 @@ public class MapUtils : Singleton<MapUtils>
         return opponentsInRange;
     }
 
+    public List<Unit> getAllUnitsinAreaForAttack(Tile center, int radius)
+    {
+        List<Tile> availableTiles = new List<Tile>();
+        List<Unit> opponentsInRange = new List<Unit>();
+        //find all available tiles in area
+        availableTiles = TilePathFinder.FindAreaForAttack(center, radius, GM.BattleData.blockedTiles.ToArray(), 0.6f);
+        foreach (Tile t in availableTiles)
+        {
+            //t.highlight.GetComponent<Renderer>().enabled = true;
+        }
+        //find all units in area
+        foreach (Unit u in GM.BattleData.Players[0].SpawnedPartyUnits)
+        {
+            if (u != GM.BattleData.CurrentUnit && u.AIControlled == false)
+            {
+                if (availableTiles.Contains(u.CurrentTile))
+                {
+                    opponentsInRange.Add(u);
+                }
+            }
+        }
+        return opponentsInRange;
+    }
+
     public int CalcPathCost(Unit unit)
     {
         int PathCost = 0;

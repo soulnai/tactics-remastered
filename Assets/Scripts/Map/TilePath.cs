@@ -30,4 +30,11 @@ public class TilePath {
 		Tiles.Add(t);
 		lastTile = t;
 	}
+
+    public void addTileWithoutCost(Tile t)
+    {
+        Cost += 1;
+        Tiles.Add(t);
+        lastTile = t;
+    }
 }
