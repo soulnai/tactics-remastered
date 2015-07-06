@@ -229,7 +229,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
@@ -432,7 +432,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
@@ -602,7 +602,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
@@ -1095,6 +1095,7 @@ GameObject:
   - 224: {fileID: 1693503940}
   - 222: {fileID: 1693503939}
   - 114: {fileID: 1693503938}
+  - 114: {fileID: 1693503941}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1150,6 +1151,20 @@ RectTransform:
   m_AnchoredPosition: {x: 1.43051147e-06, y: 5.72200042e-06}
   m_SizeDelta: {x: 157.399994, y: 234.800003}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1693503941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1693503937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b92a02098130d42b237e643942683c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerToWatch: {fileID: 0}
+  UnitToWatch: {fileID: 0}
+  WatchElements: []
 --- !u!1 &1821531212
 GameObject:
   m_ObjectHideFlags: 0

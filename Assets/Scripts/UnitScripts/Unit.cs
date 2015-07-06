@@ -37,9 +37,27 @@ public class Unit : MonoBehaviour
     //текущая позиция на карте
     public Vector2 GridPosition = Vector2.zero;
 	//количество очков действия
-    
+
+    private List<BaseAttribute> _attributesList;
+
     [HideInInspector]
-    public List<BaseAttribute> AttributesList; 
+    public List<BaseAttribute> AttributesList
+    {
+        get
+        {
+            _attributesList = new List<BaseAttribute>();
+            _attributesList.Add(AP);
+            _attributesList.Add(APMax);
+            _attributesList.Add(HP);
+            _attributesList.Add(HPMax);
+            _attributesList.Add(MP);
+            _attributesList.Add(MPMax);
+            _attributesList.Add(Dexterity);
+            _attributesList.Add(Strenght);
+            _attributesList.Add(Magic);
+            return _attributesList;
+        }
+    } 
 
     public BaseAttribute AP;
     public BaseAttribute APMax;
@@ -75,17 +93,8 @@ public class Unit : MonoBehaviour
     public int PhysicalDef;
 
 
-    public void Start()
+    public void Awake()
     {
-        AttributesList.Add(AP);
-        AttributesList.Add(APMax);
-        AttributesList.Add(HP);
-        AttributesList.Add(HPMax);
-        AttributesList.Add(MP);
-        AttributesList.Add(MPMax);
-        AttributesList.Add(Dexterity);
-        AttributesList.Add(Strenght);
-        AttributesList.Add(Magic);
         //GM.Events.OnPlayerTurnStart += TurnInit;
         CurrentAction = unitActions.idle;
     }

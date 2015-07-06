@@ -1401,38 +1401,47 @@ MonoBehaviour:
   AP:
     name: AP
     attribute: 3
+    owner: {fileID: 0}
     _value: 2
   APMax:
     name: APmax
     attribute: 6
+    owner: {fileID: 0}
     _value: 2
   HP:
     name: HP
     attribute: 1
+    owner: {fileID: 0}
     _value: 10
   HPMax:
     name: HPmax
     attribute: 4
+    owner: {fileID: 0}
     _value: 10
   MP:
     name: MP
-    attribute: 1
+    attribute: 2
+    owner: {fileID: 0}
     _value: 10
   MPMax:
     name: MPmax
-    attribute: 4
+    attribute: 5
+    owner: {fileID: 0}
     _value: 10
   Dexterity:
     name: Dex
     attribute: 8
+    owner: {fileID: 0}
     _value: 10
   Strenght:
     name: Str
     attribute: 7
+    owner: {fileID: 0}
     _value: 10
   Magic:
     name: Magic
     attribute: 9
+    owner: {fileID: 0}
     _value: 10
   ToHitChance: 0
   EvadeChance: 0
@@ -1675,7 +1684,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: MP.attribute
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MPMax.attribute
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100060}
