@@ -10,7 +10,8 @@ using System.Xml.Serialization;
 public class BaseAttribute {
 	public string name;
 	public unitAttributes attribute;
-
+    [HideInInspector]
+    public Unit owner;
 	public int _value;
 	public int Value{
 		get{return _value;}

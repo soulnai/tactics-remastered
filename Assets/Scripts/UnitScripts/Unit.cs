@@ -37,6 +37,9 @@ public class Unit : MonoBehaviour
     //текущая позиция на карте
     public Vector2 GridPosition = Vector2.zero;
 	//количество очков действия
+    
+    [HideInInspector]
+    public List<BaseAttribute> AttributesList; 
 
     public BaseAttribute AP;
     public BaseAttribute APMax;
@@ -74,6 +77,15 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
+        AttributesList.Add(AP);
+        AttributesList.Add(APMax);
+        AttributesList.Add(HP);
+        AttributesList.Add(HPMax);
+        AttributesList.Add(MP);
+        AttributesList.Add(MPMax);
+        AttributesList.Add(Dexterity);
+        AttributesList.Add(Strenght);
+        AttributesList.Add(Magic);
         //GM.Events.OnPlayerTurnStart += TurnInit;
         CurrentAction = unitActions.idle;
     }
