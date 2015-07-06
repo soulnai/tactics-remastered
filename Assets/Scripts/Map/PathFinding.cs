@@ -6,10 +6,16 @@ using System.Linq;
 public class TilePathFinder : MonoBehaviour {
 
 
-	public static List<Tile> FindPath(Tile originTile, Tile destinationTile, Tile[] occupied,float maxHeightDiff = 100f) {
+	public static List<Tile> FindPath(Tile originTile, Tile destinationTile, float maxHeightDiff = 100f) {
 		List<Tile> closed = new List<Tile>();
 		List<TilePath> open = new List<TilePath>();
-
+        Tile[] occupied = GM.Map.BlockedTiles();
+        if (occupied.Contains(destinationTile)) 
+        {
+            List<Tile> tmp = occupied.ToList();
+            tmp.Remove(destinationTile);
+            occupied = tmp.ToArray();
+        }
 
 		TilePath originPath = new TilePath();
 		originPath.addTile(originTile);
