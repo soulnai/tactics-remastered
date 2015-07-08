@@ -229,5 +229,40 @@
   </Tiles>
   <Trees />
   <Crates />
-  <MiscObjects />
+  <MiscObjects>
+    <Object locX="7" locY="12" prefabName="Chest01A" />
+    <Object locX="0" locY="10" prefabName="RoadSign01C" />
+    <Object locX="1" locY="14" prefabName="Tree02A" />
+    <Object locX="7" locY="4" prefabName="TreesTrunk02B" />
+    <Object locX="6" locY="0" prefabName="TreeTrunk01B" />
+    <Object locX="1" locY="3" prefabName="Tree04B" />
+    <Object locX="1" locY="0" prefabName="Tree04B" />
+    <Object locX="3" locY="3" prefabName="Tree04B" />
+    <Object locX="9" locY="14" prefabName="TreesTrunk02A" />
+    <Object locX="14" locY="14" prefabName="Grass01A" />
+    <Object locX="13" locY="14" prefabName="Grass01A" />
+    <Object locX="13" locY="13" prefabName="Grass01A" />
+    <Object locX="14" locY="12" prefabName="Grass01A" />
+    <Object locX="13" locY="12" prefabName="Grass01A" />
+    <Object locX="12" locY="12" prefabName="Grass01A" />
+    <Object locX="12" locY="13" prefabName="Grass01A" />
+    <Object locX="11" locY="14" prefabName="Grass01A" />
+    <Object locX="12" locY="14" prefabName="Grass01A" />
+    <Object locX="0" locY="14" prefabName="Grass01A" />
+    <Object locX="0" locY="13" prefabName="Grass01A" />
+    <Object locX="0" locY="3" prefabName="Grass01A" />
+    <Object locX="0" locY="4" prefabName="Grass01A" />
+    <Object locX="1" locY="4" prefabName="Grass01A" />
+    <Object locX="0" locY="1" prefabName="Grass01A" />
+    <Object locX="13" locY="1" prefabName="RoadSign01C" />
+    <Object locX="4" locY="7" prefabName="Rock01A" />
+    <Object locX="8" locY="4" prefabName="Rock01A" />
+    <Object locX="6" locY="11" prefabName="Rock01A" />
+    <Object locX="3" locY="12" prefabName="Rock01A" />
+    <Object locX="12" locY="7" prefabName="Rock01A" />
+    <Object locX="12" locY="9" prefabName="Tree03B" />
+    <Object locX="11" locY="13" prefabName="Tree03B" />
+    <Object locX="13" locY="3" prefabName="Tree03B" />
+    <Object locX="4" locY="10" prefabName="Tree03B" />
+  </MiscObjects>
 </MapCollection>

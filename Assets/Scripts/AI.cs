@@ -49,7 +49,7 @@ public static class AI  {
             }
             else if ((unit.CurrentAction == unitActions.idle) && (unit.AP.Value > 0))
             {
-                List<Unit> enemyUnitsToMove = GM.Map.getAllUnitsinArea(unit.CurrentTile, unit.MovementRange * 2);
+                List<Unit> enemyUnitsToMove = GM.BattleData.Players[0].SpawnedPartyUnits;
                 if (enemyUnitsToMove.Count > 0)
                 {
                     Debug.Log("Move1");
@@ -109,6 +109,7 @@ public static class AI  {
         unitAI.CurrentPath = pathToOpponent;
         if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
         {
+            Debug.Log(pathToOpponent.Count());
             Debug.Log("Path reduce");
             int movementCost = 0;
 
