@@ -1509,12 +1509,12 @@ MonoBehaviour:
     name: Dex
     attribute: 8
     owner: {fileID: 0}
-    _value: 10
+    _value: 5
   Strenght:
     name: Str
     attribute: 7
     owner: {fileID: 0}
-    _value: 10
+    _value: 15
   Magic:
     name: Magic
     attribute: 9
@@ -1736,6 +1736,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxHeight
       value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Strenght._value
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Dexterity._value
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

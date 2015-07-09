@@ -11,6 +11,9 @@ public static class GameMath {
             case EnumSpace.unitClass.knigth:
                 MainStat = attacker.Strenght.Value;
                 break;
+            case EnumSpace.unitClass.warrior:
+                MainStat = attacker.Strenght.Value;
+                break;
             case EnumSpace.unitClass.archer:
                 MainStat = attacker.Dexterity.Value;
                 break;
@@ -37,18 +40,24 @@ public static class GameMath {
                         int CritDamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef) * attacker.CritMultiplier);
                         if (CritDamageToApply <= 0)
                         {
+                            Debug.Log("Critical damage " + CritDamageToApply);
                             return 1;
                         }
+                        Debug.Log("Critical damage " + CritDamageToApply);
                         return CritDamageToApply;
                     }
                     int DamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef));
                     if (DamageToApply <= 0)
                     {
+                        Debug.Log("Hit on " + DamageToApply);
                         return 1;
                     }
+                    Debug.Log("Hit " + DamageToApply);
                     return DamageToApply;
                 }
+                Debug.Log("Target evade damage");
             }
+            Debug.Log("Hit missed!");
         }
         return 0;
     }

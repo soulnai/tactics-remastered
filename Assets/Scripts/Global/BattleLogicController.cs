@@ -2,6 +2,7 @@
 using EnumSpace;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using System.Collections;
 
 //using UnityEditor;
 
@@ -63,6 +64,14 @@ public class BattleLogicController : Singleton<BattleLogicController>
         {
             GM.BattleData.CurrentUnit = unit;
         }
+
+        if ((unit.OwnerPlayer != GM.BattleData.currentPlayer) &&
+    (GM.BattleData.UnitControlState == unitTurnStates.canInteract && GM.BattleData.CurrentUnit.AP.Value > 0))
+        {
+            int dmg = GameMath.CalculateDamage(GM.BattleData.CurrentUnit, unit);
+            GameMath.applyDamage(unit, dmg);
+            GM.BattleData.CurrentUnit.ReduceAP();
+        }
     }
 
     public void TileClick(Tile tile)
@@ -72,5 +81,14 @@ public class BattleLogicController : Singleton<BattleLogicController>
         {
             GM.BattleData.CurrentUnit.MoveTo(tile);
         }
+    }
+
+    public IEnumerator WaitForAnimation(Animation animation)
+    {
+        do
+        {
+            Debug.Log("waiting");
+            yield return new WaitForSeconds(0.5f);
+        } while (animation.isPlaying);
     }
 }

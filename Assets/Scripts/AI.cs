@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using EnumSpace;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public static class AI  {
 
@@ -83,6 +84,9 @@ public static class AI  {
     {
         if (AIunit.AP.Value > 0)
         {
+            Animation anim = AIunit.gameObject.GetComponentInChildren<Animation>();
+            //anim.Play("AttackMelee1");
+            //GM.BattleLogic.StartCoroutine(GM.BattleLogic.WaitForAnimation(anim));
             int damage = GameMath.CalculateDamage(AIunit, target);
             GameMath.applyDamage(target, damage);
             Debug.Log("Damage was applied " + damage);
