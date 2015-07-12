@@ -135,6 +135,7 @@ public class Targeting : MonoBehaviour {
         switch (Selection)
         {
             case SelectionType.Single:
+                //TODO check distance between units
                 AddUnit(unit);           
                 break;
 

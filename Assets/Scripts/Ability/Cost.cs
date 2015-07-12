@@ -19,21 +19,7 @@ public class Cost : MonoBehaviour {
         BaseAttribute attr = _ability.Owner.GetAttribute(CostAttribute);
         
         //TODO move to the Math section all this calculations
-        switch (CostType)
-        {
-                case ModType.Add:
-                attr.Value += Value;
-                    break;
-                case ModType.Sub:
-                attr.Value -= Value;
-                break;
-                case ModType.Change:
-                attr.Value = Value;
-                break;
-                case ModType.Percent:
-                attr.Value = attr.Value*Value;
-                break;
-        }
+        GameMath.ChangeAttribute(attr,CostType,Value);
     }
 
     public bool CanPayCost()

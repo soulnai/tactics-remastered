@@ -76,25 +76,6 @@ public class MapUtils : Singleton<MapUtils>
             GM.BattleData.blockedTiles.Add(tileTospawn);
             miscObjects.Add(obj);
         }
-        /*
-		int treesCount = container.trees.Count;
-		for (int i = 0; i < treesCount; i++) {
-				string stuffType = container.trees.ElementAt(i).prefabName;
-                Tile tileTospawn = GM.Scenario.map[container.trees.ElementAt(i).locX][container.trees.ElementAt(i).locY];
-				Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
-				tileTospawn.impassible = true;
-				GM.BattleData.blockedTiles.Add(tileTospawn);
-		}
-
-		int cratesCount = container.crates.Count;
-		
-		for (int i = 0; i < cratesCount; i++) {
-			string stuffType = container.crates.ElementAt(i).prefabName;
-            Tile tileTospawn = GM.Scenario.map[container.crates.ElementAt(i).locX][container.crates.ElementAt(i).locY];
-			Instantiate(GM.Prefabs.Prefabs[stuffType], tileTospawn.transform.position, Quaternion.Euler(-90, 90, 0));
-			tileTospawn.impassible = true;
-			GM.BattleData.blockedTiles.Add(tileTospawn);
-		}*/
 	}
 
     public void loadMapDetailsFromXml(string mapDetailesfile)
@@ -113,17 +94,6 @@ public class MapUtils : Singleton<MapUtils>
 		for (int i = 0; i < spawnTilesCount; i++) {
 			GM.Scenario.spawnArea.Add(GM.Scenario.map[container.spawnTiles.ElementAt(i).locX][container.spawnTiles.ElementAt(i).locY]);
 		}
-
-        //int playersCount = container.players.Count;
-        //Debug.Log(playersCount);
-		//for (int i = 0; i < container.players.Count; i++) {
-		//	Debug.Log("Units of Player"+i+":");
-		/*	for (int j = 0; j < container.players[1].units.Count; j++) {
-				GlobalGameController.Instance.AIPlayer.AvailableUnits.Add(GlobalPrefabHolder.Instance.Prefabs[container.players[1].units[j].prefabName].GetComponent<Unit>());
-				Debug.Log(container.players[1].units[j].prefabName);
-			}*/
-	//}
-
     }
 
     public void GeneratePath(Tile from, Tile to)
@@ -134,6 +104,12 @@ public class MapUtils : Singleton<MapUtils>
             tile.showHighlight(Color.red);
         }
         GM.BattleData.CurrentUnit.CurrentPath = path;
+    }
+
+    public int GetDistance(Tile a,Tile b)
+    {
+        //TODO distance
+        return 0;
     }
 
     public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits)
@@ -158,7 +134,7 @@ public class MapUtils : Singleton<MapUtils>
                     break;
                 }
             }
-            Debug.Log("TARGET ============================> "+ListOfUnits.OrderBy(x => x != null ? -x.HP.Value : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.CurrentTile, x.CurrentTile, unit.MaxHeight).Count() : 1000).First());
+            Debug.Log("TARGET -> "+ListOfUnits.OrderBy(x => x != null ? -x.HP.Value : 1000).ThenBy(x => x != null ? TilePathFinder.FindPath(unit.CurrentTile, x.CurrentTile, unit.MaxHeight).Count() : 1000).First());
         }
         return opponent;
     }
@@ -183,10 +159,7 @@ public class MapUtils : Singleton<MapUtils>
         List<Unit> opponentsInRange = new List<Unit>();
         //find all available tiles in area
         availableTiles = TilePathFinder.FindArea(center, radius, GM.BattleData.blockedTiles.ToArray(), 100f);
-        foreach (Tile t in availableTiles)
-        {
-            //t.highlight.GetComponent<Renderer>().enabled = true;
-        }
+
         //find all units in area
         foreach (Unit u in GM.BattleData.Players[0].SpawnedPartyUnits)
         {
@@ -207,10 +180,7 @@ public class MapUtils : Singleton<MapUtils>
         List<Unit> opponentsInRange = new List<Unit>();
         //find all available tiles in area
         availableTiles = TilePathFinder.FindAreaForAttack(center, radius, GM.BattleData.blockedTiles.ToArray(), 0.6f);
-        foreach (Tile t in availableTiles)
-        {
-            //t.highlight.GetComponent<Renderer>().enabled = true;
-        }
+
         //find all units in area
         foreach (Unit u in GM.BattleData.Players[0].SpawnedPartyUnits)
         {

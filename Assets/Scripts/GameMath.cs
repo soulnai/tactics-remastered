@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using EnumSpace;
 
 public static class GameMath {
     //TODO: add case for attack type to choose defence type
@@ -120,10 +121,6 @@ public static class GameMath {
         {
             MakeDead(target);
         }
-        /*target.gameObject.GetComponentInChildren<Text>().enabled = true;
-        Text DamagePopup = target.gameObject.GetComponentInChildren<Text>();
-        DamagePopup.text = damage.ToString();
-        DamagePopup.gameObject.transform.DOMove(DamagePopup.gameObject.transform.position + new Vector3(0, 0.3f, 0.3f), 1f).OnComplete(() => OnPopupComplete(target) );*/
     }
 
     private static void MakeDead(Unit target)
@@ -133,13 +130,6 @@ public static class GameMath {
         target.State = EnumSpace.unitStates.dead;
         target.OwnerPlayer.SpawnedPartyUnits.Remove(target);
     }
-
-    /*public static void OnPopupComplete(Unit target) 
-    {
-        Text DamagePopup = target.gameObject.GetComponentInChildren<Text>();
-        target.gameObject.GetComponentInChildren<Text>().enabled = false;
-        DamagePopup.gameObject.transform.DOMove(DamagePopup.gameObject.transform.position + new Vector3(0, -0.3f, -0.3f), 1f);
-    }*/
 
     public static bool checkHeight(Unit attacker, Unit defender) 
     {
@@ -157,5 +147,24 @@ public static class GameMath {
     public static float checkHeightAdvantage(Unit attacker, Unit defender)
     {
         return attacker.CurrentTile.height - defender.CurrentTile.height;
+    }
+
+    public static void ChangeAttribute(BaseAttribute attr,ModType type,int val)
+    {
+        switch (type)
+        {
+            case ModType.Add:
+                attr.Value += val;
+                break;
+            case ModType.Sub:
+                attr.Value -= val;
+                break;
+            case ModType.Change:
+                attr.Value = val;
+                break;
+            case ModType.Percent:
+                attr.Value = attr.Value * val;
+                break;
+        }
     }
 }
