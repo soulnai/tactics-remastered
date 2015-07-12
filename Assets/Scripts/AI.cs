@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using EnumSpace;
 using System.Linq;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public static class AI  {
 
@@ -49,7 +51,7 @@ public static class AI  {
             }
             else if ((unit.CurrentAction == unitActions.idle) && (unit.AP.Value > 0))
             {
-                List<Unit> enemyUnitsToMove = GM.Map.getAllUnitsinArea(unit.CurrentTile, unit.MovementRange * 2);
+                List<Unit> enemyUnitsToMove = GM.BattleData.Players[0].SpawnedPartyUnits;
                 if (enemyUnitsToMove.Count > 0)
                 {
                     Debug.Log("Move1");
@@ -83,6 +85,9 @@ public static class AI  {
     {
         if (AIunit.AP.Value > 0)
         {
+            Animation anim = AIunit.gameObject.GetComponentInChildren<Animation>();
+            //anim.Play("AttackMelee1");
+            //GM.BattleLogic.StartCoroutine(GM.BattleLogic.WaitForAnimation(anim));
             int damage = GameMath.CalculateDamage(AIunit, target);
             GameMath.applyDamage(target, damage);
             Debug.Log("Damage was applied " + damage);
@@ -109,6 +114,7 @@ public static class AI  {
         unitAI.CurrentPath = pathToOpponent;
         if (GM.Map.CalcPathCost(unitAI) > unitAI.MovementRange)
         {
+            Debug.Log(pathToOpponent.Count());
             Debug.Log("Path reduce");
             int movementCost = 0;
 

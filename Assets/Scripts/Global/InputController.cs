@@ -83,7 +83,7 @@ public class InputController : Singleton<InputController>
 
 	public void OnUnitClicked(Unit u)
 	{
-		if (OnUnitClick != null)
+		if (OnUnitClick != null && u.State != unitStates.dead)
 			OnUnitClick(u);
 	}
 

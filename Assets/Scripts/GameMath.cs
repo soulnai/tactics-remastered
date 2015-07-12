@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public static class GameMath {
     //TODO: add case for attack type to choose defence type
@@ -9,6 +11,9 @@ public static class GameMath {
         switch(attacker.UnitClass)
         {
             case EnumSpace.unitClass.knigth:
+                MainStat = attacker.Strenght.Value;
+                break;
+            case EnumSpace.unitClass.warrior:
                 MainStat = attacker.Strenght.Value;
                 break;
             case EnumSpace.unitClass.archer:
@@ -28,6 +33,7 @@ public static class GameMath {
 
         if (checkHeight(attacker, defender))
         {
+            Text Log = GameObject.Find("LogText").GetComponent<Text>();
             if (CheckHit(attacker, defender))
             {
                 if (!CheckEvade(attacker, defender))
@@ -37,18 +43,31 @@ public static class GameMath {
                         int CritDamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef) * attacker.CritMultiplier);
                         if (CritDamageToApply <= 0)
                         {
+                            Log = GameObject.Find("LogText").GetComponent<Text>();
+                            Log.text = Log.text + "<color=red>Critical damage = " + CritDamageToApply + "</color> \n";
+                            Debug.Log("Critical damage " + CritDamageToApply);
                             return 1;
                         }
+                        Log.text = Log.text + "<color=red>Critical damage = " + CritDamageToApply + "</color> \n";
+                        Debug.Log("Critical damage " + CritDamageToApply);
                         return CritDamageToApply;
                     }
                     int DamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef));
                     if (DamageToApply <= 0)
                     {
+                        Log.text = Log.text + "<color=green>Hit on = " + DamageToApply + "</color> \n";
+                        Debug.Log("Hit on " + DamageToApply);
                         return 1;
                     }
+                    Log.text = Log.text + "<color=green>Hit = " + DamageToApply + "</color> \n";
+                    Debug.Log("Hit " + DamageToApply);
                     return DamageToApply;
                 }
+                Log.text = Log.text + "<color=blue>Target evade damage </color> \n";
+                Debug.Log("Target evade damage");
             }
+            Log.text = Log.text + "<color=blue>Hit missed! </color> \n";
+            Debug.Log("Hit missed!");
         }
         return 0;
     }
@@ -97,7 +116,30 @@ public static class GameMath {
     public static void applyDamage(Unit target, int damage) 
     {
         target.HP.Value -= damage;
+        if (target.HP.Value <= 0) 
+        {
+            MakeDead(target);
+        }
+        /*target.gameObject.GetComponentInChildren<Text>().enabled = true;
+        Text DamagePopup = target.gameObject.GetComponentInChildren<Text>();
+        DamagePopup.text = damage.ToString();
+        DamagePopup.gameObject.transform.DOMove(DamagePopup.gameObject.transform.position + new Vector3(0, 0.3f, 0.3f), 1f).OnComplete(() => OnPopupComplete(target) );*/
     }
+
+    private static void MakeDead(Unit target)
+    {
+        Animation anim = target.gameObject.GetComponentInChildren<Animation>();
+        anim.Play("Death");
+        target.State = EnumSpace.unitStates.dead;
+        target.OwnerPlayer.SpawnedPartyUnits.Remove(target);
+    }
+
+    /*public static void OnPopupComplete(Unit target) 
+    {
+        Text DamagePopup = target.gameObject.GetComponentInChildren<Text>();
+        target.gameObject.GetComponentInChildren<Text>().enabled = false;
+        DamagePopup.gameObject.transform.DOMove(DamagePopup.gameObject.transform.position + new Vector3(0, -0.3f, -0.3f), 1f);
+    }*/
 
     public static bool checkHeight(Unit attacker, Unit defender) 
     {

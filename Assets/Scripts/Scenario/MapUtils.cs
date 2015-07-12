@@ -151,8 +151,9 @@ public class MapUtils : Singleton<MapUtils>
             var opponentsSortedByPath = opponentsSortedByHp.OrderBy(x => x != null ? TilePathFinder.FindPath(unit.CurrentTile, x.CurrentTile, unit.MaxHeight).Count() : 1000);
             foreach (Unit opp in opponentsSortedByPath) 
             {
-                if (TilePathFinder.FindPath(unit.CurrentTile, opp.CurrentTile, unit.MaxHeight).Count()<GM.BattleData.allTiles.Count()-GM.BattleData.blockedTiles.Count())
+                if (TilePathFinder.FindPath(unit.CurrentTile, opp.CurrentTile, unit.MaxHeight).Count()<50)
                 {
+                    Debug.Log("Pathfinding count raw" + TilePathFinder.FindPath(unit.CurrentTile, opp.CurrentTile, unit.MaxHeight).Count());
                     opponent = opp;
                     break;
                 }

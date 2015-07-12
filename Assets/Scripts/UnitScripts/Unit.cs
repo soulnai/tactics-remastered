@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     //дальность перемещения тайлов за 1 АР
     public int MovementRange = 5;
     //максимальная разница высот для преодоления
-    public int MaxHeight = 100;
+    public float MaxHeight = 0.6f;
     public unitStates State;
 	//Тайл на котором находится юнит
 	public Tile CurrentTile;
