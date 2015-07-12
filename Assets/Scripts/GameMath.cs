@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public static class GameMath {
     //TODO: add case for attack type to choose defence type
@@ -106,7 +108,30 @@ public static class GameMath {
     public static void applyDamage(Unit target, int damage) 
     {
         target.HP.Value -= damage;
+        if (target.HP.Value <= 0) 
+        {
+            MakeDead(target);
+        }
+        /*target.gameObject.GetComponentInChildren<Text>().enabled = true;
+        Text DamagePopup = target.gameObject.GetComponentInChildren<Text>();
+        DamagePopup.text = damage.ToString();
+        DamagePopup.gameObject.transform.DOMove(DamagePopup.gameObject.transform.position + new Vector3(0, 0.3f, 0.3f), 1f).OnComplete(() => OnPopupComplete(target) );*/
     }
+
+    private static void MakeDead(Unit target)
+    {
+        Animation anim = target.gameObject.GetComponentInChildren<Animation>();
+        anim.Play("Death");
+        target.State = EnumSpace.unitStates.dead;
+        target.OwnerPlayer.SpawnedPartyUnits.Remove(target);
+    }
+
+    /*public static void OnPopupComplete(Unit target) 
+    {
+        Text DamagePopup = target.gameObject.GetComponentInChildren<Text>();
+        target.gameObject.GetComponentInChildren<Text>().enabled = false;
+        DamagePopup.gameObject.transform.DOMove(DamagePopup.gameObject.transform.position + new Vector3(0, -0.3f, -0.3f), 1f);
+    }*/
 
     public static bool checkHeight(Unit attacker, Unit defender) 
     {

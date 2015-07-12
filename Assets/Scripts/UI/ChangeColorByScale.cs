@@ -64,9 +64,18 @@ public class ChangeColorByScale : MonoBehaviour {
  public void SetHealthVisual()
  {
      float healthNormalized = (float)unit.GetComponent<Unit>().HP.Value / (float)unit.GetComponent<Unit>().HPMax.Value;
-     transform.localScale = new Vector3(healthNormalized,
-     transform.localScale.y,
-     transform.localScale.z);
+     if ((float)unit.GetComponent<Unit>().HP.Value > 0)
+     {
+         transform.localScale = new Vector3(healthNormalized,
+         transform.localScale.y,
+         transform.localScale.z);
+     }
+     else 
+     {
+         transform.localScale = new Vector3(0,
+         transform.localScale.y,
+         transform.localScale.z);
+     }
  }
 
 }
