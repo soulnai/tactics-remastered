@@ -33,6 +33,7 @@ public static class GameMath {
 
         if (checkHeight(attacker, defender))
         {
+            Text Log = GameObject.Find("LogText").GetComponent<Text>();
             if (CheckHit(attacker, defender))
             {
                 if (!CheckEvade(attacker, defender))
@@ -42,23 +43,30 @@ public static class GameMath {
                         int CritDamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef) * attacker.CritMultiplier);
                         if (CritDamageToApply <= 0)
                         {
+                            Log = GameObject.Find("LogText").GetComponent<Text>();
+                            Log.text = Log.text + "<color=red>Critical damage = " + CritDamageToApply + "</color> \n";
                             Debug.Log("Critical damage " + CritDamageToApply);
                             return 1;
                         }
+                        Log.text = Log.text + "<color=red>Critical damage = " + CritDamageToApply + "</color> \n";
                         Debug.Log("Critical damage " + CritDamageToApply);
                         return CritDamageToApply;
                     }
                     int DamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef));
                     if (DamageToApply <= 0)
                     {
+                        Log.text = Log.text + "<color=green>Hit on = " + DamageToApply + "</color> \n";
                         Debug.Log("Hit on " + DamageToApply);
                         return 1;
                     }
+                    Log.text = Log.text + "<color=green>Hit = " + DamageToApply + "</color> \n";
                     Debug.Log("Hit " + DamageToApply);
                     return DamageToApply;
                 }
+                Log.text = Log.text + "<color=blue>Target evade damage </color> \n";
                 Debug.Log("Target evade damage");
             }
+            Log.text = Log.text + "<color=blue>Hit missed! </color> \n";
             Debug.Log("Hit missed!");
         }
         return 0;

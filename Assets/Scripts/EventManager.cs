@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using System.Linq;
 using EnumSpace;
+using UnityEngine.UI;
 
 public class EventManager : Singleton<EventManager>
 {
@@ -47,6 +48,8 @@ public class EventManager : Singleton<EventManager>
             OnPlayerTurnEnd(player); 
             
         }
+        Text Log = GameObject.Find("LogText").GetComponent<Text>();
+        Log.text = Log.text + "<color=black>Player - " + player.PlayerName + " turn ended</color> \n";
         Debug.Log("Player - " + player.PlayerName + " turn ended");
     }
 
@@ -57,6 +60,8 @@ public class EventManager : Singleton<EventManager>
             OnPlayerTurnStart(player);
             
         }
+        Text Log = GameObject.Find("LogText").GetComponent<Text>();
+        Log.text = Log.text + "<color=black>Player - " + player.PlayerName + " turn started</color> \n";
         Debug.Log("Player - " + player.PlayerName + " turn started");
     }
 

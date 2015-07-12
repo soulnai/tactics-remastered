@@ -129,6 +129,8 @@ public class Unit : MonoBehaviour
             }
             else
             {
+                Text Log = GameObject.Find("LogText").GetComponent<Text>();
+                Log.text = Log.text + "Недостаточно АР \n";
                 Debug.Log("Недостаточно АР");
             }
         }
