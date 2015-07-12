@@ -48,12 +48,9 @@ public class Targeting : MonoBehaviour {
                 _ability.OnAbilitySelect += SelectSelf;
                 break;
                 case SelectionType.Single:
-                _ability.OnAbilitySelect += StartTargeting;
+                _ability.OnAbilitySelect += StartTargetingSingle;
                     break;
         }
-        if (Selection == SelectionType.Single)
-        {
-                    }
     }
 
     private void SelectAll(bool start)
@@ -88,7 +85,7 @@ public class Targeting : MonoBehaviour {
         }
     }
 
-    public void StartTargeting(bool start)
+    public void StartTargetingSingle(bool start)
     {
         if (start)
         {
@@ -98,11 +95,17 @@ public class Targeting : MonoBehaviour {
                 case TargetType.Tile:
                     GM.Input.OnTileClick += SelectTile;
                     break;
-            
+
                 case TargetType.Unit:
                     GM.Input.OnUnitClick += SelectUnit;
                     break;
             }
+        }
+
+        else
+        {
+            GM.Input.OnTileClick -= SelectTile;
+            GM.Input.OnUnitClick -= SelectUnit;
         }
     }
 
@@ -123,10 +126,10 @@ public class Targeting : MonoBehaviour {
                 TileTargets.Add(GM.BattleData.CurrentUnit.CurrentTile);
                 break;
         }
-        _ability.OnTilesSelected(TileTargets);
+        _ability.TilesSelected(TileTargets);
     }
 
-    public void SelectUnit(Unit unit=null)
+    public void SelectUnit(Unit unit = null)
     {
         UnitTargets.Clear();
         switch (Selection)
@@ -153,7 +156,7 @@ public class Targeting : MonoBehaviour {
                 }
                 break;
         }
-        _ability.OnUnitsSelected(UnitTargets);
+        _ability.UnitsSelected(UnitTargets);
     }
 
     private void AddUnit(Unit unit)

@@ -26,7 +26,7 @@ public class InputController : Singleton<InputController>
 
     }
 
-    public void OnAbilityClicked(Ability a)
+    public void AbilityClicked(Ability a)
     {
         if (OnAbilityClick != null)
             OnAbilityClick(a);

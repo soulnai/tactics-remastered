@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class MouseOverGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool UseOverUIFlag;
+    public bool UseOverUIFlag = true;
     private UIController _uiController;
 
 	// Use this for initialization

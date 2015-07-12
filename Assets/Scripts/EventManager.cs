@@ -22,13 +22,21 @@ public class EventManager : Singleton<EventManager>
     //change action state
     public Action<Unit, EnumSpace.unitActions> OnUnitStateChange;
     
-    // receive ability
-    public Action<List<Unit>, AbilityContainer> OnUnitAbilityReceived;
+    //  ability
+    public Action<Ability> OnAbilitySelect; 
 
     //Selection
     public Action<Unit> OnCurrentUnitChanged;
  
     protected EventManager() { } // guarantee this will be always a singleton only - can't use the constructor!
+
+    public void AbilitySelected(Ability a)
+    {
+        if (OnAbilitySelect != null)
+        {
+            OnAbilitySelect(a);
+        }
+    }
 
     public void UnitAttributeChanged(BaseAttribute attribute, float prevVal, float currVal)
     {

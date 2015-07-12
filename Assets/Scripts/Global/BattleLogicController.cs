@@ -17,8 +17,8 @@ public class BattleLogicController : Singleton<BattleLogicController>
 
     public void Init()
     {
-        InputController.Instance.OnTileClick += TileClick;
-        InputController.Instance.OnUnitClick += UnitClick;
+        InputController.Instance.OnTileClick += MoveToTile;
+        InputController.Instance.OnUnitClick += SelectUnit;
         StartPlayerTurn(GM.BattleData.currentPlayer);
         AI.InitAI();
     }
@@ -56,19 +56,21 @@ public class BattleLogicController : Singleton<BattleLogicController>
         }
     }
 
-    public void UnitClick(Unit unit)
+    public void SelectUnit(Unit unit)
     {
         if ((unit.OwnerPlayer == GM.BattleData.currentPlayer) &&
-            (GM.BattleData.UnitControlState == unitTurnStates.canInteract))
+            (GM.BattleData.UnitControlState == unitTurnStates.canInteract) &&
+            (!GM.UI.mouseOverGUI))
         {
             GM.BattleData.CurrentUnit = unit;
         }
     }
 
-    public void TileClick(Tile tile)
+    public void MoveToTile(Tile tile)
     {
         if ((GM.BattleData.CurrentUnit.OwnerPlayer == GM.BattleData.currentPlayer) &&
-            (GM.BattleData.UnitControlState == unitTurnStates.canInteract))
+            (GM.BattleData.UnitControlState == unitTurnStates.canInteract) && 
+            (!GM.UI.mouseOverGUI))
         {
             GM.BattleData.CurrentUnit.MoveTo(tile);
         }

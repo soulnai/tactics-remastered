@@ -74,7 +74,7 @@ public class Unit : MonoBehaviour
 
     //текущее действие юнита
     private unitActions _currentAction;
-    public unitActions CurrentAction { get { return _currentAction; } set { _currentAction = value; GM.Events.UnitActionChanged(this, _currentAction, value); } }
+    public unitActions CurrentAction { get { return _currentAction; } set { GM.Events.UnitActionChanged(this, _currentAction, value); _currentAction = value; } }
     
     //Шанс попасть по противнику
     public float ToHitChance;
@@ -97,6 +97,14 @@ public class Unit : MonoBehaviour
     {
         //GM.Events.OnPlayerTurnStart += TurnInit;
         CurrentAction = unitActions.idle;
+
+        for (int i = 0; i < Abilities.Count; i++)
+        {
+            GameObject go = Instantiate(Abilities[i].gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+            go.transform.SetParent(transform,false);
+            go.GetComponent<Ability>().Init(this);
+            Abilities[i] = go.GetComponent<Ability>();
+        }
     }
 
     public void MoveTo(Tile destinationTile)
@@ -158,5 +166,12 @@ public class Unit : MonoBehaviour
         else if (AP.Value <= 0)
         {
         }
+    }
+
+    public BaseAttribute GetAttribute(unitAttributes attribute)
+    {
+        BaseAttribute attr = null;
+        attr = AttributesList.Find(x => x.attribute == attribute);
+        return attr;
     }
 }

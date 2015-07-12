@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using EnumSpace;
 //using UnityEditor;
 
@@ -16,7 +18,38 @@ public class AttributeChanger : MonoBehaviour {
 	
 	void Awake () {
         _ability = GetComponent<Ability>();
+        _ability.OnUnitsSelect += ApplyToSelectedUnits;
 	}
 
+    private void ApplyToSelectedUnits(List<Unit> units)
+    {
+        if (GetComponent<Cost>().CanPayCost())
+        {
+            foreach (Unit unit in units)
+            {
+                BaseAttribute attr = unit.GetAttribute(Attribute);
+                ApplyToAttribute(attr);
+            }
+        }
+        _ability.Applied();
+    }
 
+    private void ApplyToAttribute(BaseAttribute attr)
+    {
+        switch (ModType)
+        {
+            case ModType.Add:
+                attr.Value += Value;
+                break;
+            case ModType.Sub:
+                attr.Value -= Value;
+                break;
+            case ModType.Percent:
+                attr.Value = attr.Value*Value;
+                break;
+            case ModType.Change:
+                attr.Value = Value;
+                break;
+        }
+    }
 }

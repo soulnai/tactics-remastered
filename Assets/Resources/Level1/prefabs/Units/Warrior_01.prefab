@@ -1486,7 +1486,9 @@ MonoBehaviour:
   AIControlled: 0
   Lvl: 0
   Expirience: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11429602, guid: b3da4457ce18d524ea99eb5cf36ff645, type: 2}
+  - {fileID: 11429602, guid: 76323475357613042b24f485d683f3af, type: 2}
   MovementRange: 5
   MaxHeight: 100
   State: 0
@@ -1686,6 +1688,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: Abilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: ToHitChance
       value: .800000012
       objectReference: {fileID: 0}
@@ -1733,6 +1739,16 @@ Prefab:
       propertyPath: MPMax.attribute
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Abilities.Array.data[1]
+      value: 
+      objectReference: {fileID: 11429602, guid: 76323475357613042b24f485d683f3af,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: Abilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 11429602, guid: b3da4457ce18d524ea99eb5cf36ff645,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100060}

@@ -1391,7 +1391,10 @@ MonoBehaviour:
   AIControlled: 0
   Lvl: 0
   Expirience: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11429602, guid: b3da4457ce18d524ea99eb5cf36ff645, type: 2}
+  - {fileID: 11429602, guid: 76323475357613042b24f485d683f3af, type: 2}
+  - {fileID: 11429602, guid: 76323475357613042b24f485d683f3af, type: 2}
   MovementRange: 5
   MaxHeight: 100
   State: 0
@@ -1685,6 +1688,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Abilities.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MP.attribute
       value: 2

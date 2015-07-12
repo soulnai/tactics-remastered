@@ -5,15 +5,16 @@ namespace EnumSpace {
 
     public enum ModType
     {
-        Sum = 0,
-        Percent = 1,
-        Change = 2
+        Add = 0,
+        Sub = 1,
+        Percent = 2,
+        Change = 3
     }
 
     public enum BuffType
     {
         Buff = 0,
-        Permanent = 1
+        NotBuff = 1
     }
 
     public enum ChangeType

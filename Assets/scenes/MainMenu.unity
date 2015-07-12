@@ -269,7 +269,6 @@ GameObject:
   - 114: {fileID: 776370983}
   - 114: {fileID: 776370982}
   - 114: {fileID: 776370981}
-  - 114: {fileID: 776370980}
   - 114: {fileID: 776370979}
   - 114: {fileID: 776370978}
   - 114: {fileID: 776370977}
@@ -334,18 +333,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f31b46a7d2d7da84e87fda9d982a3d53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &776370980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11450242, guid: ad38184fea4ac6c47a746e8dabe246b5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 776370975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &776370981

@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11449814}
   - 114: {fileID: 11425112}
   m_Layer: 0
-  m_Name: BaseAbility
+  m_Name: BaseMeleeAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: BaseAbility
-  Icon: {fileID: 21300000, guid: 952c1bc85ac921d4787e0e5ff0d5e21e, type: 3}
+  Icon: {fileID: 21300000, guid: 675dbc676a25be743b690e026ab493dd, type: 3}
   Owner: {fileID: 0}
 --- !u!114 &11440572
 MonoBehaviour:
@@ -116,7 +116,7 @@ MonoBehaviour:
   ModType: 1
   BuffType: 1
   Turns: 10
-  Value: 5
+  Value: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -125,21 +125,16 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: Icon
-      value: 
-      objectReference: {fileID: 21300000, guid: 952c1bc85ac921d4787e0e5ff0d5e21e,
-        type: 3}
-    - target: {fileID: 0}
       propertyPath: Value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: CostType
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Range
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CostType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

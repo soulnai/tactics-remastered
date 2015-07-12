@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumSpace;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -10,14 +11,47 @@ public class Ability : MonoBehaviour
     public Action<bool> OnAbilitySelect;
     public Action<List<Unit>> OnUnitsSelect;
     public Action<List<Tile>> OnTilesSelect;
+    public Action OnApply;
+
 
     public string AbilityName;
     public Sprite Icon;
 
-    [HideInInspector]
-    public bool Selected;
+    private bool _selected;
 
-    public void OnUnitsSelected(List<Unit> units)
+    [HideInInspector]
+    public bool Selected
+    {
+        get
+        {
+            return _selected; 
+            
+        }
+        set
+        {
+            if (_selected != value)
+            {
+                AbilitySelected(value);
+                _selected = value;
+            }
+        }
+    }
+    
+    [HideInInspector]
+    public Unit Owner;
+
+    public void Init(Unit u)
+    {
+        Owner = u;
+    }
+
+    public void AbilitySelected(bool s)
+    {
+        if (OnAbilitySelect != null)
+            OnAbilitySelect(s);
+    }
+
+    public void UnitsSelected(List<Unit> units)
     {
         if (OnUnitsSelect != null)
         {
@@ -25,7 +59,7 @@ public class Ability : MonoBehaviour
         }
     }
 
-    public void OnTilesSelected(List<Tile> tiles)
+    public void TilesSelected(List<Tile> tiles)
     {
         if (OnTilesSelect != null)
         {
@@ -44,14 +78,21 @@ public class Ability : MonoBehaviour
         if (this == a)
         {
             Selected = true;
+            Owner.CurrentAction = unitActions.readyToAttack;
         }
         else
         {
             Selected = false;
         }
-        if (OnAbilitySelect != null)
+    }
+
+    public void Applied()
+    {
+        if (OnApply != null)
         {
-            OnAbilitySelect(Selected);
+            OnApply();
         }
+        Owner.CurrentAction = unitActions.idle;
+        Selected = false;
     }
 }
