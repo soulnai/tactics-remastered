@@ -5,72 +5,80 @@ using EnumSpace;
 
 public static class GameMath {
     //TODO: add case for attack type to choose defence type
-    public static int CalculateDamage(Unit attacker, Unit defender)
+
+    public static bool TryHit(Unit attacker, Unit defender)
     {
-        int MainStat = 0;
-
-        switch(attacker.UnitClass)
-        {
-            case EnumSpace.unitClass.knigth:
-                MainStat = attacker.Strenght.Value;
-                break;
-            case EnumSpace.unitClass.warrior:
-                MainStat = attacker.Strenght.Value;
-                break;
-            case EnumSpace.unitClass.archer:
-                MainStat = attacker.Dexterity.Value;
-                break;
-            case EnumSpace.unitClass.mage:
-                MainStat = attacker.Magic.Value;
-                break;
-            case EnumSpace.unitClass.squire:
-                MainStat = attacker.Dexterity.Value;
-                break;
-            case EnumSpace.unitClass.none:
-                MainStat = attacker.Strenght.Value;
-                break;
-        }
-
+        bool hit = false;
 
         if (checkHeight(attacker, defender))
         {
-            Text Log = GameObject.Find("LogText").GetComponent<Text>();
             if (CheckHit(attacker, defender))
             {
                 if (!CheckEvade(attacker, defender))
                 {
-                    if (CheckCrit(attacker, defender))
-                    {
-                        int CritDamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef) * attacker.CritMultiplier);
-                        if (CritDamageToApply <= 0)
-                        {
-                            Log = GameObject.Find("LogText").GetComponent<Text>();
-                            Log.text = Log.text + "<color=red>Critical damage = " + CritDamageToApply + "</color> \n";
-                            Debug.Log("Critical damage " + CritDamageToApply);
-                            return 1;
-                        }
-                        Log.text = Log.text + "<color=red>Critical damage = " + CritDamageToApply + "</color> \n";
-                        Debug.Log("Critical damage " + CritDamageToApply);
-                        return CritDamageToApply;
-                    }
-                    int DamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat / 2) - (float)defender.PhysicalDef));
-                    if (DamageToApply <= 0)
-                    {
-                        Log.text = Log.text + "<color=green>Hit on = " + DamageToApply + "</color> \n";
-                        Debug.Log("Hit on " + DamageToApply);
-                        return 1;
-                    }
-                    Log.text = Log.text + "<color=green>Hit = " + DamageToApply + "</color> \n";
-                    Debug.Log("Hit " + DamageToApply);
-                    return DamageToApply;
+                    hit = true;
                 }
-                Log.text = Log.text + "<color=blue>Target evade damage </color> \n";
                 Debug.Log("Target evade damage");
             }
-            Log.text = Log.text + "<color=blue>Hit missed! </color> \n";
             Debug.Log("Hit missed!");
         }
-        return 0;
+
+        return hit;
+    }
+    public static int CalculateDamage(Unit attacker, Unit defender)
+    {
+        if (CheckCrit(attacker, defender))
+        {
+            int CritDamageToApply =
+                (int)
+                    (((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat(attacker)/2) -
+                      (float) defender.PhysicalDef)*attacker.CritMultiplier);
+            if (CritDamageToApply <= 0)
+            {
+                Debug.Log("Critical damage " + CritDamageToApply);
+                return 1;
+            }
+            Debug.Log("Critical damage " + CritDamageToApply);
+            return CritDamageToApply;
+        }
+
+        int DamageToApply = (int)(((Random.Range(attacker.MinCurrentWeaponAtk, attacker.MaxCurrentWeaponAtk) + MainStat(attacker) / 2) - (float)defender.PhysicalDef));
+        
+        if (DamageToApply <= 0)
+        {
+            Debug.Log("Hit on " + DamageToApply);
+            return 1;
+        }
+        Debug.Log("Hit " + DamageToApply);
+        return DamageToApply;
+    }
+
+    private static int MainStat(Unit attacker)
+    {
+        int MainStat = 0;
+
+        switch (attacker.UnitClass)
+        {
+            case unitClass.knigth:
+                MainStat = attacker.Strenght.Value;
+                break;
+            case unitClass.warrior:
+                MainStat = attacker.Strenght.Value;
+                break;
+            case unitClass.archer:
+                MainStat = attacker.Dexterity.Value;
+                break;
+            case unitClass.mage:
+                MainStat = attacker.Magic.Value;
+                break;
+            case unitClass.squire:
+                MainStat = attacker.Dexterity.Value;
+                break;
+            case unitClass.none:
+                MainStat = attacker.Strenght.Value;
+                break;
+        }
+        return MainStat;
     }
 
     public static bool CheckHit(Unit attacker, Unit defender)

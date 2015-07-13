@@ -12,7 +12,6 @@ GameObject:
   - 114: {fileID: 11459466}
   - 114: {fileID: 11496576}
   - 114: {fileID: 11440572}
-  - 114: {fileID: 11449814}
   - 114: {fileID: 11425112}
   m_Layer: 0
   m_Name: BaseAbility
@@ -73,17 +72,6 @@ MonoBehaviour:
   CostAttribute: 3
   CostType: 3
   Value: 0
---- !u!114 &11449814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc0a38c18cd9094491bec72ef84e5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11459466
 MonoBehaviour:
   m_ObjectHideFlags: 1

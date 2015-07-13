@@ -86,11 +86,14 @@ public static class AI  {
         if (AIunit.AP.Value > 0)
         {
             Animation anim = AIunit.gameObject.GetComponentInChildren<Animation>();
-            //anim.Play("AttackMelee1");
-            //GM.BattleLogic.StartCoroutine(GM.BattleLogic.WaitForAnimation(anim));
-            int damage = GameMath.CalculateDamage(AIunit, target);
-            GameMath.applyDamage(target, damage);
-            Debug.Log("Damage was applied " + damage);
+            
+            if (GameMath.TryHit(AIunit, target))
+            {
+                int damage = GameMath.CalculateDamage(AIunit, target);
+                GameMath.applyDamage(target, damage);
+                Debug.Log("Damage was applied " + damage);
+            }
+
             AIunit.ReduceAP();
             Debug.Log("AI unit - " + AIunit.UnitName + " - near enemy unit.Ready to attack");
             AIUnitTurnEnd(AIunit);
