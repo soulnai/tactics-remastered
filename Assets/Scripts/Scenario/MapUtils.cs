@@ -108,8 +108,8 @@ public class MapUtils : Singleton<MapUtils>
 
     public int GetDistance(Tile a,Tile b)
     {
-        //TODO distance
-        return 0;
+        int Distance = TilePathFinder.FindPathForAttack(a, b).Count();
+        return Distance;
     }
 
     public Unit FindNearestEnemy(Unit unit, List<Unit> ListOfUnits)
